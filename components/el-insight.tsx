@@ -305,7 +305,7 @@ const ROW_2: CardData[] = [
     variant: "light",
   },
   {
-    label: "AIRBNB / ALQUILERES",
+    label: "AIRBNB / RENTA",
     pain: "Crecés en operación, no en margen.",
     sub: "Más propiedades no es más ganancia.",
     tag: "MARGEN PLANO",
