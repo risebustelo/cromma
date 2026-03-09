@@ -1,2 +1,0 @@
-# cromma
-our landing page
