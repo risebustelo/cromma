@@ -2,6 +2,14 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { CtaPrimary } from "@/components/ui/cta-buttons"
 import { Megaphone, Handshake, Package, RefreshCw, TrendingUp } from "lucide-react"
 
+// ─── WCAG AA sobre section-light bg ≈ #f5f5f0 ────────────────────────────────
+// ✅ pasan:  #0a0a0a 18.10 | #666666 5.25
+// ❌ corregidos → #707070 (4.53:1 sobre #f5f5f0):
+//    era eyebrow oklch(0.55 0.12 95) ≈ #8a7a2e → 3.92
+//    era node desc #777777 → 4.09
+//    era proceso sub #888888 → 3.24
+//    era step num oklch(0.85 0.15 95) ≈ #c9a730 → 2.12
+
 const steps = [
   { icon: Megaphone, title: "Atraer", desc: "Contenido con intención comercial.", step: 1, color: "#2ecc71" },
   { icon: Handshake, title: "Convertir", desc: "Consulta al cierre sin fricción.", step: 2, color: "#3b9ecf" },
@@ -24,10 +32,12 @@ export function FrameworkDiagram() {
         {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-14 space-y-2">
-            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "oklch(0.55 0.12 95)" }}>
+            {/* era oklch(0.55 0.12 95) ≈ 3.92 ❌ | corregido #707070 → 4.53 ✅ */}
+            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#707070" }}>
               El framework
             </p>
             <h2 className="text-[#0a0a0a]">Cómo funciona Cromma</h2>
+            {/* #666666 → 5.25 ✅ sin cambio */}
             <p className="text-[#666666] mx-auto max-w-sm text-sm">
               Cinco etapas conectadas. De la visibilidad al crecimiento predecible.
             </p>
@@ -54,21 +64,18 @@ export function FrameworkDiagram() {
                       {node.step}
                     </span>
                   </div>
+                  {/* #0a0a0a → 18.10 ✅ */}
                   <h3 className="text-sm font-bold text-[#0a0a0a] mb-1">{node.title}</h3>
-                  <p className="text-xs text-[#777777] leading-snug max-w-[120px]">{node.desc}</p>
+                  {/* era #777777 → 4.09 ❌ | corregido #707070 → 4.53 ✅ */}
+                  <p className="text-xs leading-snug max-w-[120px]" style={{ color: "#707070" }}>{node.desc}</p>
                 </div>
               </ScrollReveal>
 
               {i < steps.length - 1 && (
                 <div className="flex-shrink-0 flex items-center mt-7 w-6">
                   <svg width="24" height="10" viewBox="0 0 24 10" fill="none">
-                    <path
-                      d="M0 5 L20 5 M15 1 L20 5 L15 9"
-                      stroke="#cccccc"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M0 5 L20 5 M15 1 L20 5 L15 9"
+                      stroke="#cccccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               )}
@@ -100,7 +107,8 @@ export function FrameworkDiagram() {
                 </div>
                 <div className="pt-1 pb-4">
                   <h3 className="text-sm font-bold text-[#0a0a0a] mb-0.5">{node.title}</h3>
-                  <p className="text-xs text-[#777777] leading-snug">{node.desc}</p>
+                  {/* era #777777 → 4.09 ❌ | corregido #707070 → 4.53 ✅ */}
+                  <p className="text-xs leading-snug" style={{ color: "#707070" }}>{node.desc}</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -116,15 +124,17 @@ export function FrameworkDiagram() {
             <div className="grid md:grid-cols-3 gap-6 mb-10">
               {proceso.map((p) => (
                 <div key={p.n} className="flex items-start gap-3">
+                  {/* era oklch(0.85 0.15 95) ≈ #c9a730 → 2.12 ❌ | corregido #707070 → 4.53 ✅ */}
                   <span
                     className="text-3xl font-black leading-none flex-shrink-0 mt-0.5"
-                    style={{ color: "oklch(0.85 0.15 95 / 0.9)", fontVariantNumeric: "tabular-nums" }}
+                    style={{ color: "#707070", fontVariantNumeric: "tabular-nums" }}
                   >
                     {p.n}
                   </span>
                   <div>
                     <p className="text-sm font-bold text-[#0a0a0a] mb-0.5">{p.label}</p>
-                    <p className="text-xs text-[#888888] leading-snug">{p.sub}</p>
+                    {/* era #888888 → 3.24 ❌ | corregido #707070 → 4.53 ✅ */}
+                    <p className="text-xs leading-snug" style={{ color: "#707070" }}>{p.sub}</p>
                   </div>
                 </div>
               ))}

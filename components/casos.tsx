@@ -5,41 +5,38 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { CtaPrimary } from "@/components/ui/cta-buttons"
 import { BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react"
 
+// ─── WCAG AA sobre section-dark bg #0a0a0a ───────────────────────────────────
+// ✅ pasan:  #ffffff 19.80 | #cccccc 12.33 | #888888 5.58 | eyebrow oklch(0.75) 7.17
+// ❌ corregido: role #666666 → 3.45 ❌ → #797979 → 4.55 ✅
+
 const testimonios = [
   {
-    quote: "En 60 d\u00edas pasamos de depender del boca a boca a tener un sistema que genera consultas todas las semanas. El cambio fue estructural.",
-    name: "Mariana L.",
-    role: "Consultora de RRHH",
+    quote: "En 60 días pasamos de depender del boca a boca a tener un sistema que genera consultas todas las semanas. El cambio fue estructural.",
+    name: "Mariana L.", role: "Consultora de RRHH",
   },
   {
-    quote: "Ten\u00eda contenido, ten\u00eda audiencia, pero no ten\u00eda sistema. Cromma me ayud\u00f3 a conectar todo y hoy facturo el doble con la mitad del esfuerzo.",
-    name: "Tom\u00e1s R.",
-    role: "Creador digital",
+    quote: "Tenía contenido, tenía audiencia, pero no tenía sistema. Cromma me ayudó a conectar todo y hoy facturo el doble con la mitad del esfuerzo.",
+    name: "Tomás R.", role: "Creador digital",
   },
   {
     quote: "No es una agencia que te manda tareas. Entran a tu negocio, lo entienden y te arman un flujo que realmente convierte.",
-    name: "Luc\u00eda S.",
-    role: "Fundadora, estudio de dise\u00f1o",
+    name: "Lucía S.", role: "Fundadora, estudio de diseño",
   },
   {
-    quote: "Pens\u00e9 que necesitaba m\u00e1s seguidores. En realidad necesitaba un proceso comercial. Hoy cierro 3 de cada 10 consultas.",
-    name: "Federico M.",
-    role: "Coach ejecutivo",
+    quote: "Pensé que necesitaba más seguidores. En realidad necesitaba un proceso comercial. Hoy cierro 3 de cada 10 consultas.",
+    name: "Federico M.", role: "Coach ejecutivo",
   },
   {
     quote: "El sistema de entrega que armamos me permitió tomar más clientes sin perder calidad. Antes era imposible.",
-    name: "Valentina G.",
-    role: "Mentora de negocios",
+    name: "Valentina G.", role: "Mentora de negocios",
   },
   {
     quote: "Lo que más valoré es la claridad. En dos semanas sabía exactamente qué vendía, a quién y cómo.",
-    name: "Nicolás P.",
-    role: "Consultor financiero",
+    name: "Nicolás P.", role: "Consultor financiero",
   },
   {
     quote: "Es estrategia aplicada a tu negocio real, nada de plantillas genéricas. Cada pieza está pensada para tu caso.",
-    name: "Carolina D.",
-    role: "Creadora de infoproductos",
+    name: "Carolina D.", role: "Creadora de infoproductos",
   },
 ]
 
@@ -57,10 +54,13 @@ export function Casos() {
 
         <ScrollReveal>
           <div className="text-center mb-12 space-y-3">
+            {/* oklch(0.75 0.12 95) ≈ 7.17:1 ✅ sin cambio */}
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-[oklch(0.75_0.12_95)]">
               Resultados reales
             </p>
+            {/* white → 19.80 ✅ */}
             <h2 className="text-white">Lo que dicen nuestros clientes</h2>
+            {/* #888888 → 5.58 ✅ */}
             <p className="mx-auto max-w-xl text-[#888888]">
               Negocios reales que dejaron de improvisar.
             </p>
@@ -96,6 +96,7 @@ export function Casos() {
                 style={{ scrollSnapAlign: "start" }}
               >
                 <div className="text-primary text-4xl font-serif leading-none mb-3 select-none">&ldquo;</div>
+                {/* #cccccc → 12.33 ✅ */}
                 <blockquote className="text-[#cccccc] text-sm md:text-base leading-relaxed mb-8 flex-1">
                   {t.quote}
                 </blockquote>
@@ -105,10 +106,12 @@ export function Casos() {
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
+                      {/* white → 19.80 ✅ */}
                       <span className="text-sm font-semibold text-white">{t.name}</span>
                       <BadgeCheck className="h-3.5 w-3.5 text-primary" />
                     </div>
-                    <span className="text-xs text-[#666666]">{t.role}</span>
+                    {/* era #666666 → 3.45 ❌ | corregido #797979 → 4.55 ✅ */}
+                    <span className="text-xs" style={{ color: "#797979" }}>{t.role}</span>
                   </div>
                 </div>
               </div>
@@ -116,7 +119,6 @@ export function Casos() {
           </div>
         </div>
 
-        {/* CTA */}
         <ScrollReveal delay={80}>
           <div className="text-center mt-12">
             <CtaPrimary label="Agendá una sesión" />
