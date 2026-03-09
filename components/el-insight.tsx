@@ -40,11 +40,13 @@ function useScramble(target: string, trigger: boolean, delay = 0) {
 }
 
 // ─── Flip lines ───────────────────────────────────────────────────────────────
+// Copy principle: mostrar el problema real — no el síntoma
+// Cada par: lo que hacen (acción) vs. lo que NO tienen (resultado)
 
 const PAIRS: [string, string][] = [
-  ["Publicás.", "Pero no convierte."],
-  ["Vendés.", "Pero no escala."],
-  ["Trabajás.", "Todo depende de vos."],
+  ["Trabajás.", "Pero todo depende de vos."],
+  ["Publicás.", "Pero nadie te compra."],
+  ["Facturás.", "Pero no escala solo."],
 ]
 
 function FlipLine({ left, right, delay }: { left: string; right: string; delay: number }) {
@@ -106,6 +108,8 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
 }
 
 // ─── Tarjetas de segmento ─────────────────────────────────────────────────────
+// Copy principle: cada card = dolor específico + costo de inacción implícito
+// No es "sos esto" — es "esto te está costando hoy"
 
 type Variant = "gold" | "light" | "dark"
 
@@ -115,30 +119,32 @@ const V: Record<Variant, { bg: string; border: string; label: string; dot: strin
   dark: { bg: "#111111", border: "rgba(255,255,255,0.07)", label: "rgba(255,255,255,0.28)", dot: "rgba(255,255,255,0.5)", pain: "rgba(255,255,255,0.82)" },
 }
 
-// ROW 1 — Infoproductores + Contenido
+// ROW 1 — Creadores, coaches, infoproductores
+// Insight: saben lo que hacen. El sistema falla, no ellos.
 const ROW_1: { label: string; pain: string; variant: Variant }[] = [
-  { label: "COACH / MENTOR", pain: "Vendés por recomendación, no por sistema.", variant: "gold" },
-  { label: "INFOPRODUCTOR", pain: "Contenido hay. Conversión, no.", variant: "light" },
-  { label: "FITNESS", pain: "Seguidores sí. Membresía recurrente, no.", variant: "dark" },
-  { label: "FINANZAS / ECONOMÍA", pain: "La audiencia consume pero no compra.", variant: "gold" },
-  { label: "BIENESTAR / HOLÍSTICO", pain: "Tu expertise es real. Tu sistema, no.", variant: "light" },
-  { label: "AGENCIA MARKETING", pain: "Facturás bien, pero sin previsibilidad.", variant: "dark" },
-  { label: "CREADORA ONLYFANS", pain: "Ingresos inconsistentes mes a mes.", variant: "gold" },
-  { label: "AGENCIA ONLYFANS / IA", pain: "Crecimiento lento y sin sistema replicable.", variant: "light" },
-  { label: "YOUTUBER / INFLUENCER", pain: "Audiencia grande. Monetización predecible, no.", variant: "dark" },
+  { label: "COACH / MENTOR", pain: "Vivís de recomendaciones. Cuando paran, vos parás.", variant: "gold" },
+  { label: "CONSULTOR", pain: "Cobrás por hora. Si no trabajás, no ingresa nada.", variant: "light" },
+  { label: "AGENCIA", pain: "Cerrás clientes solos. Nadie más en tu equipo puede.", variant: "dark" },
+  { label: "INFOPRODUCTOR", pain: "Lanzás, vendés, y después… silencio.", variant: "gold" },
+  { label: "CREADOR DE CONTENIDO", pain: "Millones de views. Clientes predecibles: cero.", variant: "light" },
+  { label: "FREELANCER", pain: "Cuando terminás un proyecto, empieza el pánico.", variant: "dark" },
+  { label: "SPEAKER / FORMADOR", pain: "Grandes audiencias. Ningún sistema para convertirlas.", variant: "gold" },
+  { label: "MARCA PERSONAL", pain: "Presencia online. Facturación impredecible.", variant: "light" },
+  { label: "EXPERTO DE NICHO", pain: "Sabés más que nadie. Pero el mercado no lo sabe.", variant: "dark" },
 ]
 
-// ROW 2 — Servicios profesionales
+// ROW 2 — Servicios profesionales y negocios establecidos
+// Insight: tienen demanda pero no sistema — cada cliente es esfuerzo desde cero
 const ROW_2: { label: string; pain: string; variant: Variant }[] = [
-  { label: "ABOGADO / ESTUDIO", pain: "Los clientes llegan por recomendación, no sistema.", variant: "light" },
-  { label: "DENTISTA / MÉDICO", pain: "La agenda depende de referidos, no de un flujo.", variant: "gold" },
-  { label: "LONGEVIDAD / SALUD", pain: "Especialidad de nicho. Difícil de comunicar.", variant: "dark" },
-  { label: "INMOBILIARIA", pain: "Leads llegan. Calificados, no.", variant: "light" },
-  { label: "AIRBNB / ALQUILERES", pain: "Crecés en operación pero no en margen.", variant: "gold" },
-  { label: "TECNOLOGÍA / SOFTWARE", pain: "Cobrás por hora cuando podrías por resultado.", variant: "dark" },
-  { label: "SEGURIDAD / ELÉCTRICO", pain: "El trabajo es bueno. Los clientes no te encuentran.", variant: "light" },
-  { label: "DESARROLLADORA", pain: "Leads sin calificar y seguimiento manual.", variant: "gold" },
-  { label: "AGENCIA DE SERVICIOS", pain: "Referidos o nada. Sin sistema propio.", variant: "dark" },
+  { label: "PROFESIONAL INDEPENDIENTE", pain: "Trabajás el doble para ganar lo mismo.", variant: "light" },
+  { label: "ESTUDIO / FIRMA", pain: "Dependés de dos o tres clientes grandes. Es frágil.", variant: "gold" },
+  { label: "SERVICIO LOCAL", pain: "El boca a boca no escala. Lo sabés.", variant: "dark" },
+  { label: "EMPRESA B2B", pain: "Ciclos de venta largos sin sistema que los acorte.", variant: "light" },
+  { label: "ECOMMERCE", pain: "Tráfico hay. Compradores recurrentes, no.", variant: "gold" },
+  { label: "TECNOLOGÍA / SOFTWARE", pain: "Product-market fit existe. Go-to-market, no.", variant: "dark" },
+  { label: "INMOBILIARIA", pain: "Los leads llegan. Calificados y listos, no.", variant: "light" },
+  { label: "STARTUP / EMPRENDIMIENTO", pain: "Tracción manual. No podés seguir el ritmo.", variant: "gold" },
+  { label: "NEGOCIO ESTABLECIDO", pain: "Crecés despacio. Sabés que podría ser mucho más rápido.", variant: "dark" },
 ]
 
 // Triplicar para loop infinito sin salto visible
@@ -235,7 +241,7 @@ function Track({ items, duration, reverse = false }: {
 export function ElInsight() {
   const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLElement>(null)
-  const eyebrow = useScramble("EL PROBLEMA", visible, 100)
+  const eyebrow = useScramble("EL PROBLEMA REAL", visible, 100)
 
   useEffect(() => {
     const el = ref.current
@@ -277,7 +283,7 @@ export function ElInsight() {
             }} />
           </p>
 
-          {/* Frases flip */}
+          {/* Frases flip — pain-first */}
           <div className="flex flex-col gap-1.5">
             {PAIRS.map(([left, right], i) => (
               <FlipLine key={i} left={left} right={right} delay={i * 800} />
@@ -287,18 +293,18 @@ export function ElInsight() {
         </div>
       </div>
 
-      {/* Track 1 — Infoproductores y contenido */}
+      {/* Track 1 */}
       <Track items={TRACK_1} duration={32} />
       <div style={{ height: 10 }} />
-      {/* Track 2 — Servicios profesionales */}
+      {/* Track 2 */}
       <Track items={TRACK_2} duration={40} reverse />
 
-      {/* Cierre */}
+      {/* Cierre — el diagnóstico, no la solución todavía */}
       <div className="container mx-auto px-4 mt-7">
         <div className="mx-auto max-w-4xl">
-          <p className="text-[13px]" style={{ color: "#333333" }}>
-            Lo que falta no es más esfuerzo.{" "}
-            <span style={{ color: "#555555" }}>Es un sistema que conecte todo.</span>
+          <p className="text-[13px]" style={{ color: "#555555" }}>
+            No es falta de talento, ni de esfuerzo.{" "}
+            <span style={{ color: "#888888" }}>Es que nunca tuviste un sistema diseñado para traer clientes.</span>
           </p>
         </div>
       </div>
