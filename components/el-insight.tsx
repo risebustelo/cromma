@@ -105,177 +105,307 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
   )
 }
 
-// ─── Tipos y estilos ──────────────────────────────────────────────────────────
+// ─── Tipos ────────────────────────────────────────────────────────────────────
 
 type Variant = "gold" | "light" | "dark"
 
-const V: Record<Variant, { bg: string; border: string; label: string; dot: string; pain: string }> = {
-  gold: { bg: "#0f0e0b", border: "rgba(201,162,39,0.28)", label: "rgba(201,162,39,0.6)", dot: "#c9a227", pain: "#ddc98a" },
-  light: { bg: "#f0efe9", border: "rgba(0,0,0,0.07)", label: "rgba(0,0,0,0.35)", dot: "#0a0a0a", pain: "#1a1a1a" },
-  dark: { bg: "#111111", border: "rgba(255,255,255,0.07)", label: "rgba(255,255,255,0.28)", dot: "rgba(255,255,255,0.5)", pain: "rgba(255,255,255,0.82)" },
+// urgency: qué está pasando HOY sin sistema — aparece como tag pequeño arriba a la derecha
+// loss: lo que se pierde cada mes — número concreto
+type CardData = {
+  label: string
+  pain: string       // problema principal — una línea, presente continuo
+  sub: string        // consecuencia concreta — segunda línea, más corta
+  tag: string        // micro-tag de urgencia: "SIN SISTEMA" / "TECHO CLARO" / etc
+  variant: Variant
 }
 
-// ─── ROW 1 — Creadores y profesionales del conocimiento ───────────────────────
+// ─── Estilos por variante ─────────────────────────────────────────────────────
 
-const ROW_1: { label: string; pain: string; variant: Variant }[] = [
-  { label: "COACH / MENTOR", pain: "Vivís de recomendaciones. Cuando paran, vos parás.", variant: "gold" },
-  { label: "CONSULTOR", pain: "Cobrás por hora. Si no trabajás, no ingresa nada.", variant: "light" },
-  { label: "AGENCIA", pain: "Cerrás clientes solos. Nadie más en tu equipo puede.", variant: "dark" },
-  { label: "INFOPRODUCTOR", pain: "Lanzás, vendés, y después… silencio.", variant: "gold" },
-  { label: "CREADOR DE CONTENIDO", pain: "Millones de views. Clientes predecibles: cero.", variant: "light" },
-  { label: "FREELANCER", pain: "Cuando terminás un proyecto, empieza el pánico.", variant: "dark" },
-  { label: "SPEAKER / FORMADOR", pain: "Grandes audiencias. Ningún sistema para convertirlas.", variant: "gold" },
-  { label: "MARCA PERSONAL", pain: "Presencia online. Facturación impredecible.", variant: "light" },
-  { label: "EXPERTO DE NICHO", pain: "Sabés más que nadie. Pero el mercado no lo sabe.", variant: "dark" },
+const V: Record<Variant, {
+  bg: string; border: string
+  labelColor: string; dot: string
+  painColor: string; subColor: string
+  tagBg: string; tagColor: string
+  tagBorder: string
+}> = {
+  gold: {
+    bg: "#0d0c09",
+    border: "rgba(201,162,39,0.25)",
+    labelColor: "rgba(201,162,39,0.55)",
+    dot: "#c9a227",
+    painColor: "#e8d49a",
+    subColor: "rgba(201,162,39,0.45)",
+    tagBg: "rgba(201,162,39,0.08)",
+    tagColor: "rgba(201,162,39,0.7)",
+    tagBorder: "rgba(201,162,39,0.2)",
+  },
+  light: {
+    bg: "#eeede7",
+    border: "rgba(0,0,0,0.08)",
+    labelColor: "rgba(0,0,0,0.32)",
+    dot: "#1a1a1a",
+    painColor: "#111111",
+    subColor: "rgba(0,0,0,0.38)",
+    tagBg: "rgba(0,0,0,0.05)",
+    tagColor: "rgba(0,0,0,0.4)",
+    tagBorder: "rgba(0,0,0,0.1)",
+  },
+  dark: {
+    bg: "#0e0e0e",
+    border: "rgba(255,255,255,0.06)",
+    labelColor: "rgba(255,255,255,0.25)",
+    dot: "rgba(255,255,255,0.4)",
+    painColor: "rgba(255,255,255,0.85)",
+    subColor: "rgba(255,255,255,0.32)",
+    tagBg: "rgba(255,255,255,0.04)",
+    tagColor: "rgba(255,255,255,0.3)",
+    tagBorder: "rgba(255,255,255,0.08)",
+  },
+}
+
+// ─── ROW 1 — Creadores, coaches, infoproductores ──────────────────────────────
+// Pain: lo que viven HOY. Sub: la consecuencia directa. Tag: el cuello de botella.
+
+const ROW_1: CardData[] = [
+  {
+    label: "COACH / MENTOR",
+    pain: "Cada cliente te costó una llamada.",
+    sub: "Cuando dejás de buscar, dejás de facturar.",
+    tag: "SIN SISTEMA",
+    variant: "gold",
+  },
+  {
+    label: "CONSULTOR",
+    pain: "Tu tiempo es el único activo que vendés.",
+    sub: "Y tiene un límite físico. Ya lo sabés.",
+    tag: "TECHO CLARO",
+    variant: "light",
+  },
+  {
+    label: "AGENCIA",
+    pain: "Vos cerrás. Tu equipo no puede.",
+    sub: "El negocio escala solo si vos escalás.",
+    tag: "CUELLO DE BOTELLA",
+    variant: "dark",
+  },
+  {
+    label: "INFOPRODUCTOR",
+    pain: "El lanzamiento dura 10 días.",
+    sub: "Los otros 20, silencio.",
+    tag: "INGRESOS PICO",
+    variant: "gold",
+  },
+  {
+    label: "CREADOR DE CONTENIDO",
+    pain: "El algoritmo te da alcance. No clientes.",
+    sub: "Ningún seguidor paga solo por verte.",
+    tag: "CONVERSIÓN CERO",
+    variant: "light",
+  },
+  {
+    label: "FREELANCER",
+    pain: "Terminás un proyecto y volvés a cero.",
+    sub: "Cada mes es una búsqueda nueva.",
+    tag: "CICLO ROTO",
+    variant: "dark",
+  },
+  {
+    label: "SPEAKER / FORMADOR",
+    pain: "El escenario llena la sala. No el pipeline.",
+    sub: "La audiencia aplaude. Después, nada.",
+    tag: "SIN CONVERSIÓN",
+    variant: "gold",
+  },
+  {
+    label: "MARCA PERSONAL",
+    pain: "Tenés presencia. No tenés flujo.",
+    sub: "La marca no vende sola sin un sistema detrás.",
+    tag: "FLUJO INEXISTENTE",
+    variant: "light",
+  },
+  {
+    label: "EXPERTO DE NICHO",
+    pain: "El mercado no sabe que existís.",
+    sub: "Tu competencia cobra más. Y aparece primero.",
+    tag: "INVISIBILIDAD",
+    variant: "dark",
+  },
 ]
 
-// ─── ROW 2 — Servicios y negocios establecidos ────────────────────────────────
+// ─── ROW 2 — Servicios profesionales y negocios ───────────────────────────────
 
-const ROW_2: { label: string; pain: string; variant: Variant }[] = [
-  { label: "PROFESIONAL INDEPENDIENTE", pain: "Trabajás el doble para ganar lo mismo.", variant: "light" },
-  { label: "ESTUDIO / FIRMA", pain: "Dependés de dos o tres clientes grandes. Es frágil.", variant: "gold" },
-  { label: "SERVICIO LOCAL", pain: "El boca a boca no escala. Lo sabés.", variant: "dark" },
-  { label: "EMPRESA B2B", pain: "Ciclos de venta largos sin sistema que los acorte.", variant: "light" },
-  { label: "ECOMMERCE", pain: "Tráfico hay. Compradores recurrentes, no.", variant: "gold" },
-  { label: "TECNOLOGÍA / SOFTWARE", pain: "Product-market fit existe. Go-to-market, no.", variant: "dark" },
-  { label: "INMOBILIARIA", pain: "Los leads llegan. Calificados y listos, no.", variant: "light" },
-  { label: "STARTUP", pain: "Tracción manual. No podés seguir el ritmo.", variant: "gold" },
-  { label: "NEGOCIO ESTABLECIDO", pain: "Crecés despacio. Sabés que podría ser mucho más rápido.", variant: "dark" },
-]
-
-// ─── ROW 3 — Tech stack que implementa Cromma ─────────────────────────────────
-// Credibilidad técnica: "sabemos con qué trabajás"
-
-const TECH_STACK: { name: string; category: string; variant: Variant }[] = [
-  { name: "Go High Level", category: "CRM / AUTOMATIZACIÓN", variant: "gold" },
-  { name: "Meta Ads", category: "PAUTA PAGADA", variant: "dark" },
-  { name: "ManyChat", category: "CHAT AUTOMATION", variant: "light" },
-  { name: "Make", category: "FLUJOS AUTOMÁTICOS", variant: "gold" },
-  { name: "Airtable", category: "BASE DE DATOS", variant: "dark" },
-  { name: "OnlyFans", category: "MONETIZACIÓN", variant: "light" },
-  { name: "Power BI", category: "ANALÍTICA", variant: "gold" },
-  { name: "ActiveCampaign", category: "EMAIL MARKETING", variant: "dark" },
-  { name: "n8n", category: "AUTOMATIZACIÓN IA", variant: "light" },
-  { name: "Zapier", category: "INTEGRACIONES", variant: "gold" },
-  { name: "Notion", category: "OPERACIONES", variant: "dark" },
-  { name: "Klaviyo", category: "EMAIL / SMS", variant: "light" },
+const ROW_2: CardData[] = [
+  {
+    label: "PROFESIONAL INDEPENDIENTE",
+    pain: "Más horas no es más dinero.",
+    sub: "Ya llegaste al techo de lo que podés cobrar por hora.",
+    tag: "TECHO DE HORA",
+    variant: "light",
+  },
+  {
+    label: "ESTUDIO / FIRMA",
+    pain: "Dos clientes grandes son toda la firma.",
+    sub: "Si uno se va, el mes se cae.",
+    tag: "RIESGO CONCENTRADO",
+    variant: "gold",
+  },
+  {
+    label: "SERVICIO LOCAL",
+    pain: "El boca a boca llegó hasta acá.",
+    sub: "A partir de ahora, no crece solo.",
+    tag: "LÍMITE DE RED",
+    variant: "dark",
+  },
+  {
+    label: "EMPRESA B2B",
+    pain: "Cada venta tarda meses.",
+    sub: "Sin sistema, no podés predecir ni planificar.",
+    tag: "CICLOS LARGOS",
+    variant: "light",
+  },
+  {
+    label: "ECOMMERCE",
+    pain: "Compraron una vez. No volvieron.",
+    sub: "El costo de adquisición no para de subir.",
+    tag: "SIN RETENCIÓN",
+    variant: "gold",
+  },
+  {
+    label: "TECNOLOGÍA / SOFTWARE",
+    pain: "El producto funciona. El go-to-market, no.",
+    sub: "Sin distribución, el mejor producto no gana.",
+    tag: "DISTRIBUCIÓN ROTA",
+    variant: "dark",
+  },
+  {
+    label: "INMOBILIARIA",
+    pain: "Los leads llegan. Los buenos, no.",
+    sub: "Perdés tiempo en prospectos que nunca cierran.",
+    tag: "LEADS SIN FILTRO",
+    variant: "light",
+  },
+  {
+    label: "STARTUP",
+    pain: "Crecés a fuerza de voluntad.",
+    sub: "Eso no escala. Y ya empezás a sentirlo.",
+    tag: "TRACCIÓN MANUAL",
+    variant: "gold",
+  },
+  {
+    label: "NEGOCIO ESTABLECIDO",
+    pain: "Facturás bien. Pero podrías facturar el doble.",
+    sub: "Y lo sabés. Sólo falta el sistema que lo haga.",
+    tag: "POTENCIAL FRENADO",
+    variant: "dark",
+  },
 ]
 
 const TRACK_1 = [...ROW_1, ...ROW_1, ...ROW_1]
 const TRACK_2 = [...ROW_2, ...ROW_2, ...ROW_2]
-const TRACK_3 = [...TECH_STACK, ...TECH_STACK, ...TECH_STACK]
 
-const PROFILE_W = 210   // 196 card + 14 margin
-const TECH_W = 174   // 160 card + 14 margin
-const PROFILE_UNIQUE = 9
-const TECH_UNIQUE = 12
+const CARD_W = 222   // 208px card + 14px margin
+const UNIQUE = 9
 
-// ─── Decoración SVG de fondo ──────────────────────────────────────────────────
+// ─── Card mejorada ────────────────────────────────────────────────────────────
+// Layout: label + dot arriba | pain (grande) en medio | sub + tag abajo
 
-function SocialBg({ dark }: { dark: boolean }) {
-  const c = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"
-  return (
-    <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 180 90" fill="none">
-      <rect x="8" y="8" width="22" height="22" rx="6" stroke={c} strokeWidth="1.6" />
-      <circle cx="19" cy="19" r="5" stroke={c} strokeWidth="1.3" />
-      <circle cx="25" cy="12" r="1.2" fill={c} />
-      <rect x="38" y="8" width="22" height="22" rx="4" stroke={c} strokeWidth="1.6" />
-      <text x="42" y="24" fontSize="12" fontWeight="bold" fill={c} fontFamily="sans-serif">in</text>
-      <rect x="68" y="8" width="28" height="18" rx="5" stroke={c} strokeWidth="1.6" />
-      <polygon points="78,11 86,17 78,23" fill={c} />
-      <path d="M104 9 L116 27 M116 9 L104 27" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
-      <circle cx="19" cy="65" r="12" stroke={c} strokeWidth="1.6" />
-      <circle cx="56" cy="65" r="12" stroke={c} strokeWidth="1.6" />
-      <text x="50" y="70" fontSize="11" fill={c} fontFamily="sans-serif">@</text>
-      <circle cx="100" cy="65" r="12" stroke={c} strokeWidth="1.6" />
-      <circle cx="140" cy="65" r="12" stroke={c} strokeWidth="1.6" />
-      <text x="135" y="71" fontSize="13" fontWeight="bold" fill={c} fontFamily="sans-serif">f</text>
-    </svg>
-  )
-}
-
-// ─── Card de perfil (con pain) ────────────────────────────────────────────────
-
-function ProfileCard({ label, pain, variant }: { label: string; pain: string; variant: Variant }) {
+function Card({ label, pain, sub, tag, variant }: CardData) {
   const v = V[variant]
   return (
-    <div className="relative flex-shrink-0 rounded-xl overflow-hidden"
-      style={{ width: 196, height: 90, background: v.bg, border: `1px solid ${v.border}`, margin: "0 7px" }}>
-      <SocialBg dark={variant !== "light"} />
+    <div
+      className="relative flex-shrink-0 rounded-2xl overflow-hidden"
+      style={{
+        width: 208,
+        height: 110,
+        background: v.bg,
+        border: `1px solid ${v.border}`,
+        margin: "0 7px",
+      }}
+    >
+      {/* Gradiente sutil en esquina superior derecha */}
+      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none"
+        style={{
+          background: variant === "gold"
+            ? "radial-gradient(circle at top right, rgba(201,162,39,0.07), transparent 70%)"
+            : variant === "light"
+              ? "radial-gradient(circle at top right, rgba(0,0,0,0.03), transparent 70%)"
+              : "radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent 70%)",
+        }} />
+
       <div className="relative z-10 h-full flex flex-col justify-between p-3.5">
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: v.dot }} />
-          <span className="text-[8.5px] font-bold tracking-[0.18em] uppercase"
-            style={{ color: v.label, fontFamily: "cromma, sans-serif" }}>{label}</span>
+
+        {/* Fila superior: label + tag */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: v.dot }} />
+            <span
+              className="text-[7.5px] font-bold tracking-[0.18em] uppercase truncate"
+              style={{ color: v.labelColor, fontFamily: "cromma, sans-serif" }}
+            >
+              {label}
+            </span>
+          </div>
+          {/* Tag de urgencia */}
+          <span
+            className="flex-shrink-0 text-[6.5px] font-bold tracking-[0.14em] uppercase px-1.5 py-0.5 rounded-full"
+            style={{
+              color: v.tagColor,
+              background: v.tagBg,
+              border: `1px solid ${v.tagBorder}`,
+              fontFamily: "cromma, sans-serif",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {tag}
+          </span>
         </div>
-        <p className="text-[11.5px] font-semibold leading-snug"
-          style={{ color: v.pain, fontFamily: "cromma, sans-serif" }}>{pain}</p>
+
+        {/* Pain — línea principal */}
+        <p
+          className="text-[12px] font-bold leading-snug"
+          style={{ color: v.painColor, fontFamily: "cromma, sans-serif", letterSpacing: "-0.01em" }}
+        >
+          {pain}
+        </p>
+
+        {/* Sub — consecuencia */}
+        <p
+          className="text-[10px] font-medium leading-snug"
+          style={{ color: v.subColor, fontFamily: "cromma, sans-serif" }}
+        >
+          {sub}
+        </p>
+
       </div>
     </div>
   )
 }
 
-// ─── Card de tech stack ───────────────────────────────────────────────────────
+// ─── Track ────────────────────────────────────────────────────────────────────
 
-function TechCard({ name, category, variant }: { name: string; category: string; variant: Variant }) {
-  const v = V[variant]
-  const nameColor = variant === "light" ? "#0a0a0a" : variant === "gold" ? "#c9a227" : "rgba(255,255,255,0.88)"
-  const catColor = variant === "light" ? "rgba(0,0,0,0.32)" : "rgba(255,255,255,0.22)"
-  return (
-    <div className="relative flex-shrink-0 rounded-xl overflow-hidden"
-      style={{ width: 160, height: 72, background: v.bg, border: `1px solid ${v.border}`, margin: "0 7px" }}>
-      <div className="h-full flex flex-col justify-center px-4">
-        <span className="text-[8px] font-bold tracking-[0.2em] uppercase mb-1.5"
-          style={{ color: catColor, fontFamily: "cromma, sans-serif" }}>{category}</span>
-        <span className="text-[15px] font-black leading-none"
-          style={{ color: nameColor, fontFamily: "cromma, sans-serif", letterSpacing: "-0.02em" }}>{name}</span>
-      </div>
-    </div>
-  )
-}
-
-// ─── Tracks ───────────────────────────────────────────────────────────────────
-
-function ProfileTrack({ items, duration, reverse = false }: {
-  items: { label: string; pain: string; variant: Variant }[]; duration: number; reverse?: boolean
+function Track({ items, duration, reverse = false, bgFrom }: {
+  items: CardData[]
+  duration: number
+  reverse?: boolean
+  bgFrom?: string
 }) {
+  const bg = bgFrom ?? "#0a0a0a"
   return (
-    <div className="relative overflow-hidden" style={{ height: 108 }}>
-      <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }} />
-      <div className="flex absolute top-0 left-0 items-center"
+    <div className="relative overflow-hidden" style={{ height: 128 }}>
+      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
+      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+        style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
+      <div
+        className="flex absolute top-0 left-0 items-center"
         style={{
-          height: 108,
-          animation: `p-ticker ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
+          height: 128,
+          animation: `insight-scroll ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
           willChange: "transform",
-        }}>
+        }}
+      >
         {items.map((item, i) => (
-          <ProfileCard key={i} label={item.label} pain={item.pain} variant={item.variant} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function TechTrack({ items, duration, reverse = false }: {
-  items: { name: string; category: string; variant: Variant }[]; duration: number; reverse?: boolean
-}) {
-  return (
-    <div className="relative overflow-hidden" style={{ height: 90 }}>
-      <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }} />
-      <div className="flex absolute top-0 left-0 items-center"
-        style={{
-          height: 90,
-          animation: `t-ticker ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
-          willChange: "transform",
-        }}>
-        {items.map((item, i) => (
-          <TechCard key={i} name={item.name} category={item.category} variant={item.variant} />
+          <Card key={i} {...item} />
         ))}
       </div>
     </div>
@@ -301,16 +431,12 @@ export function ElInsight() {
   }, [])
 
   return (
-    <section ref={ref} id="insight" className="section-dark relative overflow-hidden py-10 md:py-14">
+    <section ref={ref} id="insight" className="section-dark relative overflow-hidden py-10 md:py-16">
 
       <style>{`
-        @keyframes p-ticker {
+        @keyframes insight-scroll {
           from { transform: translateX(0); }
-          to   { transform: translateX(-${PROFILE_W * PROFILE_UNIQUE}px); }
-        }
-        @keyframes t-ticker {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-${TECH_W * TECH_UNIQUE}px); }
+          to   { transform: translateX(-${CARD_W * UNIQUE}px); }
         }
       `}</style>
 
@@ -319,7 +445,7 @@ export function ElInsight() {
         style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)" }} />
 
       {/* Header */}
-      <div className="container mx-auto px-4 mb-8">
+      <div className="container mx-auto px-4 mb-10">
         <div className="mx-auto max-w-4xl space-y-4">
           <p className="text-[10px] font-bold tracking-[0.25em] font-mono" style={{ color: "#c9a227" }}>
             {eyebrow}
@@ -338,31 +464,34 @@ export function ElInsight() {
         </div>
       </div>
 
-      {/* Track 1 — Creadores */}
-      <ProfileTrack items={TRACK_1} duration={32} />
-      <div style={{ height: 10 }} />
-      {/* Track 2 — Servicios */}
-      <ProfileTrack items={TRACK_2} duration={40} reverse />
-
-      {/* Separador antes del tech stack */}
-      <div className="container mx-auto px-4 mt-8 mb-5">
-        <div className="mx-auto max-w-4xl flex items-center gap-4">
-          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
-          <span className="text-[9px] font-bold tracking-[0.22em] font-mono"
-            style={{ color: "rgba(201,162,39,0.35)" }}>STACK QUE IMPLEMENTAMOS</span>
-          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
+      {/* Micro-label fila 1 */}
+      <div className="container mx-auto px-4 mb-3">
+        <div className="mx-auto max-w-4xl">
+          <span className="text-[8.5px] font-bold tracking-[0.22em] font-mono"
+            style={{ color: "rgba(255,255,255,0.15)" }}>CREADORES · COACHES · AGENCIAS</span>
         </div>
       </div>
 
-      {/* Track 3 — Tech stack */}
-      <TechTrack items={TRACK_3} duration={26} />
+      <Track items={TRACK_1} duration={36} />
+
+      {/* Micro-label fila 2 */}
+      <div className="container mx-auto px-4 mt-6 mb-3">
+        <div className="mx-auto max-w-4xl">
+          <span className="text-[8.5px] font-bold tracking-[0.22em] font-mono"
+            style={{ color: "rgba(255,255,255,0.15)" }}>SERVICIOS · EMPRESAS · NEGOCIOS</span>
+        </div>
+      </div>
+
+      <Track items={TRACK_2} duration={44} reverse />
 
       {/* Cierre */}
-      <div className="container mx-auto px-4 mt-7">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-[13px]" style={{ color: "#555555" }}>
-            No es falta de talento, ni de esfuerzo.{" "}
-            <span style={{ color: "#888888" }}>Es que nunca tuviste un sistema diseñado para traer clientes.</span>
+      <div className="container mx-auto px-4 mt-10">
+        <div className="mx-auto max-w-4xl space-y-1">
+          <p className="text-[13px] font-semibold" style={{ color: "#444444" }}>
+            No es falta de talento, ni de esfuerzo.
+          </p>
+          <p className="text-[13px]" style={{ color: "#333333" }}>
+            Es que nunca tuviste un sistema diseñado para traer clientes.
           </p>
         </div>
       </div>
