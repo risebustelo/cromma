@@ -7,14 +7,8 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   const socialIcons = [
-    {
-      Icon: Instagram,
-      href: "https://instagram.com/cromma.uno",
-    },
-    {
-      Icon: Linkedin,
-      href: "https://linkedin.com/company/unocromma",
-    },
+    { Icon: Instagram, href: "https://instagram.com/cromma.uno" },
+    { Icon: Linkedin, href: "https://linkedin.com/company/unocromma" },
   ]
 
   return (
@@ -23,41 +17,28 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
           {/* Logo */}
-          <a
-            href="/"
-            className="nav-logo group shrink-0"
-            aria-label="Ir al inicio"
-          >
+          <a href="/" className="nav-logo group shrink-0" aria-label="Ir al inicio">
             <span className="logo-gem" aria-hidden="true">
               <span className="logo-gem-layer logo-gem-glow">
-                <span />
-                <span />
-                <span />
-                <span />
+                <span /><span /><span /><span />
               </span>
-
               <span className="logo-gem-layer logo-gem-grid">
-                <span />
-                <span />
-                <span />
-                <span />
+                <span /><span /><span /><span />
               </span>
             </span>
-
             <span className="nav-logo-text">CROMMA</span>
           </a>
 
           {/* Social Icons */}
-          <AnimatedSocialIcons
-            icons={socialIcons}
-            iconSize={18}
-          />
+          <AnimatedSocialIcons icons={socialIcons} iconSize={18} />
 
-          <div className="flex items-center gap-6 text-xs text-[#444444]">
-            <a href="#" className="hover:text-[#888888] transition-colors duration-200">
+          <div className="flex items-center gap-6 text-xs">
+            {/* era #444444 → 2.03 ❌ | corregido #797979 → 4.55 ✅ */}
+            <a href="#" style={{ color: "#797979" }} className="hover:text-[#aaaaaa] transition-colors duration-200">
               Politica de privacidad
             </a>
-            <span className="text-[#333333]">
+            {/* era #333333 → 1.57 ❌ | corregido #797979 → 4.55 ✅ */}
+            <span style={{ color: "#797979" }}>
               {year} Cromma. Todos los derechos reservados.
             </span>
           </div>
