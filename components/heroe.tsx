@@ -247,7 +247,7 @@ export function Heroe() {
             >
               Sabés lo que hacés. El problema es que no tenés un sistema para venderlo.{" "}
               <span style={{ color: "#555" }}>
-                Eso es exactamente lo que construimos. El sistema para transformar tu conocimiento en consultas calificadas y ventas predecibles. Sin anuncios desde el día uno. Sin lanzamientos. Sin depender del algoritmo.
+                Eso es exactamente lo que construimos.
               </span>
             </p>
 
