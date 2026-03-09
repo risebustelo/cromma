@@ -4,28 +4,12 @@ import { useState, useEffect, useCallback } from "react"
 import { CtaPrimary, CtaSecondary } from "@/components/ui/cta-buttons"
 
 const phrases = [
-  "escalar sin anuncios",
-  "un 5-x a tu negocio",
-  "revender sin fricción",
-  "más ingresos pasivos",
-  "monetizar tu profesión",
-  "vender en automático",
-  "cerrar 6 cifras al mes",
-  "tu flujo de ventas",
-  "primeros 100 clientes",
-  "cambiar el mundo",
-  "lanzar tu curso",
-  "tus primeros $10k mes",
-  "dejar tu jornada laboral",
-  "$25.000 U$D al mes",
-  "tu libertad financiera",
-  "ingresos recurrentes",
-  "tu funnel de 1 M U$D",
-  "un 10-x a tu empresa",
-  "6 cifras en online",
+  "conocimiento",
+  "servicio",
+  "marca",
 ]
 
-const LONGEST_PHRASE = "crear ingresos recurrentes"
+const LONGEST_PHRASE = "conocimiento"
 
 const metrics = [
   { label: "Revenue", value: "$24.800", change: "+34%", up: true },
@@ -37,12 +21,10 @@ const metrics = [
 
 const sparkData = [18, 24, 19, 31, 27, 38, 33, 44, 41, 52, 48, 61]
 
-// Indigo premium — precisión, sistema, estructura
 const INDIGO = "oklch(0.58 0.18 260)"
 const INDIGO_DIM = "oklch(0.58 0.18 260 / 0.15)"
 const INDIGO_GLOW = "oklch(0.58 0.18 260 / 0.35)"
 
-// Badge verde apagado (no el emerald genérico)
 const BADGE_GREEN = "oklch(0.55 0.14 155)"
 const BADGE_GREEN_BG = "oklch(0.55 0.14 155 / 0.12)"
 
@@ -134,7 +116,6 @@ export function Heroe() {
 
       {/* Aurora liquid */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Gold/warm — identidad primaria */}
         <div style={{
           position: "absolute", width: "55vw", height: "55vw",
           maxWidth: 650, maxHeight: 650, borderRadius: "50%",
@@ -143,7 +124,6 @@ export function Heroe() {
           filter: "blur(80px)",
           animation: "aurora1 14s ease-in-out infinite alternate",
         }} />
-        {/* Índigo — sistema, estructura */}
         <div style={{
           position: "absolute", width: "50vw", height: "50vw",
           maxWidth: 580, maxHeight: 580, borderRadius: "50%",
@@ -152,7 +132,6 @@ export function Heroe() {
           filter: "blur(90px)",
           animation: "aurora2 18s ease-in-out infinite alternate",
         }} />
-        {/* Índigo suave abajo — profundidad */}
         <div style={{
           position: "absolute", width: "40vw", height: "40vw",
           maxWidth: 480, maxHeight: 480, borderRadius: "50%",
@@ -191,6 +170,13 @@ export function Heroe() {
           0%, 100% { opacity: 1; transform: scale(1); }
           50%       { opacity: 0.4; transform: scale(0.75); }
         }
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+        }
+        .cursor-blink {
+          animation: cursorBlink 1s step-end infinite;
+        }
         @media (prefers-reduced-motion: reduce) {
           [style*="aurora"] { animation: none !important; }
         }
@@ -226,18 +212,27 @@ export function Heroe() {
                 transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
               }}
             >
-              {"Estás a un proceso de"}
-              <br role="none" />
+              {/* Línea 1: fija */}
+              <span className="block text-white">Convertimos tu</span>
+
+              {/* Línea 2: typewriter en dorado */}
               <span className="relative block" style={{ color: "#c9a227" }}>
-                <span className="invisible whitespace-nowrap" aria-hidden>{LONGEST_PHRASE}</span>
+                {/* Reserva espacio con la frase más larga — invisible */}
+                <span className="invisible whitespace-nowrap" aria-hidden>
+                  {LONGEST_PHRASE}
+                </span>
+                {/* Texto animado encima */}
                 <span className="absolute inset-0 flex items-center lg:justify-start justify-center whitespace-nowrap">
                   {displayText}
                   <span className="cursor-blink font-light" style={{ color: "#c9a227" }}>|</span>
                 </span>
               </span>
+
+              {/* Línea 3: fija */}
+              <span className="block text-white">en clientes predecibles.</span>
             </h1>
 
-            {/* Subheadline */}
+            {/* Subheadline — Opción B */}
             <p
               className="text-base md:text-lg leading-relaxed mb-10
                          text-center lg:text-left
@@ -250,9 +245,9 @@ export function Heroe() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              El sistema para transformar tu conocimiento en consultas calificadas y ventas predecibles.{" "}
+              Sabés lo que hacés. El problema es que no tenés un sistema para venderlo.{" "}
               <span style={{ color: "#555" }}>
-                Sin anuncios desde el día uno. Sin lanzamientos. Sin depender del algoritmo.
+                Eso es exactamente lo que construimos. El sistema para transformar tu conocimiento en consultas calificadas y ventas predecibles. Sin anuncios desde el día uno. Sin lanzamientos. Sin depender del algoritmo.
               </span>
             </p>
 
@@ -387,6 +382,6 @@ export function Heroe() {
 
         </div>
       </div>
-    </section >
+    </section>
   )
 }
