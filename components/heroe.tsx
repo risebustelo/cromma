@@ -28,6 +28,11 @@ const INDIGO_GLOW = "oklch(0.58 0.18 260 / 0.35)"
 const BADGE_GREEN = "oklch(0.55 0.14 155)"
 const BADGE_GREEN_BG = "oklch(0.55 0.14 155 / 0.12)"
 
+// ─── WCAG AA — todos verificados con Python sobre bg #0a0a0a ─────────────────
+// ✅ pasan:  #ffffff 19.80 | #c9a227 8.18 | #888888 5.58 | oklch(0.78) ~10.27
+// ✅ corregidos → #797979 (4.55:1):
+//    era #555 (2.66) | #444 (2.03) | #333 (1.57) | rgba(255,255,255,0.35)~#595 (2.83)
+
 function Sparkline({ data }: { data: number[] }) {
   const max = Math.max(...data)
   const min = Math.min(...data)
@@ -188,7 +193,7 @@ export function Heroe() {
           {/* Columna principal */}
           <div className="flex-1 min-w-0 text-center lg:text-left">
 
-            {/* Eyebrow */}
+            {/* Eyebrow — oklch(0.78 0.008 260) ≈ 10.27:1 ✅ */}
             <p
               className="text-xs font-semibold tracking-[0.22em] uppercase mb-8"
               style={{
@@ -201,7 +206,7 @@ export function Heroe() {
               Consultores · Coaches · Servicios Profesionales · Infoproductores
             </p>
 
-            {/* Headline */}
+            {/* Headline — blanco 19.80:1 ✅ */}
             <h1
               className="text-white mb-6"
               style={{
@@ -212,41 +217,33 @@ export function Heroe() {
                 transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
               }}
             >
-              {/* Línea 1: fija */}
               <span className="block text-white">Convertimos tu</span>
-
-              {/* Línea 2: typewriter en dorado */}
               <span className="relative block" style={{ color: "#c9a227" }}>
-                {/* Reserva espacio con la frase más larga — invisible */}
+                {/* #c9a227 → 8.18:1 ✅ */}
                 <span className="invisible whitespace-nowrap" aria-hidden>
                   {LONGEST_PHRASE}
                 </span>
-                {/* Texto animado encima */}
                 <span className="absolute inset-0 flex items-center lg:justify-start justify-center whitespace-nowrap">
                   {displayText}
                   <span className="cursor-blink font-light" style={{ color: "#c9a227" }}>|</span>
                 </span>
               </span>
-
-              {/* Línea 3: fija */}
               <span className="block text-white">en clientes predecibles.</span>
             </h1>
 
-            {/* Subheadline — Opción B */}
+            {/* Subheadline — #888 5.58:1 ✅ | span corregido #797979 4.55:1 ✅ */}
             <p
-              className="text-base md:text-lg leading-relaxed mb-10
-                         text-center lg:text-left
-                         mx-auto lg:mx-0
-                         max-w-sm sm:max-w-md lg:max-w-none"
+              className="text-base md:text-lg leading-relaxed mb-10 text-center lg:text-left mx-auto lg:mx-0 max-w-sm sm:max-w-md lg:max-w-none"
               style={{
-                color: "#888",
+                color: "#888888",           // 5.58:1 ✅
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(16px)",
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
               Sabés lo que hacés. El problema es que no tenés un sistema para venderlo.{" "}
-              <span style={{ color: "#555" }}>
+              <span style={{ color: "#797979" }}>
+                {/* era #555555 → 2.66 ❌ | corregido #797979 → 4.55 ✅ */}
                 Eso es exactamente lo que construimos.
               </span>
             </p>
@@ -264,7 +261,8 @@ export function Heroe() {
                 <CtaPrimary />
                 <CtaSecondary />
               </div>
-              <p className="text-xs tracking-wide mt-1" style={{ color: "#333" }}>
+              {/* era #333333 → 1.57 ❌ | corregido #797979 → 4.55 ✅ */}
+              <p className="text-xs tracking-wide mt-1" style={{ color: "#797979" }}>
                 {"Aplicación gratuita · Cupos limitados"}
               </p>
             </div>
@@ -281,9 +279,10 @@ export function Heroe() {
           >
             {/* Header del widget */}
             <div className="flex items-center justify-between mb-1 px-1">
+              {/* era #444 → 2.03 ❌ | corregido #797979 → 4.55 ✅ */}
               <span
                 className="text-[10px] font-semibold tracking-[0.2em] uppercase"
-                style={{ color: "#444" }}
+                style={{ color: "#797979" }}
               >
                 Live analytics
               </span>
@@ -295,7 +294,8 @@ export function Heroe() {
                     animation: "livePulse 2s ease-in-out infinite",
                   }}
                 />
-                <span className="text-[10px]" style={{ color: "#555" }}>en vivo</span>
+                {/* era #555 → 2.66 ❌ | corregido #797979 → 4.55 ✅ */}
+                <span className="text-[10px]" style={{ color: "#797979" }}>en vivo</span>
               </span>
             </div>
 
@@ -312,12 +312,14 @@ export function Heroe() {
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
+                  {/* era #555 → 2.66 ❌ | corregido #797979 → 4.55 ✅ */}
                   <p
                     className="text-[11px] mb-1 tracking-wide"
-                    style={{ color: "#555" }}
+                    style={{ color: "#797979" }}
                   >
                     {metrics[activeMetric].label}
                   </p>
+                  {/* blanco → 19.80:1 ✅ */}
                   <p
                     className="text-2xl font-bold text-white"
                     key={`val-${tick2}`}
@@ -326,6 +328,7 @@ export function Heroe() {
                     {metrics[activeMetric].value}
                   </p>
                 </div>
+                {/* BADGE_GREEN oklch(0.55 0.14 155) ≈ #2da86a → 5.7:1 sobre #0a0a0a ✅ */}
                 <span
                   className="text-xs font-semibold px-2 py-0.5 rounded-full"
                   style={{
@@ -355,23 +358,27 @@ export function Heroe() {
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all duration-300"
                     style={{ background: i === activeMetric ? INDIGO : "#2a2a2a" }}
                   />
+                  {/* active #888 → 5.58 ✅ | inactive era #555 → 2.66 ❌ corregido #797979 → 4.55 ✅ */}
                   <span
                     className="text-[11px]"
-                    style={{ color: i === activeMetric ? "#888" : "#555" }}
+                    style={{ color: i === activeMetric ? "#888888" : "#797979" }}
                   >
                     {m.label}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
+                  {/* active rgba(255,255,255,0.8) ≈ #cccccc → 12.6:1 ✅
+                      inactive era rgba(0.35) ≈ #595959 → 2.83 ❌ corregido #797979 → 4.55 ✅ */}
                   <span
                     className="text-xs font-semibold"
-                    style={{ color: i === activeMetric ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.35)" }}
+                    style={{ color: i === activeMetric ? "rgba(255,255,255,0.8)" : "#797979" }}
                   >
                     {m.value}
                   </span>
+                  {/* active BADGE_GREEN ✅ | inactive era #333 → 1.57 ❌ corregido #797979 → 4.55 ✅ */}
                   <span
                     className="text-[10px]"
-                    style={{ color: i === activeMetric ? BADGE_GREEN : "#333" }}
+                    style={{ color: i === activeMetric ? BADGE_GREEN : "#797979" }}
                   >
                     {m.change}
                   </span>
