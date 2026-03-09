@@ -4,12 +4,12 @@ import { useState, useEffect, useCallback } from "react"
 import { CtaPrimary, CtaSecondary } from "@/components/ui/cta-buttons"
 
 const phrases = [
-  "tu conocimiento",
-  "tu servicio",
-  "tu marca",
+  "conocimiento",
+  "servicio",
+  "marca",
 ]
 
-const LONGEST_PHRASE = "tu conocimiento"
+const LONGEST_PHRASE = "conocimiento"
 
 const metrics = [
   { label: "Revenue", value: "$24.800", change: "+34%", up: true },
