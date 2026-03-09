@@ -284,7 +284,7 @@ const ROW_2: CardData[] = [
     variant: "light",
   },
   {
-    label: "DENTISTA / MÉDICO",
+    label: "CLÍNICA / MÉDICO",
     pain: "La agenda depende de referidos.",
     sub: "Sin flujo activo, hay meses vacíos.",
     tag: "AGENDA FRÁGIL",
