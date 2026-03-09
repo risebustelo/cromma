@@ -40,8 +40,6 @@ function useScramble(target: string, trigger: boolean, delay = 0) {
 }
 
 // ─── Flip lines ───────────────────────────────────────────────────────────────
-// Copy principle: mostrar el problema real — no el síntoma
-// Cada par: lo que hacen (acción) vs. lo que NO tienen (resultado)
 
 const PAIRS: [string, string][] = [
   ["Trabajás.", "Pero todo depende de vos."],
@@ -107,9 +105,7 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
   )
 }
 
-// ─── Tarjetas de segmento ─────────────────────────────────────────────────────
-// Copy principle: cada card = dolor específico + costo de inacción implícito
-// No es "sos esto" — es "esto te está costando hoy"
+// ─── Tipos y estilos ──────────────────────────────────────────────────────────
 
 type Variant = "gold" | "light" | "dark"
 
@@ -119,8 +115,8 @@ const V: Record<Variant, { bg: string; border: string; label: string; dot: strin
   dark: { bg: "#111111", border: "rgba(255,255,255,0.07)", label: "rgba(255,255,255,0.28)", dot: "rgba(255,255,255,0.5)", pain: "rgba(255,255,255,0.82)" },
 }
 
-// ROW 1 — Creadores, coaches, infoproductores
-// Insight: saben lo que hacen. El sistema falla, no ellos.
+// ─── ROW 1 — Creadores y profesionales del conocimiento ───────────────────────
+
 const ROW_1: { label: string; pain: string; variant: Variant }[] = [
   { label: "COACH / MENTOR", pain: "Vivís de recomendaciones. Cuando paran, vos parás.", variant: "gold" },
   { label: "CONSULTOR", pain: "Cobrás por hora. Si no trabajás, no ingresa nada.", variant: "light" },
@@ -133,8 +129,8 @@ const ROW_1: { label: string; pain: string; variant: Variant }[] = [
   { label: "EXPERTO DE NICHO", pain: "Sabés más que nadie. Pero el mercado no lo sabe.", variant: "dark" },
 ]
 
-// ROW 2 — Servicios profesionales y negocios establecidos
-// Insight: tienen demanda pero no sistema — cada cliente es esfuerzo desde cero
+// ─── ROW 2 — Servicios y negocios establecidos ────────────────────────────────
+
 const ROW_2: { label: string; pain: string; variant: Variant }[] = [
   { label: "PROFESIONAL INDEPENDIENTE", pain: "Trabajás el doble para ganar lo mismo.", variant: "light" },
   { label: "ESTUDIO / FIRMA", pain: "Dependés de dos o tres clientes grandes. Es frágil.", variant: "gold" },
@@ -143,20 +139,43 @@ const ROW_2: { label: string; pain: string; variant: Variant }[] = [
   { label: "ECOMMERCE", pain: "Tráfico hay. Compradores recurrentes, no.", variant: "gold" },
   { label: "TECNOLOGÍA / SOFTWARE", pain: "Product-market fit existe. Go-to-market, no.", variant: "dark" },
   { label: "INMOBILIARIA", pain: "Los leads llegan. Calificados y listos, no.", variant: "light" },
-  { label: "STARTUP / EMPRENDIMIENTO", pain: "Tracción manual. No podés seguir el ritmo.", variant: "gold" },
+  { label: "STARTUP", pain: "Tracción manual. No podés seguir el ritmo.", variant: "gold" },
   { label: "NEGOCIO ESTABLECIDO", pain: "Crecés despacio. Sabés que podría ser mucho más rápido.", variant: "dark" },
 ]
 
-// Triplicar para loop infinito sin salto visible
+// ─── ROW 3 — Tech stack que implementa Cromma ─────────────────────────────────
+// Credibilidad técnica: "sabemos con qué trabajás"
+
+const TECH_STACK: { name: string; category: string; variant: Variant }[] = [
+  { name: "Go High Level", category: "CRM / AUTOMATIZACIÓN", variant: "gold" },
+  { name: "Meta Ads", category: "PAUTA PAGADA", variant: "dark" },
+  { name: "ManyChat", category: "CHAT AUTOMATION", variant: "light" },
+  { name: "Make", category: "FLUJOS AUTOMÁTICOS", variant: "gold" },
+  { name: "Airtable", category: "BASE DE DATOS", variant: "dark" },
+  { name: "OnlyFans", category: "MONETIZACIÓN", variant: "light" },
+  { name: "Power BI", category: "ANALÍTICA", variant: "gold" },
+  { name: "ActiveCampaign", category: "EMAIL MARKETING", variant: "dark" },
+  { name: "n8n", category: "AUTOMATIZACIÓN IA", variant: "light" },
+  { name: "Zapier", category: "INTEGRACIONES", variant: "gold" },
+  { name: "Notion", category: "OPERACIONES", variant: "dark" },
+  { name: "Klaviyo", category: "EMAIL / SMS", variant: "light" },
+]
+
 const TRACK_1 = [...ROW_1, ...ROW_1, ...ROW_1]
 const TRACK_2 = [...ROW_2, ...ROW_2, ...ROW_2]
+const TRACK_3 = [...TECH_STACK, ...TECH_STACK, ...TECH_STACK]
 
-// Fondo decorativo de íconos sociales
+const PROFILE_W = 210   // 196 card + 14 margin
+const TECH_W = 174   // 160 card + 14 margin
+const PROFILE_UNIQUE = 9
+const TECH_UNIQUE = 12
+
+// ─── Decoración SVG de fondo ──────────────────────────────────────────────────
+
 function SocialBg({ dark }: { dark: boolean }) {
   const c = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"
   return (
-    <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 180 90" fill="none">
+    <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 180 90" fill="none">
       <rect x="8" y="8" width="22" height="22" rx="6" stroke={c} strokeWidth="1.6" />
       <circle cx="19" cy="19" r="5" stroke={c} strokeWidth="1.3" />
       <circle cx="25" cy="12" r="1.2" fill={c} />
@@ -169,67 +188,94 @@ function SocialBg({ dark }: { dark: boolean }) {
       <circle cx="56" cy="65" r="12" stroke={c} strokeWidth="1.6" />
       <text x="50" y="70" fontSize="11" fill={c} fontFamily="sans-serif">@</text>
       <circle cx="100" cy="65" r="12" stroke={c} strokeWidth="1.6" />
-      <path d="M92 62 Q100 57 108 62" stroke={c} strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M94 67 Q100 63 106 67" stroke={c} strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M96 72 Q100 69 104 72" stroke={c} strokeWidth="1.2" strokeLinecap="round" />
       <circle cx="140" cy="65" r="12" stroke={c} strokeWidth="1.6" />
       <text x="135" y="71" fontSize="13" fontWeight="bold" fill={c} fontFamily="sans-serif">f</text>
     </svg>
   )
 }
 
-function Card({ label, pain, variant }: { label: string; pain: string; variant: Variant }) {
+// ─── Card de perfil (con pain) ────────────────────────────────────────────────
+
+function ProfileCard({ label, pain, variant }: { label: string; pain: string; variant: Variant }) {
   const v = V[variant]
   return (
-    <div
-      className="relative flex-shrink-0 rounded-xl overflow-hidden"
-      style={{ width: 196, height: 90, background: v.bg, border: `1px solid ${v.border}`, margin: "0 7px" }}
-    >
+    <div className="relative flex-shrink-0 rounded-xl overflow-hidden"
+      style={{ width: 196, height: 90, background: v.bg, border: `1px solid ${v.border}`, margin: "0 7px" }}>
       <SocialBg dark={variant !== "light"} />
       <div className="relative z-10 h-full flex flex-col justify-between p-3.5">
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: v.dot }} />
           <span className="text-[8.5px] font-bold tracking-[0.18em] uppercase"
-            style={{ color: v.label, fontFamily: "cromma, sans-serif" }}>
-            {label}
-          </span>
+            style={{ color: v.label, fontFamily: "cromma, sans-serif" }}>{label}</span>
         </div>
         <p className="text-[11.5px] font-semibold leading-snug"
-          style={{ color: v.pain, fontFamily: "cromma, sans-serif" }}>
-          {pain}
-        </p>
+          style={{ color: v.pain, fontFamily: "cromma, sans-serif" }}>{pain}</p>
       </div>
     </div>
   )
 }
 
-// ─── Track infinito ───────────────────────────────────────────────────────────
+// ─── Card de tech stack ───────────────────────────────────────────────────────
 
-const CARD_W = 210  // 196 + 14 margin
-const UNIQUE = 9    // cards únicas por fila
+function TechCard({ name, category, variant }: { name: string; category: string; variant: Variant }) {
+  const v = V[variant]
+  const nameColor = variant === "light" ? "#0a0a0a" : variant === "gold" ? "#c9a227" : "rgba(255,255,255,0.88)"
+  const catColor = variant === "light" ? "rgba(0,0,0,0.32)" : "rgba(255,255,255,0.22)"
+  return (
+    <div className="relative flex-shrink-0 rounded-xl overflow-hidden"
+      style={{ width: 160, height: 72, background: v.bg, border: `1px solid ${v.border}`, margin: "0 7px" }}>
+      <div className="h-full flex flex-col justify-center px-4">
+        <span className="text-[8px] font-bold tracking-[0.2em] uppercase mb-1.5"
+          style={{ color: catColor, fontFamily: "cromma, sans-serif" }}>{category}</span>
+        <span className="text-[15px] font-black leading-none"
+          style={{ color: nameColor, fontFamily: "cromma, sans-serif", letterSpacing: "-0.02em" }}>{name}</span>
+      </div>
+    </div>
+  )
+}
 
-function Track({ items, duration, reverse = false }: {
-  items: typeof TRACK_1; duration: number; reverse?: boolean
+// ─── Tracks ───────────────────────────────────────────────────────────────────
+
+function ProfileTrack({ items, duration, reverse = false }: {
+  items: { label: string; pain: string; variant: Variant }[]; duration: number; reverse?: boolean
 }) {
-  const loopW = CARD_W * UNIQUE
   return (
     <div className="relative overflow-hidden" style={{ height: 108 }}>
-      {/* Fades laterales */}
       <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
         style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }} />
       <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
         style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }} />
-
-      <div
-        className="flex absolute top-0 left-0 items-center"
+      <div className="flex absolute top-0 left-0 items-center"
         style={{
           height: 108,
-          animation: `insight-ticker ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
+          animation: `p-ticker ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
           willChange: "transform",
-        }}
-      >
+        }}>
         {items.map((item, i) => (
-          <Card key={i} label={item.label} pain={item.pain} variant={item.variant} />
+          <ProfileCard key={i} label={item.label} pain={item.pain} variant={item.variant} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function TechTrack({ items, duration, reverse = false }: {
+  items: { name: string; category: string; variant: Variant }[]; duration: number; reverse?: boolean
+}) {
+  return (
+    <div className="relative overflow-hidden" style={{ height: 90 }}>
+      <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }} />
+      <div className="flex absolute top-0 left-0 items-center"
+        style={{
+          height: 90,
+          animation: `t-ticker ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
+          willChange: "transform",
+        }}>
+        {items.map((item, i) => (
+          <TechCard key={i} name={item.name} category={item.category} variant={item.variant} />
         ))}
       </div>
     </div>
@@ -258,9 +304,13 @@ export function ElInsight() {
     <section ref={ref} id="insight" className="section-dark relative overflow-hidden py-10 md:py-14">
 
       <style>{`
-        @keyframes insight-ticker {
+        @keyframes p-ticker {
           from { transform: translateX(0); }
-          to   { transform: translateX(-${CARD_W * UNIQUE}px); }
+          to   { transform: translateX(-${PROFILE_W * PROFILE_UNIQUE}px); }
+        }
+        @keyframes t-ticker {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-${TECH_W * TECH_UNIQUE}px); }
         }
       `}</style>
 
@@ -271,8 +321,6 @@ export function ElInsight() {
       {/* Header */}
       <div className="container mx-auto px-4 mb-8">
         <div className="mx-auto max-w-4xl space-y-4">
-
-          {/* Eyebrow scramble */}
           <p className="text-[10px] font-bold tracking-[0.25em] font-mono" style={{ color: "#c9a227" }}>
             {eyebrow}
             <span style={{
@@ -282,24 +330,34 @@ export function ElInsight() {
               opacity: visible ? 1 : 0,
             }} />
           </p>
-
-          {/* Frases flip — pain-first */}
           <div className="flex flex-col gap-1.5">
             {PAIRS.map(([left, right], i) => (
               <FlipLine key={i} left={left} right={right} delay={i * 800} />
             ))}
           </div>
-
         </div>
       </div>
 
-      {/* Track 1 */}
-      <Track items={TRACK_1} duration={32} />
+      {/* Track 1 — Creadores */}
+      <ProfileTrack items={TRACK_1} duration={32} />
       <div style={{ height: 10 }} />
-      {/* Track 2 */}
-      <Track items={TRACK_2} duration={40} reverse />
+      {/* Track 2 — Servicios */}
+      <ProfileTrack items={TRACK_2} duration={40} reverse />
 
-      {/* Cierre — el diagnóstico, no la solución todavía */}
+      {/* Separador antes del tech stack */}
+      <div className="container mx-auto px-4 mt-8 mb-5">
+        <div className="mx-auto max-w-4xl flex items-center gap-4">
+          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
+          <span className="text-[9px] font-bold tracking-[0.22em] font-mono"
+            style={{ color: "rgba(201,162,39,0.35)" }}>STACK QUE IMPLEMENTAMOS</span>
+          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
+        </div>
+      </div>
+
+      {/* Track 3 — Tech stack */}
+      <TechTrack items={TRACK_3} duration={26} />
+
+      {/* Cierre */}
       <div className="container mx-auto px-4 mt-7">
         <div className="mx-auto max-w-4xl">
           <p className="text-[13px]" style={{ color: "#555555" }}>
