@@ -87,19 +87,40 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
 
   return (
     <div className="flex items-baseline gap-2 flex-wrap">
-      <span className="font-black leading-none"
-        style={{ fontFamily: "cromma, sans-serif", fontSize: "clamp(1.1rem,2.6vw,1.65rem)", color: "#ffffff", letterSpacing: "-0.02em" }}>
+      <span
+        className="font-black leading-none"
+        style={{
+          fontFamily: "cromma, sans-serif",
+          fontSize: "clamp(1.1rem, 2.6vw, 1.65rem)",
+          color: "#ffffff",
+          letterSpacing: "-0.02em",
+        }}
+      >
         {left}
       </span>
-      <span className="font-semibold leading-none"
-        style={{ fontFamily: "cromma, sans-serif", fontSize: "clamp(1.1rem,2.6vw,1.65rem)", color: phase === "typing" ? "#c9a227" : "#444444", letterSpacing: "-0.02em", minWidth: "1ch" }}>
+      <span
+        className="font-semibold leading-none"
+        style={{
+          fontFamily: "cromma, sans-serif",
+          fontSize: "clamp(1.1rem, 2.6vw, 1.65rem)",
+          color: phase === "typing" ? "#c9a227" : "#444444",
+          letterSpacing: "-0.02em",
+          minWidth: "1ch",
+        }}
+      >
         {text}
-        <span style={{
-          display: "inline-block", width: "2px", height: "1em", background: "#c9a227",
-          marginLeft: "2px", verticalAlign: "text-bottom",
-          opacity: phase === "show-right" ? 0 : 1,
-          animation: phase !== "show-right" ? "blink 0.5s step-end infinite" : "none",
-        }} />
+        <span
+          style={{
+            display: "inline-block",
+            width: "2px",
+            height: "1em",
+            background: "#c9a227",
+            marginLeft: "2px",
+            verticalAlign: "text-bottom",
+            opacity: phase === "show-right" ? 0 : 1,
+            animation: phase !== "show-right" ? "blink 0.5s step-end infinite" : "none",
+          }}
+        />
       </span>
     </div>
   )
@@ -109,81 +130,85 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
 
 type Variant = "gold" | "light" | "dark"
 
-// urgency: qué está pasando HOY sin sistema — aparece como tag pequeño arriba a la derecha
-// loss: lo que se pierde cada mes — número concreto
 type CardData = {
-  label: string
-  pain: string       // problema principal — una línea, presente continuo
-  sub: string        // consecuencia concreta — segunda línea, más corta
-  tag: string        // micro-tag de urgencia: "SIN SISTEMA" / "TECHO CLARO" / etc
+  label: string   // perfil — corto, en mayúsculas
+  pain: string    // problema principal — 1 línea corta, impacta de golpe
+  sub: string     // consecuencia — 1 línea, refuerza el dolor
+  tag: string     // nombre del cuello de botella — muy corto
   variant: Variant
 }
 
-// ─── Estilos por variante ─────────────────────────────────────────────────────
-
 const V: Record<Variant, {
-  bg: string; border: string
-  labelColor: string; dot: string
-  painColor: string; subColor: string
-  tagBg: string; tagColor: string
+  bg: string
+  border: string
+  labelColor: string
+  dot: string
+  painColor: string
+  subColor: string
+  tagBg: string
+  tagColor: string
   tagBorder: string
+  glow: string
 }> = {
   gold: {
     bg: "#0d0c09",
-    border: "rgba(201,162,39,0.25)",
-    labelColor: "rgba(201,162,39,0.55)",
+    border: "rgba(201,162,39,0.22)",
+    labelColor: "rgba(201,162,39,0.5)",
     dot: "#c9a227",
-    painColor: "#e8d49a",
-    subColor: "rgba(201,162,39,0.45)",
-    tagBg: "rgba(201,162,39,0.08)",
-    tagColor: "rgba(201,162,39,0.7)",
-    tagBorder: "rgba(201,162,39,0.2)",
+    painColor: "#f0dfa0",
+    subColor: "rgba(201,162,39,0.42)",
+    tagBg: "rgba(201,162,39,0.09)",
+    tagColor: "rgba(201,162,39,0.65)",
+    tagBorder: "rgba(201,162,39,0.18)",
+    glow: "rgba(201,162,39,0.05)",
   },
   light: {
-    bg: "#eeede7",
-    border: "rgba(0,0,0,0.08)",
-    labelColor: "rgba(0,0,0,0.32)",
-    dot: "#1a1a1a",
-    painColor: "#111111",
-    subColor: "rgba(0,0,0,0.38)",
+    bg: "#eeedea",
+    border: "rgba(0,0,0,0.07)",
+    labelColor: "rgba(0,0,0,0.3)",
+    dot: "#222222",
+    painColor: "#0e0e0e",
+    subColor: "rgba(0,0,0,0.36)",
     tagBg: "rgba(0,0,0,0.05)",
-    tagColor: "rgba(0,0,0,0.4)",
+    tagColor: "rgba(0,0,0,0.38)",
     tagBorder: "rgba(0,0,0,0.1)",
+    glow: "rgba(0,0,0,0.02)",
   },
   dark: {
     bg: "#0e0e0e",
     border: "rgba(255,255,255,0.06)",
-    labelColor: "rgba(255,255,255,0.25)",
-    dot: "rgba(255,255,255,0.4)",
-    painColor: "rgba(255,255,255,0.85)",
-    subColor: "rgba(255,255,255,0.32)",
+    labelColor: "rgba(255,255,255,0.24)",
+    dot: "rgba(255,255,255,0.38)",
+    painColor: "rgba(255,255,255,0.88)",
+    subColor: "rgba(255,255,255,0.3)",
     tagBg: "rgba(255,255,255,0.04)",
-    tagColor: "rgba(255,255,255,0.3)",
+    tagColor: "rgba(255,255,255,0.28)",
     tagBorder: "rgba(255,255,255,0.08)",
+    glow: "rgba(255,255,255,0.02)",
   },
 }
 
-// ─── ROW 1 — Creadores, coaches, infoproductores ──────────────────────────────
-// Pain: lo que viven HOY. Sub: la consecuencia directa. Tag: el cuello de botella.
+// ─── Datos — copy quirúrgico, líneas cortas que entran en la card ─────────────
+// Regla: pain ≤ 38 chars | sub ≤ 42 chars | tag ≤ 18 chars | label ≤ 22 chars
 
 const ROW_1: CardData[] = [
   {
     label: "COACH / MENTOR",
-    pain: "Cada cliente te costó una llamada.",
+    pain: "Sin sistema, no hay clientes nuevos.",
     sub: "Cuando dejás de buscar, dejás de facturar.",
     tag: "SIN SISTEMA",
     variant: "gold",
   },
   {
     label: "CONSULTOR",
-    pain: "Tu tiempo es el único activo que vendés.",
-    sub: "Y tiene un límite físico. Ya lo sabés.",
-    tag: "TECHO CLARO",
+    pain: "Tu tiempo es lo único que vendés.",
+    sub: "Y tiene un límite físico.",
+    tag: "TECHO DE HORA",
     variant: "light",
   },
   {
     label: "AGENCIA",
-    pain: "Vos cerrás. Tu equipo no puede.",
+    pain: "Vos cerrás. Tu equipo, no puede.",
     sub: "El negocio escala solo si vos escalás.",
     tag: "CUELLO DE BOTELLA",
     variant: "dark",
@@ -191,60 +216,58 @@ const ROW_1: CardData[] = [
   {
     label: "INFOPRODUCTOR",
     pain: "El lanzamiento dura 10 días.",
-    sub: "Los otros 20, silencio.",
+    sub: "Los otros 20 del mes: silencio.",
     tag: "INGRESOS PICO",
     variant: "gold",
   },
   {
     label: "CREADOR DE CONTENIDO",
-    pain: "El algoritmo te da alcance. No clientes.",
+    pain: "El algoritmo da alcance. No clientes.",
     sub: "Ningún seguidor paga solo por verte.",
     tag: "CONVERSIÓN CERO",
     variant: "light",
   },
   {
     label: "FREELANCER",
-    pain: "Terminás un proyecto y volvés a cero.",
+    pain: "Terminás un proyecto. Volvés a cero.",
     sub: "Cada mes es una búsqueda nueva.",
     tag: "CICLO ROTO",
     variant: "dark",
   },
   {
     label: "SPEAKER / FORMADOR",
-    pain: "El escenario llena la sala. No el pipeline.",
-    sub: "La audiencia aplaude. Después, nada.",
+    pain: "El escenario llena la sala.",
+    sub: "No el pipeline de clientes.",
     tag: "SIN CONVERSIÓN",
     variant: "gold",
   },
   {
     label: "MARCA PERSONAL",
     pain: "Tenés presencia. No tenés flujo.",
-    sub: "La marca no vende sola sin un sistema detrás.",
+    sub: "La marca no vende sola.",
     tag: "FLUJO INEXISTENTE",
     variant: "light",
   },
   {
     label: "EXPERTO DE NICHO",
-    pain: "El mercado no sabe que existís.",
-    sub: "Tu competencia cobra más. Y aparece primero.",
+    pain: "Tu competencia aparece primero.",
+    sub: "Y cobra más. Aunque sabe menos.",
     tag: "INVISIBILIDAD",
     variant: "dark",
   },
 ]
 
-// ─── ROW 2 — Servicios profesionales y negocios ───────────────────────────────
-
 const ROW_2: CardData[] = [
   {
     label: "PROFESIONAL INDEPENDIENTE",
     pain: "Más horas no es más dinero.",
-    sub: "Ya llegaste al techo de lo que podés cobrar por hora.",
-    tag: "TECHO DE HORA",
+    sub: "Ya llegaste al techo.",
+    tag: "TECHO CLARO",
     variant: "light",
   },
   {
     label: "ESTUDIO / FIRMA",
-    pain: "Dos clientes grandes son toda la firma.",
+    pain: "Dos clientes grandes = toda la firma.",
     sub: "Si uno se va, el mes se cae.",
     tag: "RIESGO CONCENTRADO",
     variant: "gold",
@@ -252,49 +275,49 @@ const ROW_2: CardData[] = [
   {
     label: "SERVICIO LOCAL",
     pain: "El boca a boca llegó hasta acá.",
-    sub: "A partir de ahora, no crece solo.",
+    sub: "A partir de ahora no crece solo.",
     tag: "LÍMITE DE RED",
     variant: "dark",
   },
   {
     label: "EMPRESA B2B",
     pain: "Cada venta tarda meses.",
-    sub: "Sin sistema, no podés predecir ni planificar.",
+    sub: "Sin sistema no podés predecir nada.",
     tag: "CICLOS LARGOS",
     variant: "light",
   },
   {
     label: "ECOMMERCE",
     pain: "Compraron una vez. No volvieron.",
-    sub: "El costo de adquisición no para de subir.",
+    sub: "El costo de adquisición no para.",
     tag: "SIN RETENCIÓN",
     variant: "gold",
   },
   {
     label: "TECNOLOGÍA / SOFTWARE",
-    pain: "El producto funciona. El go-to-market, no.",
-    sub: "Sin distribución, el mejor producto no gana.",
-    tag: "DISTRIBUCIÓN ROTA",
+    pain: "El producto funciona. El GTM, no.",
+    sub: "Sin distribución, el mejor no gana.",
+    tag: "GTM ROTO",
     variant: "dark",
   },
   {
     label: "INMOBILIARIA",
     pain: "Los leads llegan. Los buenos, no.",
-    sub: "Perdés tiempo en prospectos que nunca cierran.",
+    sub: "Perdés tiempo en los que no cierran.",
     tag: "LEADS SIN FILTRO",
     variant: "light",
   },
   {
     label: "STARTUP",
-    pain: "Crecés a fuerza de voluntad.",
-    sub: "Eso no escala. Y ya empezás a sentirlo.",
+    pain: "Crecés a pura fuerza de voluntad.",
+    sub: "Eso no escala. Ya empezás a sentirlo.",
     tag: "TRACCIÓN MANUAL",
     variant: "gold",
   },
   {
     label: "NEGOCIO ESTABLECIDO",
-    pain: "Facturás bien. Pero podrías facturar el doble.",
-    sub: "Y lo sabés. Sólo falta el sistema que lo haga.",
+    pain: "Facturás bien. Podrías facturar el doble.",
+    sub: "Solo falta el sistema que lo haga.",
     tag: "POTENCIAL FRENADO",
     variant: "dark",
   },
@@ -303,75 +326,101 @@ const ROW_2: CardData[] = [
 const TRACK_1 = [...ROW_1, ...ROW_1, ...ROW_1]
 const TRACK_2 = [...ROW_2, ...ROW_2, ...ROW_2]
 
-const CARD_W = 222   // 208px card + 14px margin
+// Card: 240px ancho, 120px alto — texto cómodo en mobile y desktop
+const CARD_W = 256   // 240px + 16px de margen
 const UNIQUE = 9
 
-// ─── Card mejorada ────────────────────────────────────────────────────────────
-// Layout: label + dot arriba | pain (grande) en medio | sub + tag abajo
+// ─── Card ─────────────────────────────────────────────────────────────────────
 
 function Card({ label, pain, sub, tag, variant }: CardData) {
   const v = V[variant]
   return (
     <div
-      className="relative flex-shrink-0 rounded-2xl overflow-hidden"
+      className="relative flex-shrink-0 rounded-2xl"
       style={{
-        width: 208,
-        height: 110,
+        width: 240,
+        height: 120,
         background: v.bg,
         border: `1px solid ${v.border}`,
-        margin: "0 7px",
+        margin: "0 8px",
+        // Sombra interior sutil arriba derecha
+        boxShadow: `inset -30px -20px 40px ${v.glow}`,
       }}
     >
-      {/* Gradiente sutil en esquina superior derecha */}
-      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none"
-        style={{
-          background: variant === "gold"
-            ? "radial-gradient(circle at top right, rgba(201,162,39,0.07), transparent 70%)"
-            : variant === "light"
-              ? "radial-gradient(circle at top right, rgba(0,0,0,0.03), transparent 70%)"
-              : "radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent 70%)",
-        }} />
-
-      <div className="relative z-10 h-full flex flex-col justify-between p-3.5">
+      <div className="h-full flex flex-col justify-between p-4">
 
         {/* Fila superior: label + tag */}
         <div className="flex items-center justify-between gap-2">
+
+          {/* Label con dot */}
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: v.dot }} />
             <span
-              className="text-[7.5px] font-bold tracking-[0.18em] uppercase truncate"
-              style={{ color: v.labelColor, fontFamily: "cromma, sans-serif" }}
+              className="flex-shrink-0 rounded-full"
+              style={{ width: 5, height: 5, background: v.dot }}
+            />
+            <span
+              style={{
+                fontFamily: "cromma, sans-serif",
+                fontSize: 8,
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase" as const,
+                color: v.labelColor,
+                whiteSpace: "nowrap" as const,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
             >
               {label}
             </span>
           </div>
-          {/* Tag de urgencia */}
+
+          {/* Tag pill */}
           <span
-            className="flex-shrink-0 text-[6.5px] font-bold tracking-[0.14em] uppercase px-1.5 py-0.5 rounded-full"
             style={{
+              fontFamily: "cromma, sans-serif",
+              fontSize: 7,
+              fontWeight: 700,
+              letterSpacing: "0.13em",
+              textTransform: "uppercase" as const,
               color: v.tagColor,
               background: v.tagBg,
               border: `1px solid ${v.tagBorder}`,
-              fontFamily: "cromma, sans-serif",
-              whiteSpace: "nowrap",
+              borderRadius: 99,
+              padding: "2px 6px",
+              whiteSpace: "nowrap" as const,
+              flexShrink: 0,
             }}
           >
             {tag}
           </span>
         </div>
 
-        {/* Pain — línea principal */}
+        {/* Pain — problema principal, tipografía más grande y legible */}
         <p
-          className="text-[12px] font-bold leading-snug"
-          style={{ color: v.painColor, fontFamily: "cromma, sans-serif", letterSpacing: "-0.01em" }}
+          style={{
+            fontFamily: "cromma, sans-serif",
+            fontSize: 13,
+            fontWeight: 700,
+            lineHeight: 1.35,
+            letterSpacing: "-0.01em",
+            color: v.painColor,
+            margin: 0,
+          }}
         >
           {pain}
         </p>
 
         {/* Sub — consecuencia */}
         <p
-          className="text-[10px] font-medium leading-snug"
-          style={{ color: v.subColor, fontFamily: "cromma, sans-serif" }}
+          style={{
+            fontFamily: "cromma, sans-serif",
+            fontSize: 11,
+            fontWeight: 500,
+            lineHeight: 1.35,
+            color: v.subColor,
+            margin: 0,
+          }}
         >
           {sub}
         </p>
@@ -383,24 +432,39 @@ function Card({ label, pain, sub, tag, variant }: CardData) {
 
 // ─── Track ────────────────────────────────────────────────────────────────────
 
-function Track({ items, duration, reverse = false, bgFrom }: {
+function Track({
+  items,
+  duration,
+  reverse = false,
+}: {
   items: CardData[]
   duration: number
   reverse?: boolean
-  bgFrom?: string
 }) {
-  const bg = bgFrom ?? "#0a0a0a"
   return (
-    <div className="relative overflow-hidden" style={{ height: 128 }}>
-      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
-      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
+    <div className="relative overflow-hidden" style={{ height: 140 }}>
+      {/* Fades laterales */}
+      <div
+        className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+        style={{
+          width: "6rem",
+          background: "linear-gradient(to right, #0a0a0a, transparent)",
+        }}
+      />
+      <div
+        className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+        style={{
+          width: "6rem",
+          background: "linear-gradient(to left, #0a0a0a, transparent)",
+        }}
+      />
+
       <div
         className="flex absolute top-0 left-0 items-center"
         style={{
-          height: 128,
-          animation: `insight-scroll ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
+          height: 140,
+          animation: `insight-scroll ${duration}s linear infinite ${reverse ? "reverse" : "normal"
+            }`,
           willChange: "transform",
         }}
       >
@@ -423,7 +487,9 @@ export function ElInsight() {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true) },
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true)
+      },
       { threshold: 0.2 }
     )
     obs.observe(el)
@@ -431,8 +497,11 @@ export function ElInsight() {
   }, [])
 
   return (
-    <section ref={ref} id="insight" className="section-dark relative overflow-hidden py-10 md:py-16">
-
+    <section
+      ref={ref}
+      id="insight"
+      className="section-dark relative overflow-hidden py-10 md:py-16"
+    >
       <style>{`
         @keyframes insight-scroll {
           from { transform: translateX(0); }
@@ -440,21 +509,35 @@ export function ElInsight() {
         }
       `}</style>
 
-      {/* Línea superior dorada */}
-      <div className="absolute top-0 inset-x-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)" }} />
+      {/* Línea superior */}
+      <div
+        className="absolute top-0 inset-x-0 h-px"
+        style={{
+          background:
+            "linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)",
+        }}
+      />
 
       {/* Header */}
       <div className="container mx-auto px-4 mb-10">
         <div className="mx-auto max-w-4xl space-y-4">
-          <p className="text-[10px] font-bold tracking-[0.25em] font-mono" style={{ color: "#c9a227" }}>
+          <p
+            className="text-[10px] font-bold tracking-[0.25em] font-mono"
+            style={{ color: "#c9a227" }}
+          >
             {eyebrow}
-            <span style={{
-              display: "inline-block", width: "2px", height: "0.8em",
-              background: "#c9a227", marginLeft: "3px", verticalAlign: "middle",
-              animation: visible ? "blink 0.7s step-end infinite" : "none",
-              opacity: visible ? 1 : 0,
-            }} />
+            <span
+              style={{
+                display: "inline-block",
+                width: "2px",
+                height: "0.8em",
+                background: "#c9a227",
+                marginLeft: "3px",
+                verticalAlign: "middle",
+                animation: visible ? "blink 0.7s step-end infinite" : "none",
+                opacity: visible ? 1 : 0,
+              }}
+            />
           </p>
           <div className="flex flex-col gap-1.5">
             {PAIRS.map(([left, right], i) => (
@@ -467,38 +550,74 @@ export function ElInsight() {
       {/* Micro-label fila 1 */}
       <div className="container mx-auto px-4 mb-3">
         <div className="mx-auto max-w-4xl">
-          <span className="text-[8.5px] font-bold tracking-[0.22em] font-mono"
-            style={{ color: "rgba(255,255,255,0.15)" }}>CREADORES · COACHES · AGENCIAS</span>
+          <span
+            className="font-bold font-mono"
+            style={{
+              fontSize: 9,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.14)",
+            }}
+          >
+            CREADORES · COACHES · AGENCIAS
+          </span>
         </div>
       </div>
 
-      <Track items={TRACK_1} duration={36} />
+      <Track items={TRACK_1} duration={40} />
 
       {/* Micro-label fila 2 */}
-      <div className="container mx-auto px-4 mt-6 mb-3">
+      <div className="container mx-auto px-4 mt-7 mb-3">
         <div className="mx-auto max-w-4xl">
-          <span className="text-[8.5px] font-bold tracking-[0.22em] font-mono"
-            style={{ color: "rgba(255,255,255,0.15)" }}>SERVICIOS · EMPRESAS · NEGOCIOS</span>
+          <span
+            className="font-bold font-mono"
+            style={{
+              fontSize: 9,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.14)",
+            }}
+          >
+            SERVICIOS · EMPRESAS · NEGOCIOS
+          </span>
         </div>
       </div>
 
-      <Track items={TRACK_2} duration={44} reverse />
+      <Track items={TRACK_2} duration={48} reverse />
 
       {/* Cierre */}
       <div className="container mx-auto px-4 mt-10">
         <div className="mx-auto max-w-4xl space-y-1">
-          <p className="text-[13px] font-semibold" style={{ color: "#444444" }}>
+          <p
+            style={{
+              fontFamily: "cromma, sans-serif",
+              fontSize: 13,
+              fontWeight: 600,
+              color: "#444444",
+            }}
+          >
             No es falta de talento, ni de esfuerzo.
           </p>
-          <p className="text-[13px]" style={{ color: "#333333" }}>
+          <p
+            style={{
+              fontFamily: "cromma, sans-serif",
+              fontSize: 13,
+              color: "#333333",
+            }}
+          >
             Es que nunca tuviste un sistema diseñado para traer clientes.
           </p>
         </div>
       </div>
 
       {/* Línea inferior */}
-      <div className="absolute bottom-0 inset-x-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.12), transparent)" }} />
+      <div
+        className="absolute bottom-0 inset-x-0 h-px"
+        style={{
+          background:
+            "linear-gradient(to right, transparent, rgba(201,162,39,0.12), transparent)",
+        }}
+      />
     </section>
   )
 }
