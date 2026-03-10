@@ -176,7 +176,7 @@
 }
 
 /* ═══════════════════════════════════════════
-   NAV LOGO — gema cristal / cuarzo
+   NAV LOGO — crystal / quartz gem
 ═══════════════════════════════════════════ */
 
 .nav-logo {
@@ -197,6 +197,8 @@
   transition: transform 0.25s ease, text-shadow 0.25s ease, opacity 0.25s ease;
 }
 
+/* gem container */
+
 .logo-gem {
   display: inline-block;
   width: 28px;
@@ -204,6 +206,8 @@
   position: relative;
   flex-shrink: 0;
 }
+
+/* base layer grid */
 
 .logo-gem-layer {
   position: absolute;
@@ -222,35 +226,40 @@
   border-radius: 3px;
 }
 
+/* subtle light reflection layer */
+
 .logo-gem-glow {
   inset: -1px;
   opacity: 0.05;
   filter: blur(0.3px) saturate(1.2);
-  transform: rotate(45deg) scale(0.9);
+  transform: rotate(45deg) scale(0.95);
 }
 
 .logo-gem-glow>span:nth-child(1) {
   background: #ffd95e;
-  box-shadow: 0 0 8px rgba(255, 217, 94, 0.36);
+  box-shadow: 0 0 4px rgba(255, 217, 94, 0.18);
 }
 
 .logo-gem-glow>span:nth-child(2) {
   background: #65f58e;
-  box-shadow: 0 0 8px rgba(101, 245, 142, 0.32);
+  box-shadow: 0 0 4px rgba(101, 245, 142, 0.16);
 }
 
 .logo-gem-glow>span:nth-child(3) {
   background: #ffb0d2;
-  box-shadow: 0 0 8px rgba(255, 176, 210, 0.32);
+  box-shadow: 0 0 4px rgba(255, 176, 210, 0.16);
 }
 
 .logo-gem-glow>span:nth-child(4) {
   background: #67f0f0;
-  box-shadow: 0 0 8px rgba(103, 240, 240, 0.30);
+  box-shadow: 0 0 4px rgba(103, 240, 240, 0.15);
 }
+
+/* gem surface layer */
 
 .logo-gem-grid {
   z-index: 2;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
 }
 
 .logo-gem-grid>span {
@@ -258,15 +267,24 @@
   display: block;
   overflow: hidden;
   border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  filter: saturate(1.22) brightness(0.92);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  filter: saturate(1.08) brightness(0.96);
 }
+
+/* crystal light facets */
 
 .logo-gem-grid>span::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 16%, transparent 17%, transparent 58%, rgba(255, 255, 255, 0.015) 59%, transparent 100%);
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 18%,
+      transparent 20%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.02) 62%,
+      transparent 100%);
   pointer-events: none;
 }
 
@@ -274,43 +292,85 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(225deg, transparent 0%, transparent 44%, rgba(255, 255, 255, 0.05) 45%, transparent 50%, transparent 100%);
+  background:
+    linear-gradient(225deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(255, 255, 255, 0.05) 46%,
+      transparent 52%,
+      transparent 100%);
   pointer-events: none;
 }
 
+/* gold gem */
+
 .logo-gem-grid>span:nth-child(1) {
-  background: radial-gradient(circle at 30% 25%, rgba(255, 248, 200, 0.30) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(170, 110, 0, 0.18) 0%, transparent 36%), linear-gradient(145deg, #fff0a0 0%, #ffd54a 38%, #f2b400 64%, #c98700 100%);
-  box-shadow: 0 0 6px rgba(255, 217, 94, 0.18), 0 0 12px rgba(255, 217, 94, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(110, 75, 0, 0.22);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 248, 200, 0.30) 0%, transparent 26%),
+    radial-gradient(circle at 70% 72%, rgba(170, 110, 0, 0.18) 0%, transparent 36%),
+    linear-gradient(145deg, #fff0a0 0%, #ffd54a 38%, #f2b400 64%, #c98700 100%);
+  box-shadow:
+    0 0 3px rgba(255, 217, 94, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(110, 75, 0, 0.22);
 }
+
+/* green gem */
 
 .logo-gem-grid>span:nth-child(2) {
-  background: radial-gradient(circle at 30% 25%, rgba(225, 255, 232, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(0, 95, 35, 0.18) 0%, transparent 36%), linear-gradient(145deg, #c8ffd7 0%, #4df27e 38%, #19c85a 64%, #0d8f3d 100%);
-  box-shadow: 0 0 6px rgba(101, 245, 142, 0.16), 0 0 12px rgba(101, 245, 142, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(0, 80, 30, 0.22);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(225, 255, 232, 0.26) 0%, transparent 26%),
+    radial-gradient(circle at 70% 72%, rgba(0, 95, 35, 0.18) 0%, transparent 36%),
+    linear-gradient(145deg, #c8ffd7 0%, #4df27e 38%, #19c85a 64%, #0d8f3d 100%);
+  box-shadow:
+    0 0 3px rgba(101, 245, 142, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 80, 30, 0.22);
 }
+
+/* pink gem */
 
 .logo-gem-grid>span:nth-child(3) {
-  background: radial-gradient(circle at 30% 25%, rgba(255, 238, 245, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(120, 20, 65, 0.16) 0%, transparent 36%), linear-gradient(145deg, #ffd0e3 0%, #ff8fc1 38%, #ff5fa3 64%, #d93d83 100%);
-  box-shadow: 0 0 6px rgba(255, 176, 210, 0.16), 0 0 12px rgba(255, 176, 210, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(95, 15, 50, 0.22);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 238, 245, 0.26) 0%, transparent 26%),
+    radial-gradient(circle at 70% 72%, rgba(120, 20, 65, 0.16) 0%, transparent 36%),
+    linear-gradient(145deg, #ffd0e3 0%, #ff8fc1 38%, #ff5fa3 64%, #d93d83 100%);
+  box-shadow:
+    0 0 3px rgba(255, 176, 210, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(95, 15, 50, 0.22);
 }
+
+/* cyan gem */
 
 .logo-gem-grid>span:nth-child(4) {
-  background: radial-gradient(circle at 30% 25%, rgba(235, 255, 255, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(0, 75, 75, 0.16) 0%, transparent 36%), linear-gradient(145deg, #c9ffff 0%, #4eeeee 38%, #12caca 64%, #0a8e8e 100%);
-  box-shadow: 0 0 6px rgba(103, 240, 240, 0.15), 0 0 12px rgba(103, 240, 240, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(0, 65, 65, 0.22);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(235, 255, 255, 0.26) 0%, transparent 26%),
+    radial-gradient(circle at 70% 72%, rgba(0, 75, 75, 0.16) 0%, transparent 36%),
+    linear-gradient(145deg, #c9ffff 0%, #4eeeee 38%, #12caca 64%, #0a8e8e 100%);
+  box-shadow:
+    0 0 3px rgba(103, 240, 240, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 65, 65, 0.22);
 }
 
+/* hover interaction */
+
 .nav-logo:hover .logo-gem-glow {
-  opacity: 0.03;
-  filter: blur(0.5px) saturate(1.2);
-  transform: rotate(45deg) scale(1.4);
+  opacity: 0.06;
+  filter: blur(0.4px) saturate(1.1);
+  transform: rotate(45deg) scale(1.05);
 }
 
 .nav-logo:hover .logo-gem-grid {
-  transform: rotate(45deg) scale(1.1);
-  filter: saturate(1);
+  transform: rotate(45deg) scale(1.06);
+  filter: saturate(1.02);
 }
 
 .nav-logo:hover .nav-logo-text {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05), 0 0 14px rgba(255, 217, 94, 0.06);
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.05),
+    0 0 10px rgba(255, 217, 94, 0.04);
 }
 
 /* ═══════════════════════════════════════════
