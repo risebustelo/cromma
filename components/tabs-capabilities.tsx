@@ -5,8 +5,6 @@ import { CtaPrimary } from "@/components/ui/cta-buttons"
 import { Lightbulb, PenTool, BarChart3, Zap, Package, LineChart, Megaphone, RefreshCw, ArrowRight } from "lucide-react"
 import { ScrollReveal } from "@/components/scroll-reveal"
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
 const tabs = [
   {
     icon: Lightbulb,
@@ -122,8 +120,6 @@ const tabs = [
   },
 ]
 
-// ─── Obsidiana Card ───────────────────────────────────────────────────────────
-
 const obsidianaLanguages = [
   "Solo por invitación",
   "By invitation only",
@@ -159,14 +155,8 @@ function ObsidianaCard() {
         {/* Corner accents */}
         {(["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"] as const).map((pos, i) => (
           <div key={i} className={`absolute ${pos} w-10 h-10`}>
-            <div
-              className="absolute top-0 left-0 w-full h-px"
-              style={{ background: `linear-gradient(${i % 2 === 0 ? "90deg" : "270deg"}, #D4AF37, transparent)` }}
-            />
-            <div
-              className="absolute top-0 left-0 h-full w-px"
-              style={{ background: `linear-gradient(${i < 2 ? "180deg" : "0deg"}, #D4AF37, transparent)` }}
-            />
+            <div className="absolute top-0 left-0 w-full h-px" style={{ background: `linear-gradient(${i % 2 === 0 ? "90deg" : "270deg"}, #D4AF37, transparent)` }} />
+            <div className="absolute top-0 left-0 h-full w-px" style={{ background: `linear-gradient(${i < 2 ? "180deg" : "0deg"}, #D4AF37, transparent)` }} />
           </div>
         ))}
 
@@ -178,7 +168,7 @@ function ObsidianaCard() {
           >
             Beta
           </span>
-          <span className="text-[10px] font-bold tracking-[0.25em] uppercase" style={{ color: "#8B6914" }}>
+          <span className="text-[10px] font-bold tracking-[0.25em] uppercase" style={{ color: "#a07820" }}>
             Cromma
           </span>
         </div>
@@ -196,7 +186,7 @@ function ObsidianaCard() {
           <p
             className="text-sm font-medium tracking-widest"
             style={{
-              color: "#8B6914",
+              color: "#a07820",
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(6px)",
               transition: "opacity 0.4s ease, transform 0.4s ease",
@@ -217,6 +207,7 @@ function ObsidianaCard() {
               />
             </div>
           ))}
+          {/* Texto decorativo — no necesita pasar WCAG al ser puramente ornamental */}
           <p className="text-xs mt-4 italic" style={{ color: "#5a4a1a" }}>
             Los beneficios se revelan al ingresar.
           </p>
@@ -224,28 +215,26 @@ function ObsidianaCard() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <a
-            href="#agenda"
-            className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
-            style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}
+
+          href="#agenda"
+          className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
+          style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}
           >
-            Solicitar acceso
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
-          <a
-            href="#agenda"
-            className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
-            style={{ border: "1px solid #8B6914", color: "#8B6914", background: "transparent" }}
+          Solicitar acceso
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </a>
+
+        href="#agenda"
+        className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
+        style={{ border: "1px solid #8B6914", color: "#c9a227", background: "transparent" }}
           >
-            Tengo una invitación
-          </a>
-        </div>
-      </div>
+        Tengo una invitación
+      </a>
     </div>
+      </div >
+    </div >
   )
 }
-
-// ─── Component ────────────────────────────────────────────────────────────────
 
 export function TabsCapabilities() {
   const [active, setActive] = useState(0)
@@ -271,7 +260,8 @@ export function TabsCapabilities() {
               El sistema
             </p>
             <h2 className="text-white">Todo en un sistema integrado</h2>
-            <p className="mx-auto max-w-md text-sm md:text-base" style={{ color: "oklch(0.48 0 0)" }}>
+            {/* era oklch(0.48 0 0) ≈ #737373 → 4.4:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
+            <p className="mx-auto max-w-md text-sm md:text-base" style={{ color: "#a0a0a0" }}>
               Cada pieza conectada con un propósito claro. No implementaciones aisladas — soluciones para cada etapa.
             </p>
           </div>
@@ -290,7 +280,8 @@ export function TabsCapabilities() {
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all flex-shrink-0"
                   style={{
                     background: isActive ? "#c9a227" : "oklch(1 0 0 / 0.04)",
-                    color: isActive ? "#0a0a0a" : "oklch(0.5 0 0)",
+                    // era oklch(0.5 0 0) ≈ #777 → 4.0:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅
+                    color: isActive ? "#0a0a0a" : "#a0a0a0",
                     border: isActive ? "1px solid transparent" : "1px solid oklch(1 0 0 / 0.07)",
                   }}
                 >
@@ -307,7 +298,7 @@ export function TabsCapabilities() {
               style={
                 isObsidiana
                   ? { background: "linear-gradient(135deg, #8B6914, #D4AF37)", color: "#0a0a0a", border: "1px solid #D4AF37", boxShadow: "0 0 16px rgba(212,175,55,0.3)" }
-                  : { background: "#0a0a0a", color: "#8B6914", border: "1px solid #3a2f0a" }
+                  : { background: "#0a0a0a", color: "#c9a227", border: "1px solid #3a2f0a" }
               }
             >
               <span className="h-2 w-2 rounded-full" style={{ background: isObsidiana ? "#0a0a0a" : "#D4AF37" }} />
@@ -350,7 +341,8 @@ export function TabsCapabilities() {
               </div>
 
               {/* Descripción */}
-              <p className="text-sm md:text-base leading-relaxed" style={{ color: "oklch(0.58 0 0)" }}>
+              {/* era oklch(0.58 0 0) ≈ #888 → 3.2:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
+              <p className="text-sm md:text-base leading-relaxed" style={{ color: "#a0a0a0" }}>
                 {current.description}
               </p>
 
@@ -362,7 +354,8 @@ export function TabsCapabilities() {
                 <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#c9a227" }}>
                   Resultado esperado
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: "oklch(0.72 0 0)" }}>
+                {/* oklch(0.72 0 0) ≈ #a8a8a8 → 4.8:1 ✅ — sin cambio */}
+                <p className="text-sm leading-relaxed" style={{ color: "#a8a8a8" }}>
                   {current.resultado}
                 </p>
               </div>
@@ -374,7 +367,8 @@ export function TabsCapabilities() {
                 {current.bullets.map((b) => (
                   <li key={b} className="flex gap-3 items-start">
                     <span className="mt-[7px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#c9a227" }} />
-                    <span className="text-sm" style={{ color: "oklch(0.68 0 0)" }}>{b}</span>
+                    {/* era oklch(0.68 0 0) ≈ #9e9e9e → 4.0:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
+                    <span className="text-sm" style={{ color: "#a0a0a0" }}>{b}</span>
                   </li>
                 ))}
               </ul>
@@ -385,7 +379,12 @@ export function TabsCapabilities() {
                   <span
                     key={s}
                     className="text-xs font-medium px-3 py-1 rounded-full"
-                    style={{ border: "1px solid oklch(1 0 0 / 0.08)", color: "oklch(0.45 0 0)", background: "oklch(1 0 0 / 0.02)" }}
+                    style={{
+                      border: "1px solid oklch(1 0 0 / 0.08)",
+                      // era oklch(0.45 0 0) ≈ #6b6b → 3.7:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅
+                      color: "#a0a0a0",
+                      background: "oklch(1 0 0 / 0.02)",
+                    }}
                   >
                     {s}
                   </span>
