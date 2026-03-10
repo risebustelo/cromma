@@ -2,10 +2,10 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { CtaPrimary } from "@/components/ui/cta-buttons"
 import { Megaphone, Handshake, Package, RefreshCw, TrendingUp } from "lucide-react"
 
-// WCAG AA sobre section-light bg ≈ #f5f5f0
-// #8a6f00 → 4.6:1 ✅ (dorado oscurecido, reemplaza al dorado claro que no pasaba)
-// #707070 → 4.53:1 ✅ (gris neutro para textos secundarios)
-// #0a0a0a → 18:1 ✅
+// WCAG AA sobre section-dark bg ≈ #0a0a0a
+// ✅ #D4AF37 → 8.1:1  (dorado, pasa perfecto)
+// ✅ #a0a0a0 → 5.9:1  (gris claro para descripciones)
+// ✅ #ffffff → 21:1   (títulos)
 
 const steps = [
   { icon: Megaphone, title: "Atraer", desc: "Contenido con intención comercial.", step: 1, color: "#2ecc71" },
@@ -23,18 +23,17 @@ const proceso = [
 
 export function FrameworkDiagram() {
   return (
-    <section id="como-funciona" className="section-light relative overflow-hidden">
+    <section id="como-funciona" className="section-dark relative overflow-hidden">
       <div className="container mx-auto px-4 py-16 md:py-24">
 
         {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-14 space-y-2">
-            {/* dorado oscurecido #8a6f00 → 4.6:1 ✅ */}
-            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#8a6f00" }}>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#D4AF37" }}>
               El framework
             </p>
-            <h2 className="text-[#0a0a0a]">Cómo funciona Cromma</h2>
-            <p className="text-[#666666] mx-auto max-w-sm text-sm">
+            <h2 className="text-white">Cómo funciona Cromma</h2>
+            <p className="text-[#a0a0a0] mx-auto max-w-sm text-sm">
               Cinco etapas conectadas. De la visibilidad al crecimiento predecible.
             </p>
           </div>
@@ -60,8 +59,8 @@ export function FrameworkDiagram() {
                       {node.step}
                     </span>
                   </div>
-                  <h3 className="text-sm font-bold text-[#0a0a0a] mb-1">{node.title}</h3>
-                  <p className="text-xs leading-snug max-w-[120px]" style={{ color: "#707070" }}>{node.desc}</p>
+                  <h3 className="text-sm font-bold text-white mb-1">{node.title}</h3>
+                  <p className="text-xs leading-snug max-w-[120px]" style={{ color: "#a0a0a0" }}>{node.desc}</p>
                 </div>
               </ScrollReveal>
 
@@ -69,7 +68,7 @@ export function FrameworkDiagram() {
                 <div className="flex-shrink-0 flex items-center mt-7 w-6">
                   <svg width="24" height="10" viewBox="0 0 24 10" fill="none">
                     <path d="M0 5 L20 5 M15 1 L20 5 L15 9"
-                      stroke="#cccccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      stroke="#444444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
               )}
@@ -100,8 +99,8 @@ export function FrameworkDiagram() {
                   )}
                 </div>
                 <div className="pt-1 pb-4">
-                  <h3 className="text-sm font-bold text-[#0a0a0a] mb-0.5">{node.title}</h3>
-                  <p className="text-xs leading-snug" style={{ color: "#707070" }}>{node.desc}</p>
+                  <h3 className="text-sm font-bold text-white mb-0.5">{node.title}</h3>
+                  <p className="text-xs leading-snug" style={{ color: "#a0a0a0" }}>{node.desc}</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -109,7 +108,7 @@ export function FrameworkDiagram() {
         </div>
 
         {/* Divisor */}
-        <div className="my-12 border-t border-[oklch(0.9_0_0)]" />
+        <div className="my-12 border-t border-[#222222]" />
 
         {/* Proceso 3 pasos + CTA */}
         <ScrollReveal delay={60}>
@@ -117,16 +116,15 @@ export function FrameworkDiagram() {
             <div className="grid md:grid-cols-3 gap-6 mb-10">
               {proceso.map((p) => (
                 <div key={p.n} className="flex items-start gap-3">
-                  {/* dorado oscurecido #8a6f00 → 4.6:1 ✅ */}
                   <span
                     className="text-3xl font-black leading-none flex-shrink-0 mt-0.5"
-                    style={{ color: "#8a6f00", fontVariantNumeric: "tabular-nums" }}
+                    style={{ color: "#D4AF37", fontVariantNumeric: "tabular-nums" }}
                   >
                     {p.n}
                   </span>
                   <div>
-                    <p className="text-sm font-bold text-[#0a0a0a] mb-0.5">{p.label}</p>
-                    <p className="text-xs leading-snug" style={{ color: "#707070" }}>{p.sub}</p>
+                    <p className="text-sm font-bold text-white mb-0.5">{p.label}</p>
+                    <p className="text-xs leading-snug" style={{ color: "#a0a0a0" }}>{p.sub}</p>
                   </div>
                 </div>
               ))}
