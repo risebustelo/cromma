@@ -3,9 +3,6 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowDown, MessageCircle } from "lucide-react"
 
-/**
- * Botón CTA principal — dorado con shimmer.
- */
 export function CtaPrimary({
   label = "Empezá ahora",
   href = "#agenda",
@@ -25,9 +22,6 @@ export function CtaPrimary({
   )
 }
 
-/**
- * Botón CTA secundario — outline ghost.
- */
 export function CtaSecondary({
   label = "Conocer más",
   href = "#como-funciona",
@@ -47,10 +41,6 @@ export function CtaSecondary({
   )
 }
 
-/**
- * Botón WhatsApp — mismo sistema visual que btn-cta, verde.
- * Todo el estilo vive en .btn-wa en globals.css
- */
 export function WhatsAppButton({
   href,
   label = "Escribinos por WhatsApp",
@@ -59,15 +49,7 @@ export function WhatsAppButton({
   label?: string
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="btn-wa inline-flex items-center gap-2 overflow-hidden
-                 text-xs font-bold text-white no-underline select-none
-                 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
-      style={{ height: "2rem", padding: "0 0.75rem", borderRadius: "0.5rem" }}
-    >
+    <a href={href} target="_blank" rel="noopener noreferrer" className="btn-wa inline-flex items-center gap-2 overflow-hidden text-xs font-bold text-white no-underline select-none hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200" style={{ height: "2rem", padding: "0 0.75rem", borderRadius: "0.5rem" }}>
       <MessageCircle className="relative z-10 h-4 w-4 flex-shrink-0" />
       <span className="relative z-10">{label}</span>
     </a>
