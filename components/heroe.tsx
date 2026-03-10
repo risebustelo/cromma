@@ -18,7 +18,6 @@ const sparkData = [18, 24, 19, 31, 27, 38, 33, 44, 41, 52, 48, 61]
 
 const TEAL = "#1a6b6b"
 const TEAL_DIM = "rgba(26,107,107,0.18)"
-const CORAL = "#f07baa"
 const BADGE_GREEN = "oklch(0.55 0.14 155)"
 const BADGE_GREEN_BG = "oklch(0.55 0.14 155 / 0.12)"
 
@@ -83,97 +82,22 @@ export function Heroe() {
   }, [tick, phase])
 
   return (
-    <section id="hero" className="section-dark noise relative overflow-hidden">
-
-      {/* ── Grilla animada ── */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-
-        {/* Grilla de líneas SVG */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ opacity: 0.07 }}
-        >
-          <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#4ab8b8" strokeWidth="0.5" />
-            </pattern>
-            <radialGradient id="grid-fade" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </radialGradient>
-            <mask id="grid-mask">
-              <rect width="100%" height="100%" fill="url(#grid-fade)" />
-            </mask>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" mask="url(#grid-mask)" />
-        </svg>
-
-        {/* Punto de intersección brillante — teal */}
-        <div style={{
-          position: "absolute",
-          width: "500px", height: "500px",
-          top: "-15%", left: "10%",
-          background: "radial-gradient(circle, rgba(26,107,107,0.18) 0%, transparent 65%)",
-          filter: "blur(60px)",
-          animation: "driftA 20s ease-in-out infinite alternate",
-        }} />
-
-        {/* Punto de intersección brillante — coral */}
-        <div style={{
-          position: "absolute",
-          width: "400px", height: "400px",
-          top: "20%", right: "-5%",
-          background: "radial-gradient(circle, rgba(240,123,170,0.10) 0%, transparent 65%)",
-          filter: "blur(70px)",
-          animation: "driftB 26s ease-in-out infinite alternate",
-        }} />
-
-        {/* Líneas diagonales animadas — teal sutil */}
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: `repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 80px,
-            rgba(26,107,107,0.03) 80px,
-            rgba(26,107,107,0.03) 81px
-          )`,
-          animation: "slideLines 30s linear infinite",
-        }} />
-
-        {/* Líneas horizontales scan — coral sutil */}
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 119px,
-            rgba(240,123,170,0.04) 119px,
-            rgba(240,123,170,0.04) 120px
-          )`,
-          animation: "scanDown 40s linear infinite",
-        }} />
-      </div>
+    <section id="hero" className="section-dark noise relative overflow-hidden" style={{ minHeight: "100svh", display: "flex", flexDirection: "column", justifyContent: "center" }}>
 
       <style>{`
         @keyframes driftA {
-          0%   { transform: translate(0, 0) scale(1); }
-          50%  { transform: translate(5%, 8%) scale(1.1); }
-          100% { transform: translate(-3%, 4%) scale(0.95); }
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(5%,8%) scale(1.1); }
+          100% { transform: translate(-3%,4%) scale(0.95); }
         }
         @keyframes driftB {
-          0%   { transform: translate(0, 0) scale(1); }
-          50%  { transform: translate(-6%, 5%) scale(1.08); }
-          100% { transform: translate(4%, -4%) scale(0.96); }
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(-6%,5%) scale(1.08); }
+          100% { transform: translate(4%,-4%) scale(0.96); }
         }
-        @keyframes slideLines {
-          from { background-position: 0 0; }
-          to   { background-position: 160px 160px; }
-        }
-        @keyframes scanDown {
-          from { background-position: 0 0; }
-          to   { background-position: 0 240px; }
+        @keyframes gridMove {
+          from { transform: translate(0, 0); }
+          to   { transform: translate(60px, 60px); }
         }
         @keyframes fadeSlideIn {
           from { opacity: 0; transform: translateY(6px); }
@@ -192,12 +116,58 @@ export function Heroe() {
           50%       { opacity: 0; }
         }
         .cursor-blink { animation: cursorBlink 1s step-end infinite; }
+        .hero-grid-moving {
+          animation: gridMove 8s linear infinite;
+        }
         @media (prefers-reduced-motion: reduce) {
-          [style*="animation"] { animation: none !important; }
+          .hero-grid-moving, [style*="animation"] { animation: none !important; }
         }
       `}</style>
 
-      <div className="container relative z-10 mx-auto px-4 py-16 md:py-20 lg:py-24">
+      {/* ── Fondo: grilla + glows ── */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        {/* Grilla CSS pura — teal muy sutil */}
+        <div style={{
+          position: "absolute",
+          inset: "-60px",
+          backgroundImage: `
+            linear-gradient(rgba(74,184,184,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(74,184,184,0.06) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }} className="hero-grid-moving" />
+
+        {/* Fade radial para que la grilla desaparezca en los bordes */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 50% 50%, transparent 30%, #0a0a0a 75%)",
+        }} />
+
+        {/* Glow teal — izquierda arriba */}
+        <div style={{
+          position: "absolute",
+          width: "500px", height: "500px",
+          top: "-10%", left: "5%",
+          background: "radial-gradient(circle, rgba(26,107,107,0.20) 0%, transparent 65%)",
+          filter: "blur(80px)",
+          animation: "driftA 20s ease-in-out infinite alternate",
+        }} />
+
+        {/* Glow coral — derecha medio */}
+        <div style={{
+          position: "absolute",
+          width: "400px", height: "400px",
+          top: "25%", right: "-5%",
+          background: "radial-gradient(circle, rgba(240,123,170,0.10) 0%, transparent 65%)",
+          filter: "blur(80px)",
+          animation: "driftB 26s ease-in-out infinite alternate",
+        }} />
+
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 py-20 md:py-24 lg:py-28">
         <div className="mx-auto max-w-6xl flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
 
           {/* Columna principal */}
