@@ -224,8 +224,8 @@
 
 .logo-gem-glow {
   inset: -1px;
-  opacity: 0.12;
-  filter: blur(0.5px) saturate(4.5);
+  opacity: 0.05;
+  filter: blur(0.3px) saturate(1.2);
   transform: rotate(45deg) scale(0.9);
 }
 
