@@ -742,24 +742,32 @@
 }
 
 /* ═══════════════════════════════════════════
-   CTA BUTTON — Dorado, acción principal
+   BTN SYSTEM — mismo sistema 3D en todos
+   Capas: gradiente base + border-bottom sólido
+   + inset highlight + shimmer sweep
 ═══════════════════════════════════════════ */
 
+/* ─── CTA Dorado ─── */
 .btn-cta {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #e0c04a, #c9a227 40%, #a8880f);
-  box-shadow: 0 4px 12px rgba(138, 112, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(to bottom, #e8cc5a, #c9a227 45%, #a88510);
+  border-bottom: 3px solid #7a6000 !important;
+  box-shadow:
+    0 4px 14px rgba(138, 112, 0, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-cta::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.40) 50%, transparent 75%);
   transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  transition: transform 0.55s ease;
   z-index: 1;
 }
 
@@ -768,28 +776,44 @@
 }
 
 .btn-cta:hover {
-  box-shadow: 0 6px 20px rgba(138, 112, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.4), inset 0 -1px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(to bottom, #efd46a, #d4ad30 45%, #b8920f);
+  box-shadow:
+    0 6px 22px rgba(138, 112, 0, 0.60),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* ═══════════════════════════════════════════
-   CTA EMERALD — Resultados, prueba social
-═══════════════════════════════════════════ */
+.btn-cta:active {
+  transform: translateY(1px);
+  border-bottom-width: 2px !important;
+  box-shadow:
+    0 2px 8px rgba(138, 112, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+}
 
+/* ─── Emerald ─── */
 .btn-emerald {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #3fd468, #2eaf5a 40%, #1f7d3e);
-  box-shadow: 0 4px 12px rgba(46, 175, 90, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 -1px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(to bottom, #4de07a, #2eaf5a 45%, #1e7d3e);
+  border-bottom: 3px solid #0f5228 !important;
+  box-shadow:
+    0 4px 14px rgba(46, 175, 90, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-emerald::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.35) 50%, transparent 75%);
   transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  transition: transform 0.55s ease;
+  z-index: 1;
 }
 
 .btn-emerald:hover::before {
@@ -797,26 +821,44 @@
 }
 
 .btn-emerald:hover {
-  box-shadow: 0 6px 18px rgba(46, 175, 90, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(to bottom, #5dea88, #38bf68 45%, #268f4a);
+  box-shadow:
+    0 6px 22px rgba(46, 175, 90, 0.60),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* ─── BTN CORAL — Urgencia, puntos de dolor ─── */
+.btn-emerald:active {
+  transform: translateY(1px);
+  border-bottom-width: 2px !important;
+  box-shadow:
+    0 2px 8px rgba(46, 175, 90, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+/* ─── Coral ─── */
 .btn-coral {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #f799be, #f07baa 40%, #d45a8a);
-  color: #0a0a0a;
-  box-shadow: 0 4px 12px rgba(240, 123, 170, 0.30), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.30), inset 0 -1px rgba(0, 0, 0, 0.10);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(to bottom, #f799be, #f07baa 45%, #d45a8a);
+  color: #1a0a10;
+  border-bottom: 3px solid #9e3060 !important;
+  box-shadow:
+    0 4px 14px rgba(240, 123, 170, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-coral::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.38) 50%, transparent 75%);
   transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  transition: transform 0.55s ease;
   z-index: 1;
 }
 
@@ -825,26 +867,44 @@
 }
 
 .btn-coral:hover {
-  box-shadow: 0 6px 18px rgba(240, 123, 170, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(to bottom, #faa8ca, #f58aba 45%, #de6898);
+  box-shadow:
+    0 6px 22px rgba(240, 123, 170, 0.60),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* ─── BTN TEAL — Confianza, secundario ─── */
+.btn-coral:active {
+  transform: translateY(1px);
+  border-bottom-width: 2px !important;
+  box-shadow:
+    0 2px 8px rgba(240, 123, 170, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+/* ─── Teal ─── */
 .btn-teal {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #22888a, #1a6b6b 40%, #104444);
+  background: linear-gradient(to bottom, #22888a, #1a6b6b 45%, #104444);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(26, 107, 107, 0.30), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.18), inset 0 -1px rgba(0, 0, 0, 0.12);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 3px solid #072828 !important;
+  box-shadow:
+    0 4px 14px rgba(26, 107, 107, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-teal::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.20) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.22) 50%, transparent 75%);
   transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  transition: transform 0.55s ease;
   z-index: 1;
 }
 
@@ -853,28 +913,42 @@
 }
 
 .btn-teal:hover {
-  box-shadow: 0 6px 18px rgba(26, 107, 107, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.22), inset 0 -1px rgba(0, 0, 0, 0.14);
+  background: linear-gradient(to bottom, #2a9a9c, #207878 45%, #165252);
+  box-shadow:
+    0 6px 22px rgba(26, 107, 107, 0.60),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.20);
 }
 
-/* ═══════════════════════════════════════════
-   WA BUTTON — WhatsApp
-═══════════════════════════════════════════ */
+.btn-teal:active {
+  transform: translateY(1px);
+  border-bottom-width: 2px !important;
+  box-shadow:
+    0 2px 8px rgba(26, 107, 107, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
 
+/* ─── WhatsApp ─── */
 .btn-wa {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #34d45e, #1db842 40%, #128a2f) !important;
+  background: linear-gradient(to bottom, #34d45e, #1db842 45%, #128a2f) !important;
   border: none !important;
-  border-bottom: 2px solid #0a5c1f !important;
-  box-shadow: 0 3px 10px rgba(18, 138, 47, 0.35), 0 1px 3px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 -1px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 3px solid #0a5c1f !important;
+  box-shadow:
+    0 4px 14px rgba(18, 138, 47, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-wa::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.32) 50%, transparent 70%);
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.35) 50%, transparent 75%);
   transform: translateX(-100%);
   transition: transform 0.6s ease;
   z-index: 1;
@@ -885,7 +959,20 @@
 }
 
 .btn-wa:hover {
-  box-shadow: 0 5px 16px rgba(18, 138, 47, 0.5), 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.38), inset 0 -1px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(to bottom, #3ee06a, #22c44a 45%, #168f33) !important;
+  box-shadow:
+    0 6px 22px rgba(18, 138, 47, 0.60),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btn-wa:active {
+  transform: translateY(1px);
+  border-bottom-width: 2px !important;
+  box-shadow:
+    0 2px 8px rgba(18, 138, 47, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 /* ═══════════════════════════════════════════
