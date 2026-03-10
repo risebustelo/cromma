@@ -218,16 +218,14 @@ function ObsidianaCard() {
 
           href="#agenda"
           className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
-          style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}
-          >
+          style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}>
           Solicitar acceso
           <ArrowRight className="ml-2 h-4 w-4" />
         </a>
 
         href="#agenda"
         className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
-        style={{ border: "1px solid #8B6914", color: "#c9a227", background: "transparent" }}
-          >
+        style={{ border: "1px solid #8B6914", color: "#c9a227", background: "transparent" }}>
         Tengo una invitación
       </a>
     </div>
