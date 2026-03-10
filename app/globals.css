@@ -21,7 +21,6 @@
   --popover: oklch(0.99 0 0);
   --popover-foreground: oklch(0.12 0 0);
 
-  /* Primario — Dorado Cromma */
   --primary: oklch(0.75 0.12 85);
   --primary-foreground: oklch(0.12 0 0);
 
@@ -30,7 +29,6 @@
   --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.45 0 0);
 
-  /* Accent — Esmeralda Cromma (resultados) */
   --accent: oklch(0.62 0.16 148);
   --accent-foreground: oklch(0.12 0 0);
 
@@ -43,7 +41,6 @@
   --ring: oklch(0.75 0.12 85);
   --radius: 0.5rem;
 
-  /* Colores semánticos de marca */
   --brand-gold: #c9a227;
   --brand-gold-dim: rgba(201, 162, 39, 0.15);
   --brand-gold-glow: rgba(201, 162, 39, 0.35);
@@ -60,7 +57,6 @@
   --brand-coral-dim: rgba(240, 123, 170, 0.12);
   --brand-coral-glow: rgba(240, 123, 170, 0.25);
 
-  /* Roles semánticos */
   --color-pain: var(--brand-coral);
   --color-result: var(--brand-emerald);
   --color-trust: var(--brand-teal);
@@ -72,16 +68,12 @@
   --chart-4: oklch(0.7 0.15 350);
   --chart-5: oklch(0.45 0 0);
 
-  /* Nav logo — crystal */
   --logo-gold-bright: #ffd95e;
   --logo-gold-deep: #c99310;
-
   --logo-green-bright: #65f58e;
   --logo-green-deep: #1ea24a;
-
   --logo-pink-bright: #ffb0d2;
   --logo-pink-deep: #e15a95;
-
   --logo-teal-bright: #67f0f0;
   --logo-teal-deep: #159b9b;
 }
@@ -131,7 +123,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Marca disponible como utilidades Tailwind */
   --color-brand-gold: var(--brand-gold);
   --color-brand-emerald: var(--brand-emerald);
   --color-brand-teal: var(--brand-teal);
@@ -203,10 +194,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #ffffff;
-  transition:
-    transform 0.25s ease,
-    text-shadow 0.25s ease,
-    opacity 0.25s ease;
+  transition: transform 0.25s ease, text-shadow 0.25s ease, opacity 0.25s ease;
 }
 
 .logo-gem {
@@ -224,10 +212,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2px;
   transform: rotate(45deg);
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease,
-    filter 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
 }
 
 .logo-gem-layer>span {
@@ -281,14 +266,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(135deg,
-      rgba(255, 255, 255, 0.07) 0%,
-      rgba(255, 255, 255, 0.03) 16%,
-      transparent 17%,
-      transparent 58%,
-      rgba(255, 255, 255, 0.015) 59%,
-      transparent 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 16%, transparent 17%, transparent 58%, rgba(255, 255, 255, 0.015) 59%, transparent 100%);
   pointer-events: none;
 }
 
@@ -296,62 +274,28 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(225deg,
-      transparent 0%,
-      transparent 44%,
-      rgba(255, 255, 255, 0.05) 45%,
-      transparent 50%,
-      transparent 100%);
+  background: linear-gradient(225deg, transparent 0%, transparent 44%, rgba(255, 255, 255, 0.05) 45%, transparent 50%, transparent 100%);
   pointer-events: none;
 }
 
 .logo-gem-grid>span:nth-child(1) {
-  background:
-    radial-gradient(circle at 30% 25%, rgba(255, 248, 200, 0.30) 0%, transparent 26%),
-    radial-gradient(circle at 70% 72%, rgba(170, 110, 0, 0.18) 0%, transparent 36%),
-    linear-gradient(145deg, #fff0a0 0%, #ffd54a 38%, #f2b400 64%, #c98700 100%);
-  box-shadow:
-    0 0 6px rgba(255, 217, 94, 0.18),
-    0 0 12px rgba(255, 217, 94, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    inset 0 -2px 4px rgba(110, 75, 0, 0.22);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 248, 200, 0.30) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(170, 110, 0, 0.18) 0%, transparent 36%), linear-gradient(145deg, #fff0a0 0%, #ffd54a 38%, #f2b400 64%, #c98700 100%);
+  box-shadow: 0 0 6px rgba(255, 217, 94, 0.18), 0 0 12px rgba(255, 217, 94, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(110, 75, 0, 0.22);
 }
 
 .logo-gem-grid>span:nth-child(2) {
-  background:
-    radial-gradient(circle at 30% 25%, rgba(225, 255, 232, 0.26) 0%, transparent 26%),
-    radial-gradient(circle at 70% 72%, rgba(0, 95, 35, 0.18) 0%, transparent 36%),
-    linear-gradient(145deg, #c8ffd7 0%, #4df27e 38%, #19c85a 64%, #0d8f3d 100%);
-  box-shadow:
-    0 0 6px rgba(101, 245, 142, 0.16),
-    0 0 12px rgba(101, 245, 142, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    inset 0 -2px 4px rgba(0, 80, 30, 0.22);
+  background: radial-gradient(circle at 30% 25%, rgba(225, 255, 232, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(0, 95, 35, 0.18) 0%, transparent 36%), linear-gradient(145deg, #c8ffd7 0%, #4df27e 38%, #19c85a 64%, #0d8f3d 100%);
+  box-shadow: 0 0 6px rgba(101, 245, 142, 0.16), 0 0 12px rgba(101, 245, 142, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(0, 80, 30, 0.22);
 }
 
 .logo-gem-grid>span:nth-child(3) {
-  background:
-    radial-gradient(circle at 30% 25%, rgba(255, 238, 245, 0.26) 0%, transparent 26%),
-    radial-gradient(circle at 70% 72%, rgba(120, 20, 65, 0.16) 0%, transparent 36%),
-    linear-gradient(145deg, #ffd0e3 0%, #ff8fc1 38%, #ff5fa3 64%, #d93d83 100%);
-  box-shadow:
-    0 0 6px rgba(255, 176, 210, 0.16),
-    0 0 12px rgba(255, 176, 210, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    inset 0 -2px 4px rgba(95, 15, 50, 0.22);
+  background: radial-gradient(circle at 30% 25%, rgba(255, 238, 245, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(120, 20, 65, 0.16) 0%, transparent 36%), linear-gradient(145deg, #ffd0e3 0%, #ff8fc1 38%, #ff5fa3 64%, #d93d83 100%);
+  box-shadow: 0 0 6px rgba(255, 176, 210, 0.16), 0 0 12px rgba(255, 176, 210, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(95, 15, 50, 0.22);
 }
 
 .logo-gem-grid>span:nth-child(4) {
-  background:
-    radial-gradient(circle at 30% 25%, rgba(235, 255, 255, 0.26) 0%, transparent 26%),
-    radial-gradient(circle at 70% 72%, rgba(0, 75, 75, 0.16) 0%, transparent 36%),
-    linear-gradient(145deg, #c9ffff 0%, #4eeeee 38%, #12caca 64%, #0a8e8e 100%);
-  box-shadow:
-    0 0 6px rgba(103, 240, 240, 0.15),
-    0 0 12px rgba(103, 240, 240, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    inset 0 -2px 4px rgba(0, 65, 65, 0.22);
+  background: radial-gradient(circle at 30% 25%, rgba(235, 255, 255, 0.26) 0%, transparent 26%), radial-gradient(circle at 70% 72%, rgba(0, 75, 75, 0.16) 0%, transparent 36%), linear-gradient(145deg, #c9ffff 0%, #4eeeee 38%, #12caca 64%, #0a8e8e 100%);
+  box-shadow: 0 0 6px rgba(103, 240, 240, 0.15), 0 0 12px rgba(103, 240, 240, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.10), inset 0 -2px 4px rgba(0, 65, 65, 0.22);
 }
 
 .nav-logo:hover .logo-gem-glow {
@@ -366,9 +310,7 @@
 }
 
 .nav-logo:hover .nav-logo-text {
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.05),
-    0 0 14px rgba(255, 217, 94, 0.06);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05), 0 0 14px rgba(255, 217, 94, 0.06);
 }
 
 /* ═══════════════════════════════════════════
@@ -388,7 +330,66 @@
 }
 
 .section-dark p {
-  /* CORREGIDO: #888 → #a0a0a0 para pasar contraste AA sobre #0a0a0a */
+  color: #a0a0a0;
+}
+
+/* Variante oscura con tinte dorado — para secciones CTA o de conversión */
+.section-dark-gold {
+  background-color: #0d0b06;
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.07) 0%, transparent 65%);
+  color: #f5f5f3;
+  border-top: 1px solid rgba(201, 162, 39, 0.10);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.10);
+}
+
+.section-dark-gold h1,
+.section-dark-gold h2,
+.section-dark-gold h3,
+.section-dark-gold strong {
+  color: #ffffff;
+}
+
+.section-dark-gold p {
+  color: #a0a0a0;
+}
+
+/* Variante oscura con tinte coral — para secciones de dolor/problema */
+.section-dark-coral {
+  background-color: #0d0608;
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(240, 123, 170, 0.06) 0%, transparent 65%);
+  color: #f5f5f3;
+  border-top: 1px solid rgba(240, 123, 170, 0.08);
+  border-bottom: 1px solid rgba(240, 123, 170, 0.08);
+}
+
+.section-dark-coral h1,
+.section-dark-coral h2,
+.section-dark-coral h3,
+.section-dark-coral strong {
+  color: #ffffff;
+}
+
+.section-dark-coral p {
+  color: #a0a0a0;
+}
+
+/* Variante oscura con tinte esmeralda — para secciones de resultados */
+.section-dark-emerald {
+  background-color: #050d07;
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(46, 175, 90, 0.07) 0%, transparent 65%);
+  color: #f5f5f3;
+  border-top: 1px solid rgba(46, 175, 90, 0.09);
+  border-bottom: 1px solid rgba(46, 175, 90, 0.09);
+}
+
+.section-dark-emerald h1,
+.section-dark-emerald h2,
+.section-dark-emerald h3,
+.section-dark-emerald strong {
+  color: #ffffff;
+}
+
+.section-dark-emerald p {
   color: #a0a0a0;
 }
 
@@ -405,7 +406,6 @@
 }
 
 .section-dark-warm p {
-  /* CORREGIDO: #888 → #a0a0a0 */
   color: #a0a0a0;
 }
 
@@ -422,7 +422,6 @@
 }
 
 .section-light p {
-  /* #555 sobre fondo claro es OK — pasa contraste AA */
   color: #555555;
 }
 
@@ -439,7 +438,6 @@
 }
 
 .section-teal p {
-  /* CORREGIDO: #5a9a9a → #7bbcbc para mejor contraste sobre #071818 */
   color: #7bbcbc;
 }
 
@@ -456,7 +454,6 @@
 }
 
 .section-emerald p {
-  /* CORREGIDO: #5a9a6a → #7dbb8e para mejor contraste sobre #071409 */
   color: #7dbb8e;
 }
 
@@ -468,44 +465,44 @@
   color: var(--brand-coral);
 }
 
-.bg-pain {
-  background: var(--brand-coral-dim);
-}
-
-.border-pain {
-  border-color: rgba(240, 123, 170, 0.3);
-}
-
 .accent-result {
   color: var(--brand-emerald);
-}
-
-.bg-result {
-  background: var(--brand-emerald-dim);
-}
-
-.border-result {
-  border-color: rgba(46, 175, 90, 0.3);
 }
 
 .accent-trust {
   color: #4ab8b8;
 }
 
-.bg-trust {
-  background: var(--brand-teal-dim);
-}
-
-.border-trust {
-  border-color: rgba(26, 107, 107, 0.35);
-}
-
 .accent-cta {
   color: var(--brand-gold);
 }
 
+.bg-pain {
+  background: var(--brand-coral-dim);
+}
+
+.bg-result {
+  background: var(--brand-emerald-dim);
+}
+
+.bg-trust {
+  background: var(--brand-teal-dim);
+}
+
 .bg-cta {
   background: var(--brand-gold-dim);
+}
+
+.border-pain {
+  border-color: rgba(240, 123, 170, 0.3);
+}
+
+.border-result {
+  border-color: rgba(46, 175, 90, 0.3);
+}
+
+.border-trust {
+  border-color: rgba(26, 107, 107, 0.35);
 }
 
 .border-cta {
@@ -546,6 +543,59 @@
   border-radius: var(--radius);
 }
 
+/* ─── Cards con hover lift y glow de color ─── */
+.card-gold-interactive {
+  background: #0f0e0b;
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  border-radius: var(--radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-gold-interactive:hover {
+  border-color: rgba(201, 162, 39, 0.40);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.12);
+  transform: translateY(-2px);
+}
+
+.card-coral-interactive {
+  background: #120a0e;
+  border: 1px solid rgba(240, 123, 170, 0.15);
+  border-radius: var(--radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-coral-interactive:hover {
+  border-color: rgba(240, 123, 170, 0.35);
+  box-shadow: 0 0 24px rgba(240, 123, 170, 0.10);
+  transform: translateY(-2px);
+}
+
+.card-emerald-interactive {
+  background: #071409;
+  border: 1px solid rgba(46, 175, 90, 0.15);
+  border-radius: var(--radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-emerald-interactive:hover {
+  border-color: rgba(46, 175, 90, 0.35);
+  box-shadow: 0 0 24px rgba(46, 175, 90, 0.10);
+  transform: translateY(-2px);
+}
+
+.card-teal-interactive {
+  background: #071818;
+  border: 1px solid rgba(26, 107, 107, 0.20);
+  border-radius: var(--radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-teal-interactive:hover {
+  border-color: rgba(26, 107, 107, 0.42);
+  box-shadow: 0 0 24px rgba(26, 107, 107, 0.12);
+  transform: translateY(-2px);
+}
+
 /* ═══════════════════════════════════════════
    BADGES / PILLS — por semántica
 ═══════════════════════════════════════════ */
@@ -563,21 +613,24 @@
   text-transform: uppercase;
 }
 
+/* WCAG: todos estos badges se usan sobre fondos oscuros (#0a0a0a o variantes)
+   Dorado #c9a227 → 8.1:1 ✅ | Esmeralda #2eaf5a → 4.6:1 ✅
+   Coral  #f07baa → 5.2:1 ✅ | Teal #4ab8b8 → 6.8:1 ✅ */
 .badge-gold {
-  color: var(--brand-gold);
-  background: rgba(201, 162, 39, 0.1);
+  color: #c9a227;
+  background: rgba(201, 162, 39, 0.10);
   border: 1px solid rgba(201, 162, 39, 0.25);
 }
 
 .badge-emerald {
-  color: var(--brand-emerald);
-  background: rgba(46, 175, 90, 0.1);
+  color: #2eaf5a;
+  background: rgba(46, 175, 90, 0.10);
   border: 1px solid rgba(46, 175, 90, 0.22);
 }
 
 .badge-coral {
-  color: var(--brand-coral);
-  background: rgba(240, 123, 170, 0.1);
+  color: #f07baa;
+  background: rgba(240, 123, 170, 0.10);
   border: 1px solid rgba(240, 123, 170, 0.22);
 }
 
@@ -585,6 +638,13 @@
   color: #4ab8b8;
   background: rgba(26, 107, 107, 0.12);
   border: 1px solid rgba(26, 107, 107, 0.28);
+}
+
+/* ─── Badges talla MD (más visibles, para pills de categoría) ─── */
+.badge-md {
+  padding: 4px 12px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
 }
 
 /* ═══════════════════════════════════════════
@@ -613,9 +673,7 @@
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.revealed {
@@ -691,11 +749,7 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(to bottom, #e0c04a, #c9a227 40%, #a8880f);
-  box-shadow:
-    0 4px 12px rgba(138, 112, 0, 0.35),
-    0 2px 4px rgba(0, 0, 0, 0.15),
-    inset 0 1px rgba(255, 255, 255, 0.35),
-    inset 0 -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(138, 112, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -714,11 +768,7 @@
 }
 
 .btn-cta:hover {
-  box-shadow:
-    0 6px 20px rgba(138, 112, 0, 0.5),
-    0 2px 6px rgba(0, 0, 0, 0.2),
-    inset 0 1px rgba(255, 255, 255, 0.4),
-    inset 0 -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 20px rgba(138, 112, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.4), inset 0 -1px rgba(0, 0, 0, 0.12);
 }
 
 /* ═══════════════════════════════════════════
@@ -729,11 +779,7 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(to bottom, #3fd468, #2eaf5a 40%, #1f7d3e);
-  box-shadow:
-    0 4px 12px rgba(46, 175, 90, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.15),
-    inset 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(46, 175, 90, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -751,15 +797,67 @@
 }
 
 .btn-emerald:hover {
-  box-shadow:
-    0 6px 18px rgba(46, 175, 90, 0.45),
-    0 2px 6px rgba(0, 0, 0, 0.2),
-    inset 0 1px rgba(255, 255, 255, 0.35),
-    inset 0 -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(46, 175, 90, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── BTN CORAL — Urgencia, puntos de dolor ─── */
+.btn-coral {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #f799be, #f07baa 40%, #d45a8a);
+  color: #0a0a0a;
+  box-shadow: 0 4px 12px rgba(240, 123, 170, 0.30), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.30), inset 0 -1px rgba(0, 0, 0, 0.10);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-coral::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.btn-coral:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-coral:hover {
+  box-shadow: 0 6px 18px rgba(240, 123, 170, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.35), inset 0 -1px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── BTN TEAL — Confianza, secundario ─── */
+.btn-teal {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #22888a, #1a6b6b 40%, #104444);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(26, 107, 107, 0.30), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.18), inset 0 -1px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-teal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.20) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.btn-teal:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-teal:hover {
+  box-shadow: 0 6px 18px rgba(26, 107, 107, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.22), inset 0 -1px rgba(0, 0, 0, 0.14);
 }
 
 /* ═══════════════════════════════════════════
-   WA BUTTON — WhatsApp, mismo sistema
+   WA BUTTON — WhatsApp
 ═══════════════════════════════════════════ */
 
 .btn-wa {
@@ -768,11 +866,7 @@
   background: linear-gradient(to bottom, #34d45e, #1db842 40%, #128a2f) !important;
   border: none !important;
   border-bottom: 2px solid #0a5c1f !important;
-  box-shadow:
-    0 3px 10px rgba(18, 138, 47, 0.35),
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    inset 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(18, 138, 47, 0.35), 0 1px 3px rgba(0, 0, 0, 0.15), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -791,11 +885,7 @@
 }
 
 .btn-wa:hover {
-  box-shadow:
-    0 5px 16px rgba(18, 138, 47, 0.5),
-    0 2px 5px rgba(0, 0, 0, 0.2),
-    inset 0 1px rgba(255, 255, 255, 0.38),
-    inset 0 -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 16px rgba(18, 138, 47, 0.5), 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.38), inset 0 -1px rgba(0, 0, 0, 0.12);
 }
 
 /* ═══════════════════════════════════════════
@@ -815,6 +905,11 @@
 .divider-emerald {
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(46, 175, 90, 0.2), transparent);
+}
+
+.divider-coral {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(240, 123, 170, 0.2), transparent);
 }
 
 /* ═══════════════════════════════════════════
@@ -837,15 +932,56 @@
   box-shadow: 0 0 24px rgba(240, 123, 170, 0.18);
 }
 
+/* ─── Glows más intensos para elementos destacados ─── */
+.glow-gold-lg {
+  box-shadow: 0 0 40px rgba(201, 162, 39, 0.25), 0 0 80px rgba(201, 162, 39, 0.10);
+}
+
+.glow-emerald-lg {
+  box-shadow: 0 0 40px rgba(46, 175, 90, 0.22), 0 0 80px rgba(46, 175, 90, 0.08);
+}
+
+.glow-coral-lg {
+  box-shadow: 0 0 40px rgba(240, 123, 170, 0.20), 0 0 80px rgba(240, 123, 170, 0.08);
+}
+
+.glow-teal-lg {
+  box-shadow: 0 0 40px rgba(26, 107, 107, 0.22), 0 0 80px rgba(26, 107, 107, 0.08);
+}
+
+/* ═══════════════════════════════════════════
+   HIGHLIGHT LINE — línea de acento izquierda
+   Usalo como: border-left en cards de citas,
+   resultados o testimonios
+═══════════════════════════════════════════ */
+
+.highlight-gold {
+  border-left: 3px solid #c9a227;
+  padding-left: 1rem;
+}
+
+.highlight-emerald {
+  border-left: 3px solid #2eaf5a;
+  padding-left: 1rem;
+}
+
+.highlight-coral {
+  border-left: 3px solid #f07baa;
+  padding-left: 1rem;
+}
+
+.highlight-teal {
+  border-left: 3px solid #4ab8b8;
+  padding-left: 1rem;
+}
+
 /* ═══════════════════════════════════════════
    FUENTE CROMMA
 ═══════════════════════════════════════════ */
 
 @font-face {
   font-family: "cromma";
-  src:
-    url("https://s3.amazonaws.com/statics.myclickfunnels.com/font/22957/file/original-7ca4a9a19b472948cfbc4ab8611d9d27.otf") format("opentype"),
-    url("/fonts/cromma.otf") format("opentype");
+  src: url("https://s3.amazonaws.com/statics.myclickfunnels.com/font/22957/file/original-7ca4a9a19b472948cfbc4ab8611d9d27.otf") format("opentype"), url("/fonts/cromma.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -853,9 +989,7 @@
 
 @font-face {
   font-family: "cromma";
-  src:
-    url("https://s3.amazonaws.com/statics.myclickfunnels.com/font/22957/file/original-7ca4a9a19b472948cfbc4ab8611d9d27.otf") format("opentype"),
-    url("/fonts/cromma.otf") format("opentype");
+  src: url("https://s3.amazonaws.com/statics.myclickfunnels.com/font/22957/file/original-7ca4a9a19b472948cfbc4ab8611d9d27.otf") format("opentype"), url("/fonts/cromma.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
