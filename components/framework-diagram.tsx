@@ -30,7 +30,7 @@ export function FrameworkDiagram() {
         <ScrollReveal>
           <div className="text-center mb-14 space-y-2">
             {/* dorado oscurecido #8a6f00 → 4.6:1 ✅ */}
-            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#8a6f00" }}>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#D4AF37" }}>
               El framework
             </p>
             <h2 className="text-[#0a0a0a]">Cómo funciona Cromma</h2>
@@ -120,7 +120,7 @@ export function FrameworkDiagram() {
                   {/* dorado oscurecido #8a6f00 → 4.6:1 ✅ */}
                   <span
                     className="text-3xl font-black leading-none flex-shrink-0 mt-0.5"
-                    style={{ color: "#8a6f00", fontVariantNumeric: "tabular-nums" }}
+                    style={{ color: "#D4AF37", fontVariantNumeric: "tabular-nums" }}
                   >
                     {p.n}
                   </span>
