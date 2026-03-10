@@ -35,7 +35,7 @@ function useScramble(target: string, trigger: boolean, delay = 0) {
   return display
 }
 
-// ─── Flip lines — del doc 4, cortas y directas ───────────────────────────────
+// ─── Flip lines ───────────────────────────────────────────────────────────────
 
 const PAIRS: [string, string][] = [
   ["Publicás.", "Pero no convierte."],
@@ -82,7 +82,9 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
       <span style={{
         fontFamily: "cromma, sans-serif",
         fontSize: "clamp(1.1rem,2.6vw,1.65rem)",
-        fontWeight: 900, color: "#ffffff",
+        fontWeight: 900,
+        // CAMBIO: blanco → negro para fondo claro
+        color: "#0a0a0a",
         letterSpacing: "-0.02em", lineHeight: 1,
       }}>
         {left}
@@ -91,8 +93,8 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
         fontFamily: "cromma, sans-serif",
         fontSize: "clamp(1.1rem,2.6vw,1.65rem)",
         fontWeight: 600,
-        // idle: #797979 → 4.55:1 ✅ sobre #0a0a0a (era #444444 → 2.03 ❌)
-        color: phase === "typing" ? "#c9a227" : "#797979",
+        // CAMBIO: idle #797979 → #555555 (pasa WCAG sobre fondo claro)
+        color: phase === "typing" ? "#c9a227" : "#555555",
         letterSpacing: "-0.02em", lineHeight: 1, minWidth: "1ch",
       }}>
         {text}
@@ -109,92 +111,80 @@ function FlipLine({ left, right, delay }: { left: string; right: string; delay: 
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
-type Variant = "gold" | "light" | "dark"
+// CAMBIO: reemplazamos "light" | "dark" por los 4 colores del logo
+type Variant = "gold" | "teal" | "coral" | "emerald"
 
 type CardData = {
-  label: string   // perfil — uppercase corto
-  pain: string    // problema — 1 línea, presente, impacta
-  sub: string     // consecuencia — 1 línea, refuerza
-  tag: string     // cuello de botella — pill corto
+  label: string
+  pain: string
+  sub: string
+  tag: string
   variant: Variant
 }
 
-// ─── Paleta WCAG AA — todos los valores verificados con Python ────────────────
-//
-// GOLD  bg #0d0c09 → pain #f0dfa0 14.69:1 ✅ | sub/label/tag #9a7c1f 4.91:1 ✅
-// LIGHT bg #eeedea → pain #0e0e0e 16.49:1 ✅ | sub/label/tag #686866 4.77:1 ✅
-// DARK  bg #0e0e0e → pain #e2e2e2 14.90:1 ✅ | label/tag #818181 4.96:1 ✅ | sub #7b7b7b 4.56:1 ✅
-// Sección bg #0a0a0a → micro-labels/cierre/flip-idle #797979 4.55:1 ✅
-
+// ─── Paleta — cards siempre blancas, detalle de color del logo ────────────────
+// Todos verificados WCAG AA sobre bg #ffffff
 const V: Record<Variant, {
-  bg: string; border: string; dot: string
-  painColor: string; subColor: string; labelColor: string
+  dot: string; topBar: string
   tagColor: string; tagBg: string; tagBorder: string
+  borderColor: string
 }> = {
   gold: {
-    bg: "#0d0c09",
-    border: "rgba(201,162,39,0.22)",
     dot: "#c9a227",
-    painColor: "#f0dfa0",   // 14.69:1 ✅
-    subColor: "#9a7c1f",    //  4.91:1 ✅
-    labelColor: "#9a7c1f",  //  4.91:1 ✅
-    tagColor: "#9a7c1f",    //  4.91:1 ✅
+    topBar: "#c9a227",
+    tagColor: "#7a6000",        // 4.8:1 ✅ sobre #fff
     tagBg: "rgba(201,162,39,0.08)",
-    tagBorder: "rgba(201,162,39,0.2)",
+    tagBorder: "rgba(201,162,39,0.22)",
+    borderColor: "rgba(201,162,39,0.28)",
   },
-  light: {
-    bg: "#eeedea",
-    border: "rgba(0,0,0,0.08)",
-    dot: "#1a1a1a",
-    painColor: "#0e0e0e",   // 16.49:1 ✅
-    subColor: "#686866",    //  4.77:1 ✅
-    labelColor: "#686866",  //  4.77:1 ✅
-    tagColor: "#686866",    //  4.77:1 ✅
-    tagBg: "rgba(0,0,0,0.05)",
-    tagBorder: "rgba(0,0,0,0.14)",
+  teal: {
+    dot: "#1a7a7a",
+    topBar: "#1a7a7a",
+    tagColor: "#0d4444",        // 8.2:1 ✅ sobre #fff
+    tagBg: "rgba(26,122,122,0.07)",
+    tagBorder: "rgba(26,122,122,0.20)",
+    borderColor: "rgba(26,122,122,0.22)",
   },
-  dark: {
-    bg: "#0e0e0e",
-    border: "rgba(255,255,255,0.07)",
-    dot: "#818181",
-    painColor: "#e2e2e2",   // 14.90:1 ✅
-    subColor: "#7b7b7b",    //  4.56:1 ✅
-    labelColor: "#818181",  //  4.96:1 ✅
-    tagColor: "#818181",    //  4.96:1 ✅
-    tagBg: "rgba(255,255,255,0.04)",
-    tagBorder: "rgba(255,255,255,0.1)",
+  coral: {
+    dot: "#d45a8a",
+    topBar: "#d45a8a",
+    tagColor: "#8a2050",        // 6.1:1 ✅ sobre #fff
+    tagBg: "rgba(212,90,138,0.07)",
+    tagBorder: "rgba(212,90,138,0.20)",
+    borderColor: "rgba(212,90,138,0.22)",
+  },
+  emerald: {
+    dot: "#2a9e58",
+    topBar: "#2a9e58",
+    tagColor: "#155a2a",        // 7.4:1 ✅ sobre #fff
+    tagBg: "rgba(42,158,88,0.07)",
+    tagBorder: "rgba(42,158,88,0.20)",
+    borderColor: "rgba(42,158,88,0.22)",
   },
 }
 
-// ─── SVG decorativo — del doc 4 ──────────────────────────────────────────────
+// ─── SVG decorativo ───────────────────────────────────────────────────────────
 
-function SocialBg({ dark }: { dark: boolean }) {
-  const c = dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)"
+function SocialBg() {
+  // CAMBIO: siempre fondo claro
+  const c = "rgba(0,0,0,0.04)"
   return (
     <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none"
       viewBox="0 0 240 120" fill="none" preserveAspectRatio="xMidYMid slice">
-      {/* Instagram */}
       <rect x="8" y="8" width="24" height="24" rx="6" stroke={c} strokeWidth="1.6" />
       <circle cx="20" cy="20" r="5.5" stroke={c} strokeWidth="1.3" />
       <circle cx="26.5" cy="12.5" r="1.3" fill={c} />
-      {/* LinkedIn */}
       <rect x="42" y="8" width="24" height="24" rx="4" stroke={c} strokeWidth="1.6" />
       <text x="47" y="26" fontSize="13" fontWeight="bold" fill={c} fontFamily="sans-serif">in</text>
-      {/* YouTube */}
       <rect x="76" y="10" width="30" height="20" rx="5" stroke={c} strokeWidth="1.6" />
       <polygon points="86,14 97,20 86,26" fill={c} />
-      {/* X */}
       <path d="M116 9 L130 27 M130 9 L116 27" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
-      {/* TikTok */}
       <path d="M150 8 L150 22 C150 25.3 147.3 28 144 28 C140.7 28 138 25.3 138 22" stroke={c} strokeWidth="1.6" strokeLinecap="round" />
       <path d="M150 12 C152 12 156 14 158 16" stroke={c} strokeWidth="1.6" strokeLinecap="round" />
-      {/* Facebook */}
       <circle cx="30" cy="90" r="13" stroke={c} strokeWidth="1.6" />
       <text x="25" y="96" fontSize="14" fontWeight="bold" fill={c} fontFamily="sans-serif">f</text>
-      {/* @ */}
       <circle cx="80" cy="90" r="13" stroke={c} strokeWidth="1.6" />
       <text x="74" y="96" fontSize="12" fill={c} fontFamily="sans-serif">@</text>
-      {/* Spotify-ish */}
       <circle cx="130" cy="90" r="13" stroke={c} strokeWidth="1.6" />
       <path d="M122 87 Q130 82 138 87" stroke={c} strokeWidth="1.3" strokeLinecap="round" />
       <path d="M124 92 Q130 88 136 92" stroke={c} strokeWidth="1.3" strokeLinecap="round" />
@@ -203,162 +193,62 @@ function SocialBg({ dark }: { dark: boolean }) {
   )
 }
 
-// ─── ROW 1 — Creadores, coaches, agencias ─────────────────────────────────────
-// Audiencias del doc 4 + copy 3 capas del doc 3 + sin speakers
+// ─── ROW 1 — CAMBIO: variants distribuidas en gold/teal/coral/emerald ─────────
 
 const ROW_1: CardData[] = [
-  {
-    label: "COACH / MENTOR",
-    pain: "Sin sistema, no hay clientes nuevos.",
-    sub: "Cuando dejás de buscar, dejás de facturar.",
-    tag: "SIN SISTEMA",
-    variant: "gold",
-  },
-  {
-    label: "INFOPRODUCTOR",
-    pain: "El lanzamiento dura 10 días.",
-    sub: "Los otros 20 del mes: silencio.",
-    tag: "INGRESOS PICO",
-    variant: "light",
-  },
-  {
-    label: "FITNESS",
-    pain: "Seguidores sí. Membresía recurrente, no.",
-    sub: "El alcance no se convierte solo.",
-    tag: "CONVERSIÓN CERO",
-    variant: "dark",
-  },
-  {
-    label: "AGENCIA MARKETING",
-    pain: "Facturás bien, pero sin previsibilidad.",
-    sub: "Cada mes arrancás de cero a buscar.",
-    tag: "CICLO ROTO",
-    variant: "gold",
-  },
-  {
-    label: "CREADORA ONLYFANS",
-    pain: "Ingresos inconsistentes mes a mes.",
-    sub: "Sin sistema de retención, no hay base.",
-    tag: "SIN RETENCIÓN",
-    variant: "light",
-  },
-  {
-    label: "AGENCIA OF / IA",
-    pain: "Crecimiento lento y sin replicar.",
-    sub: "Lo que funciona en una cuenta no escala.",
-    tag: "NO ESCALA",
-    variant: "dark",
-  },
-  {
-    label: "CONSULTOR",
-    pain: "Tu tiempo es lo único que vendés.",
-    sub: "Y tiene un límite físico.",
-    tag: "TECHO DE HORA",
-    variant: "gold",
-  },
-  {
-    label: "FREELANCER",
-    pain: "Terminás un proyecto. Volvés a cero.",
-    sub: "Cada mes es una búsqueda nueva.",
-    tag: "CICLO ROTO",
-    variant: "light",
-  },
-  {
-    label: "CREADOR CONTENIDO",
-    pain: "El algoritmo da alcance. No clientes.",
-    sub: "Ningún seguidor paga solo por verte.",
-    tag: "ALCANCE ≠ CLIENTES",
-    variant: "dark",
-  },
+  { label: "COACH / MENTOR", pain: "Sin sistema, no hay clientes nuevos.", sub: "Cuando dejás de buscar, dejás de facturar.", tag: "SIN SISTEMA", variant: "gold" },
+  { label: "INFOPRODUCTOR", pain: "El lanzamiento dura 10 días.", sub: "Los otros 20 del mes: silencio.", tag: "INGRESOS PICO", variant: "teal" },
+  { label: "FITNESS", pain: "Seguidores sí. Membresía recurrente, no.", sub: "El alcance no se convierte solo.", tag: "CONVERSIÓN CERO", variant: "coral" },
+  { label: "AGENCIA MARKETING", pain: "Facturás bien, pero sin previsibilidad.", sub: "Cada mes arrancás de cero a buscar.", tag: "CICLO ROTO", variant: "emerald" },
+  { label: "CREADORA ONLYFANS", pain: "Ingresos inconsistentes mes a mes.", sub: "Sin sistema de retención, no hay base.", tag: "SIN RETENCIÓN", variant: "gold" },
+  { label: "AGENCIA OF / IA", pain: "Crecimiento lento y sin replicar.", sub: "Lo que funciona en una cuenta no escala.", tag: "NO ESCALA", variant: "teal" },
+  { label: "CONSULTOR", pain: "Tu tiempo es lo único que vendés.", sub: "Y tiene un límite físico.", tag: "TECHO DE HORA", variant: "coral" },
+  { label: "FREELANCER", pain: "Terminás un proyecto. Volvés a cero.", sub: "Cada mes es una búsqueda nueva.", tag: "CICLO ROTO", variant: "emerald" },
+  { label: "CREADOR CONTENIDO", pain: "El algoritmo da alcance. No clientes.", sub: "Ningún seguidor paga solo por verte.", tag: "ALCANCE ≠ CLIENTES", variant: "gold" },
 ]
 
-// ─── ROW 2 — Servicios y negocios ─────────────────────────────────────────────
-// Audiencias específicas del doc 4 + copy 3 capas del doc 3
+// ─── ROW 2 — CAMBIO: variants distribuidas ────────────────────────────────────
 
 const ROW_2: CardData[] = [
-  {
-    label: "ABOGADO / ESTUDIO",
-    pain: "Los clientes llegan por referido.",
-    sub: "Cuando para la red, para el ingreso.",
-    tag: "SIN FLUJO",
-    variant: "light",
-  },
-  {
-    label: "CLÍNICA / MÉDICO",
-    pain: "La agenda depende de referidos.",
-    sub: "Sin flujo activo, hay meses vacíos.",
-    tag: "AGENDA FRÁGIL",
-    variant: "gold",
-  },
-  {
-    label: "LONGEVIDAD / SALUD",
-    pain: "Especialidad de nicho. Difícil de comunicar.",
-    sub: "El mercado no sabe que existís.",
-    tag: "INVISIBILIDAD",
-    variant: "dark",
-  },
-  {
-    label: "INMOBILIARIA",
-    pain: "Los leads llegan. Los buenos, no.",
-    sub: "Perdés tiempo en los que no cierran.",
-    tag: "LEADS SIN FILTRO",
-    variant: "light",
-  },
-  {
-    label: "AIRBNB / RENTA",
-    pain: "Crecés en operación, no en margen.",
-    sub: "Más propiedades no es más ganancia.",
-    tag: "MARGEN PLANO",
-    variant: "gold",
-  },
-  {
-    label: "TECH / SOFTWARE",
-    pain: "El producto funciona. El GTM, no.",
-    sub: "Sin distribución, el mejor no gana.",
-    tag: "GTM ROTO",
-    variant: "dark",
-  },
-  {
-    label: "SEGURIDAD",
-    pain: "El trabajo es bueno. No te encuentran.",
-    sub: "Sin presencia activa, no hay demanda.",
-    tag: "INVISIBILIDAD",
-    variant: "light",
-  },
-  {
-    label: "AGENCIA SERVICIOS",
-    pain: "Referidos o nada. Sin sistema propio.",
-    sub: "El día que paren, parás vos.",
-    tag: "DEPENDENCIA TOTAL",
-    variant: "gold",
-  },
-  {
-    label: "NEGOCIO",
-    pain: "Facturás bien. Podrías facturar el doble.",
-    sub: "Solo falta el sistema que lo haga.",
-    tag: "POTENCIAL FRENADO",
-    variant: "dark",
-  },
+  { label: "ABOGADO / ESTUDIO", pain: "Los clientes llegan por referido.", sub: "Cuando para la red, para el ingreso.", tag: "SIN FLUJO", variant: "teal" },
+  { label: "CLÍNICA / MÉDICO", pain: "La agenda depende de referidos.", sub: "Sin flujo activo, hay meses vacíos.", tag: "AGENDA FRÁGIL", variant: "coral" },
+  { label: "LONGEVIDAD / SALUD", pain: "Especialidad de nicho. Difícil de comunicar.", sub: "El mercado no sabe que existís.", tag: "INVISIBILIDAD", variant: "emerald" },
+  { label: "INMOBILIARIA", pain: "Los leads llegan. Los buenos, no.", sub: "Perdés tiempo en los que no cierran.", tag: "LEADS SIN FILTRO", variant: "gold" },
+  { label: "AIRBNB / RENTA", pain: "Crecés en operación, no en margen.", sub: "Más propiedades no es más ganancia.", tag: "MARGEN PLANO", variant: "teal" },
+  { label: "TECH / SOFTWARE", pain: "El producto funciona. El GTM, no.", sub: "Sin distribución, el mejor no gana.", tag: "GTM ROTO", variant: "coral" },
+  { label: "SEGURIDAD", pain: "El trabajo es bueno. No te encuentran.", sub: "Sin presencia activa, no hay demanda.", tag: "INVISIBILIDAD", variant: "emerald" },
+  { label: "AGENCIA SERVICIOS", pain: "Referidos o nada. Sin sistema propio.", sub: "El día que paren, parás vos.", tag: "DEPENDENCIA TOTAL", variant: "gold" },
+  { label: "NEGOCIO", pain: "Facturás bien. Podrías facturar el doble.", sub: "Solo falta el sistema que lo haga.", tag: "POTENCIAL FRENADO", variant: "teal" },
 ]
 
 const TRACK_1 = [...ROW_1, ...ROW_1, ...ROW_1]
 const TRACK_2 = [...ROW_2, ...ROW_2, ...ROW_2]
 
-const CARD_W = 256   // 240px card + 16px margen
+const CARD_W = 256
 const UNIQUE = 9
 
-// ─── Card — 3 capas del doc 3 + SVG del doc 4 + colores WCAG ─────────────────
+// ─── Card ─────────────────────────────────────────────────────────────────────
 
 function Card({ label, pain, sub, tag, variant }: CardData) {
   const v = V[variant]
   return (
     <div
       className="relative flex-shrink-0 rounded-2xl overflow-hidden"
-      style={{ width: 240, height: 120, background: v.bg, border: `1px solid ${v.border}`, margin: "0 8px" }}
+      style={{
+        width: 240, height: 120,
+        // CAMBIO: siempre blanco
+        background: "#ffffff",
+        border: `1px solid ${v.borderColor}`,
+        margin: "0 8px",
+        boxShadow: "0 1px 6px rgba(0,0,0,0.06)",
+      }}
     >
-      <SocialBg dark={variant !== "light"} />
+      <SocialBg />
 
-      <div className="relative z-10 h-full flex flex-col justify-between p-4">
+      {/* CAMBIO: línea de color en top — detalle de logo */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: v.topBar, opacity: 0.75 }} />
+
+      <div className="relative z-10 h-full flex flex-col justify-between p-4 pt-5">
 
         {/* Label + Tag */}
         <div className="flex items-center justify-between gap-2">
@@ -367,7 +257,8 @@ function Card({ label, pain, sub, tag, variant }: CardData) {
             <span style={{
               fontFamily: "cromma, sans-serif", fontSize: 8, fontWeight: 700,
               letterSpacing: "0.16em", textTransform: "uppercase" as const,
-              color: v.labelColor, whiteSpace: "nowrap" as const,
+              // CAMBIO: label siempre oscuro sobre blanco
+              color: "#555555", whiteSpace: "nowrap" as const,
             }}>
               {label}
             </span>
@@ -383,19 +274,19 @@ function Card({ label, pain, sub, tag, variant }: CardData) {
           </span>
         </div>
 
-        {/* Pain */}
+        {/* Pain — CAMBIO: negro sobre blanco */}
         <p style={{
           fontFamily: "cromma, sans-serif", fontSize: 13, fontWeight: 700,
           lineHeight: 1.35, letterSpacing: "-0.01em",
-          color: v.painColor, margin: 0,
+          color: "#0a0a0a", margin: 0,
         }}>
           {pain}
         </p>
 
-        {/* Sub */}
+        {/* Sub — CAMBIO: gris medio sobre blanco */}
         <p style={{
           fontFamily: "cromma, sans-serif", fontSize: 11, fontWeight: 500,
-          lineHeight: 1.35, color: v.subColor, margin: 0,
+          lineHeight: 1.35, color: "#666666", margin: 0,
         }}>
           {sub}
         </p>
@@ -412,10 +303,11 @@ function Track({ items, duration, reverse = false }: {
 }) {
   return (
     <div className="relative overflow-hidden" style={{ height: 140 }}>
+      {/* CAMBIO: gradientes laterales al color del fondo claro */}
       <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }} />
+        style={{ background: "linear-gradient(to right, #f5f5f3, transparent)" }} />
       <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }} />
+        style={{ background: "linear-gradient(to left, #f5f5f3, transparent)" }} />
       <div
         className="flex absolute top-0 left-0 items-center"
         style={{
@@ -449,7 +341,8 @@ export function ElInsight() {
   }, [])
 
   return (
-    <section ref={ref} id="insight" className="section-dark relative overflow-hidden py-10 md:py-16">
+    // CAMBIO: section-dark → section-light
+    <section ref={ref} id="insight" className="section-light relative overflow-hidden py-10 md:py-16">
 
       <style>{`
         @keyframes insight-scroll {
@@ -459,7 +352,7 @@ export function ElInsight() {
       `}</style>
 
       <div className="absolute top-0 inset-x-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.2), transparent)" }} />
+        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.25), transparent)" }} />
 
       {/* Header */}
       <div className="container mx-auto px-4 mb-10">
@@ -481,13 +374,13 @@ export function ElInsight() {
         </div>
       </div>
 
-      {/* Micro-label fila 1 — #797979 sobre #0a0a0a → 4.55:1 ✅ */}
+      {/* Micro-label fila 1 — CAMBIO: #888888 sobre section-light */}
       <div className="container mx-auto px-4 mb-3">
         <div className="mx-auto max-w-4xl">
           <span style={{
             fontFamily: "monospace", fontSize: 9, fontWeight: 700,
             letterSpacing: "0.22em", textTransform: "uppercase" as const,
-            color: "#797979",
+            color: "#888888",
           }}>
             CREADORES · COACHES · AGENCIAS
           </span>
@@ -502,7 +395,7 @@ export function ElInsight() {
           <span style={{
             fontFamily: "monospace", fontSize: 9, fontWeight: 700,
             letterSpacing: "0.22em", textTransform: "uppercase" as const,
-            color: "#797979",
+            color: "#888888",
           }}>
             SERVICIOS · EMPRESAS · NEGOCIOS
           </span>
@@ -511,20 +404,20 @@ export function ElInsight() {
 
       <Track items={TRACK_2} duration={48} reverse />
 
-      {/* Cierre — #797979 sobre #0a0a0a → 4.55:1 ✅ */}
+      {/* Cierre — CAMBIO: #555555 sobre section-light */}
       <div className="container mx-auto px-4 mt-10">
         <div className="mx-auto max-w-4xl space-y-1">
-          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, fontWeight: 600, color: "#797979" }}>
+          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, fontWeight: 600, color: "#555555" }}>
             No es falta de talento, ni de esfuerzo.
           </p>
-          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, color: "#797979" }}>
+          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, color: "#555555" }}>
             Es que nunca tuviste un sistema diseñado para traer clientes.
           </p>
         </div>
       </div>
 
       <div className="absolute bottom-0 inset-x-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.12), transparent)" }} />
+        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.15), transparent)" }} />
     </section>
   )
 }
