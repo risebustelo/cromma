@@ -26,8 +26,7 @@ export function Footer() {
           <a
             href="/"
             className="nav-logo group shrink-0"
-            aria-label="Ir al inicio"
-          >
+            aria-label="Ir al inicio">
             <span className="logo-gem" aria-hidden="true">
               <span className="logo-gem-layer logo-gem-glow">
                 <span />
