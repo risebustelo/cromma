@@ -23,10 +23,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
           {/* Logo */}
-          <a
-            href="/"
-            className="nav-logo group shrink-0"
-            aria-label="Ir al inicio">
+          <a href="/" className="nav-logo group shrink-0" aria-label="Ir al inicio">
             <span className="logo-gem" aria-hidden="true">
               <span className="logo-gem-layer logo-gem-glow">
                 <span />
@@ -34,7 +31,6 @@ export function Footer() {
                 <span />
                 <span />
               </span>
-
               <span className="logo-gem-layer logo-gem-grid">
                 <span />
                 <span />
@@ -42,22 +38,18 @@ export function Footer() {
                 <span />
               </span>
             </span>
-
             <span className="nav-logo-text">CROMMA</span>
           </a>
 
           {/* Social Icons */}
-          <AnimatedSocialIcons
-            icons={socialIcons}
-            iconSize={18}
-          />
+          <AnimatedSocialIcons icons={socialIcons} iconSize={18} />
 
-          <div className="flex items-center gap-6 text-xs text-[#444444]">
-            <a href="#" className="hover:text-[#888888] transition-colors duration-200">
-              Politica de privacidad
+          <div className="flex items-center gap-6 text-xs text-[#a0a0a0]">
+            <a href="#" className="hover:text-[#cccccc] transition-colors duration-200">
+              Política de privacidad
             </a>
-            <span className="text-[#333333]">
-              {year} Cromma. Todos los derechos reservados.
+            <span className="text-[#888888]">
+              © {year} Cromma. Todos los derechos reservados.
             </span>
           </div>
 
