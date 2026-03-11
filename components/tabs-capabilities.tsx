@@ -144,35 +144,75 @@ function ObsidianaCard() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="relative rounded-2xl p-8 md:p-12 overflow-hidden" style={{ background: "linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)", border: "1px solid #8B6914", boxShadow: "0 0 40px rgba(184,134,11,0.15), inset 0 1px 0 rgba(212,175,55,0.1)" }}>
+      <div
+        className="relative rounded-2xl p-8 md:p-12 overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)",
+          border: "1px solid #8B6914",
+          boxShadow: "0 0 40px rgba(184,134,11,0.15), inset 0 1px 0 rgba(212,175,55,0.1)",
+        }}
+      >
+        {/* Corner accents */}
         {(["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"] as const).map((pos, i) => (
           <div key={i} className={`absolute ${pos} w-10 h-10`}>
             <div className="absolute top-0 left-0 w-full h-px" style={{ background: `linear-gradient(${i % 2 === 0 ? "90deg" : "270deg"}, #D4AF37, transparent)` }} />
             <div className="absolute top-0 left-0 h-full w-px" style={{ background: `linear-gradient(${i < 2 ? "180deg" : "0deg"}, #D4AF37, transparent)` }} />
           </div>
         ))}
+
+        {/* Beta + brand */}
         <div className="flex justify-between items-start mb-8">
-          <span className="text-[10px] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full" style={{ border: "1px solid #8B6914", color: "#D4AF37", background: "rgba(184,134,11,0.08)" }}>Beta</span>
-          <span className="text-[10px] font-bold tracking-[0.25em] uppercase" style={{ color: "#a07820" }}>Cromma</span>
+          <span
+            className="text-[10px] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
+            style={{ border: "1px solid #8B6914", color: "#D4AF37", background: "rgba(184,134,11,0.08)" }}
+          >
+            Beta
+          </span>
+          <span className="text-[10px] font-bold tracking-[0.25em] uppercase" style={{ color: "#a07820" }}>
+            Cromma
+          </span>
         </div>
+
+        {/* Name */}
         <div className="mb-2">
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#D4AF37" }}>Obsidiana</h3>
+          <h3 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#D4AF37" }}>
+            Obsidiana
+          </h3>
           <div className="h-px w-16 mt-3" style={{ background: "linear-gradient(90deg, #D4AF37, transparent)" }} />
         </div>
+
+        {/* Rotating language */}
         <div className="h-8 mb-8 flex items-center">
-          <p className="text-sm font-medium tracking-widest" style={{ color: "#a07820", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.4s ease, transform 0.4s ease" }}>
+          <p
+            className="text-sm font-medium tracking-widest"
+            style={{
+              color: "#a07820",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(6px)",
+              transition: "opacity 0.4s ease, transform 0.4s ease",
+            }}
+          >
             {obsidianaLanguages[langIndex]}
           </p>
         </div>
+
+        {/* Mystery blocks */}
         <div className="space-y-3 mb-10">
           {[65, 80, 50].map((w, i) => (
             <div key={i} className="flex gap-3 items-center">
               <div className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#D4AF37", opacity: 0.4 }} />
-              <div className="h-2 rounded-full" style={{ background: "linear-gradient(90deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05))", width: `${w}%` }} />
+              <div
+                className="h-2 rounded-full"
+                style={{ background: "linear-gradient(90deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05))", width: `${w}%` }}
+              />
             </div>
           ))}
-          <p className="text-xs mt-4 italic" style={{ color: "#5a4a1a" }}>Los beneficios se revelan al ingresar.</p>
+          <p className="text-xs mt-4 italic" style={{ color: "#5a4a1a" }}>
+            Los beneficios se revelan al ingresar.
+          </p>
         </div>
+
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3">
           <a href="#agenda" className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl" style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}>
             Solicitar acceso
@@ -200,15 +240,19 @@ export function TabsCapabilities() {
           from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes sistemaDrift {
+        @keyframes sistemaDriftA {
           0%   { transform: translate(0,0) scale(1); }
           100% { transform: translate(4%, -5%) scale(1.08); }
         }
+        @keyframes sistemaDriftB {
+          0%   { transform: translate(0,0) scale(1); }
+          100% { transform: translate(-3%, 4%) scale(1.06); }
+        }
       `}</style>
 
-      {/* CAMBIO: fondo con detalles sutiles de colores del logo */}
+      {/* CAMBIO: detalles sutiles en el fondo */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Grilla muy tenue */}
+        {/* Grilla dorada muy tenue */}
         <div style={{
           position: "absolute", inset: 0,
           backgroundImage: `
@@ -224,7 +268,7 @@ export function TabsCapabilities() {
           top: "-15%", right: "-5%",
           background: "radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 65%)",
           filter: "blur(80px)",
-          animation: "sistemaDrift 25s ease-in-out infinite alternate",
+          animation: "sistemaDriftA 25s ease-in-out infinite alternate",
         }} />
         {/* Glow teal abajo izquierda */}
         <div style={{
@@ -233,15 +277,18 @@ export function TabsCapabilities() {
           bottom: "0%", left: "-5%",
           background: "radial-gradient(circle, rgba(26,122,122,0.05) 0%, transparent 65%)",
           filter: "blur(90px)",
-          animation: "sistemaDrift 32s ease-in-out infinite alternate-reverse",
+          animation: "sistemaDriftB 32s ease-in-out infinite alternate",
         }} />
       </div>
 
       <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
 
+        {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-12 space-y-2">
-            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#c9a227" }}>El sistema</p>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: "#c9a227" }}>
+              El sistema
+            </p>
             <h2 className="text-white">Todo en un sistema integrado</h2>
             <p className="mx-auto max-w-md text-sm md:text-base" style={{ color: "#a0a0a0" }}>
               Cada pieza conectada con un propósito claro. No implementaciones aisladas — soluciones para cada etapa.
@@ -249,57 +296,99 @@ export function TabsCapabilities() {
           </div>
         </ScrollReveal>
 
+        {/* Tabs */}
         <ScrollReveal delay={60}>
           <div className="flex gap-2 overflow-x-auto scrollbar-none pb-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0 md:justify-center md:flex-wrap">
             {tabs.map((tab, i) => {
               const TabIcon = tab.icon
               const isActive = active === i
               return (
-                <button key={tab.label} onClick={() => setActive(i)} className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all flex-shrink-0" style={{
-                  background: isActive ? "#c9a227" : "oklch(1 0 0 / 0.04)",
-                  color: isActive ? "#0a0a0a" : "#a0a0a0",
-                  border: isActive ? "1px solid transparent" : "1px solid oklch(1 0 0 / 0.07)",
-                }}>
+                <button
+                  key={tab.label}
+                  onClick={() => setActive(i)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all flex-shrink-0"
+                  style={{
+                    background: isActive ? "#c9a227" : "oklch(1 0 0 / 0.04)",
+                    color: isActive ? "#0a0a0a" : "#a0a0a0",
+                    border: isActive ? "1px solid transparent" : "1px solid oklch(1 0 0 / 0.07)",
+                  }}
+                >
                   <TabIcon className="h-3.5 w-3.5 flex-shrink-0" />
                   {tab.label}
                 </button>
               )
             })}
-            <button onClick={() => setActive(tabs.length)} className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all flex-shrink-0" style={
-              isObsidiana
-                ? { background: "linear-gradient(135deg, #8B6914, #D4AF37)", color: "#0a0a0a", border: "1px solid #D4AF37", boxShadow: "0 0 16px rgba(212,175,55,0.3)" }
-                : { background: "#0a0a0a", color: "#c9a227", border: "1px solid #3a2f0a" }
-            }>
+
+            {/* Tab Obsidiana */}
+            <button
+              onClick={() => setActive(tabs.length)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all flex-shrink-0"
+              style={
+                isObsidiana
+                  ? { background: "linear-gradient(135deg, #8B6914, #D4AF37)", color: "#0a0a0a", border: "1px solid #D4AF37", boxShadow: "0 0 16px rgba(212,175,55,0.3)" }
+                  : { background: "#0a0a0a", color: "#c9a227", border: "1px solid #3a2f0a" }
+              }
+            >
               <span className="h-2 w-2 rounded-full" style={{ background: isObsidiana ? "#0a0a0a" : "#D4AF37" }} />
               Obsidiana
             </button>
           </div>
         </ScrollReveal>
 
+        {/* Panel */}
         <ScrollReveal delay={120}>
           {isObsidiana ? (
             <ObsidianaCard />
           ) : current && Icon ? (
-            <div key={active} className="mx-auto max-w-3xl rounded-2xl p-8 md:p-10 space-y-6" style={{
-              background: "oklch(0.09 0.003 260)",
-              border: "1px solid oklch(1 0 0 / 0.07)",
-              animation: "tabIn 0.22s ease both",
-            }}>
-              <span className="inline-block text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 rounded-full" style={{ border: "1px solid oklch(0.85 0.15 95 / 0.25)", color: "#c9a227", background: "oklch(0.85 0.15 95 / 0.06)" }}>
+            <div
+              key={active}
+              className="mx-auto max-w-3xl rounded-2xl p-8 md:p-10 space-y-6"
+              style={{
+                background: "oklch(0.09 0.003 260)",
+                border: "1px solid oklch(1 0 0 / 0.07)",
+                animation: "tabIn 0.22s ease both",
+              }}
+            >
+              {/* Etapa badge */}
+              <span
+                className="inline-block text-[10px] font-bold tracking-[0.22em] uppercase px-3 py-1 rounded-full"
+                style={{ border: "1px solid oklch(0.85 0.15 95 / 0.25)", color: "#c9a227", background: "oklch(0.85 0.15 95 / 0.06)" }}
+              >
                 {current.etapa}
               </span>
+
+              {/* Título */}
               <div className="flex items-start gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0" style={{ background: "oklch(0.85 0.15 95 / 0.1)", border: "1px solid oklch(0.85 0.15 95 / 0.18)" }}>
+                <div
+                  className="flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
+                  style={{ background: "oklch(0.85 0.15 95 / 0.1)", border: "1px solid oklch(0.85 0.15 95 / 0.18)" }}
+                >
                   <Icon className="h-5 w-5" style={{ color: "#c9a227" }} />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold text-white leading-snug pt-1">{current.title}</h3>
               </div>
-              <p className="text-sm md:text-base leading-relaxed" style={{ color: "#a0a0a0" }}>{current.description}</p>
-              <div className="rounded-xl px-5 py-4" style={{ borderLeft: "3px solid #c9a227", background: "oklch(0.85 0.15 95 / 0.05)" }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#c9a227" }}>Resultado esperado</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#a8a8a8" }}>{current.resultado}</p>
+
+              {/* Descripción */}
+              <p className="text-sm md:text-base leading-relaxed" style={{ color: "#a0a0a0" }}>
+                {current.description}
+              </p>
+
+              {/* Resultado esperado */}
+              <div
+                className="rounded-xl px-5 py-4"
+                style={{ borderLeft: "3px solid #c9a227", background: "oklch(0.85 0.15 95 / 0.05)" }}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#c9a227" }}>
+                  Resultado esperado
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "#a8a8a8" }}>
+                  {current.resultado}
+                </p>
               </div>
+
               <div className="h-px" style={{ background: "oklch(1 0 0 / 0.06)" }} />
+
+              {/* Bullets */}
               <ul className="space-y-2.5">
                 {current.bullets.map((b) => (
                   <li key={b} className="flex gap-3 items-start">
@@ -308,17 +397,27 @@ export function TabsCapabilities() {
                   </li>
                 ))}
               </ul>
+
+              {/* Tags de soluciones */}
               <div className="flex flex-wrap gap-2">
                 {current.soluciones.map((s) => (
-                  <span key={s} className="text-xs font-medium px-3 py-1 rounded-full" style={{ border: "1px solid oklch(1 0 0 / 0.08)", color: "#a0a0a0", background: "oklch(1 0 0 / 0.02)" }}>{s}</span>
+                  <span
+                    key={s}
+                    className="text-xs font-medium px-3 py-1 rounded-full"
+                    style={{
+                      border: "1px solid oklch(1 0 0 / 0.08)",
+                      color: "#a0a0a0",
+                      background: "oklch(1 0 0 / 0.02)",
+                    }}
+                  >
+                    {s}
+                  </span>
                 ))}
               </div>
 
-              {/* CAMBIO: CTA con más protagonismo — separador + glow */}
-              <div className="pt-4 border-t" style={{ borderColor: "rgba(201,162,39,0.12)" }}>
-                <div style={{ filter: "drop-shadow(0 0 12px rgba(201,162,39,0.25))" }}>
-                  <CtaPrimary />
-                </div>
+              {/* CTA — sin cambios, igual que el original */}
+              <div className="pt-2">
+                <CtaPrimary />
               </div>
 
             </div>
