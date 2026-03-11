@@ -35,7 +35,8 @@ export function FrameworkDiagram() {
             </p>
             <h2 className="text-[#0a0a0a]">Cómo funciona Cromma</h2>
             <p className="text-[#666666] mx-auto max-w-sm text-sm">
-              Cinco etapas conectadas que transforman atención en consultas calificadas y clientes.
+              La mayoría publica contenido sin un sistema detrás.
+              En CROMMA construimos el sistema que convierte esa atención en consultas reales.
             </p>
           </div>
         </ScrollReveal>
