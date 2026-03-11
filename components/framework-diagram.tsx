@@ -8,17 +8,17 @@ import { Megaphone, Handshake, Package, RefreshCw, TrendingUp } from "lucide-rea
 // #0a0a0a → 18:1 ✅
 
 const steps = [
-  { icon: Megaphone, title: "Atraer", desc: "Contenido con intención comercial.", step: 1, color: "#2ecc71" },
-  { icon: Handshake, title: "Convertir", desc: "Consulta al cierre sin fricción.", step: 2, color: "#3b9ecf" },
-  { icon: Package, title: "Entregar", desc: "Onboarding estándar. Experiencia medible.", step: 3, color: "#2ecc71" },
-  { icon: RefreshCw, title: "Expandir", desc: "Upsell y retención. Más valor por cliente.", step: 4, color: "#3b9ecf" },
-  { icon: TrendingUp, title: "Escalar", desc: "Automatización. El sistema trabaja sin vos.", step: 5, color: "#D4AF37" },
+  { icon: Megaphone, title: "Atraer", desc: "Contenido que atrae a quienes ya necesitan lo que ofrecés.", step: 1, color: "#2ecc71" },
+  { icon: Handshake, title: "Convertir", desc: "Transformamos interés en consultas calificadas y clientes.", step: 2, color: "#3b9ecf" },
+  { icon: Package, title: "Entregar", desc: "Proceso claro para que cada nuevo cliente tenga una experiencia profesional.", step: 3, color: "#2ecc71" },
+  { icon: RefreshCw, title: "Expandir", desc: "Estrategias para crear clientes que vuelven y recomiendan.", step: 4, color: "#3b9ecf" },
+  { icon: TrendingUp, title: "Escalar", desc: "Convertimos el proceso en un sistema que crece con el negocio.", step: 5, color: "#D4AF37" },
 ]
 
 const proceso = [
-  { n: "01", label: "Clarificás la oferta", sub: "Qué resolvés, para quién, a qué precio." },
-  { n: "02", label: "Estructurás el sistema", sub: "El flujo que convierte y retiene." },
-  { n: "03", label: "Implementás y escalás", sub: "Ejecutamos, medimos y ajustamos." },
+  { n: "01", label: "Clarificamos tu oferta", sub: "Definimos qué vendés, a quién y por qué deberían elegirte." },
+  { n: "02", label: "Diseñamos el sistema", sub: "Construimos la estructura que atrae, convierte y organiza las consultas." },
+  { n: "03", label: "Implementamos y optimizamos", sub: "Ponemos el sistema en marcha y lo mejoramos con datos reales." },
 ]
 
 export function FrameworkDiagram() {
@@ -35,7 +35,8 @@ export function FrameworkDiagram() {
             </p>
             <h2 className="text-[#0a0a0a]">Cómo funciona Cromma</h2>
             <p className="text-[#666666] mx-auto max-w-sm text-sm">
-              Cinco etapas conectadas. De la visibilidad al crecimiento predecible.
+              La mayoría publica contenido sin un sistema detrás.
+              Nosotros construimos el sistema que convierte esa atención en consultas reales.
             </p>
           </div>
         </ScrollReveal>

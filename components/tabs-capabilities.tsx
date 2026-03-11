@@ -15,7 +15,7 @@ const tabs = [
     resultado: "Propuesta lista para generar las primeras consultas calificadas en menos de 30 días.",
     bullets: [
       "Propuesta de valor diferenciada y posicionada",
-      "Pricing alineado al mercado y al resultado que entregás",
+      "Precio alineado al mercado y al resultado que entregás",
       "Mensaje claro que atrae al cliente correcto y filtra al incorrecto",
     ],
     soluciones: ["Sales Coaching", "CRM", "Landing Pages"],
