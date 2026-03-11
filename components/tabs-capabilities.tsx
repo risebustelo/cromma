@@ -207,7 +207,6 @@ function ObsidianaCard() {
               />
             </div>
           ))}
-          {/* Texto decorativo — no necesita pasar WCAG al ser puramente ornamental */}
           <p className="text-xs mt-4 italic" style={{ color: "#5a4a1a" }}>
             Los beneficios se revelan al ingresar.
           </p>
@@ -215,20 +214,16 @@ function ObsidianaCard() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3">
-
           <a href="#agenda" className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl" style={{ background: "linear-gradient(135deg, #8B6914, #D4AF37, #8B6914)", color: "#0a0a0a" }}>
             Solicitar acceso
             <ArrowRight className="ml-2 h-4 w-4" />
           </a>
-
-          <a href="#agenda"
-            className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl"
-            style={{ border: "1px solid #8B6914", color: "#c9a227", background: "transparent" }}>
+          <a href="#agenda" className="flex-1 h-12 font-bold text-sm inline-flex items-center justify-center rounded-xl" style={{ border: "1px solid #8B6914", color: "#c9a227", background: "transparent" }}>
             Tengo una invitación
           </a>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
 
@@ -245,9 +240,48 @@ export function TabsCapabilities() {
           from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes sistemaDriftA {
+          0%   { transform: translate(0,0) scale(1); }
+          100% { transform: translate(4%, -5%) scale(1.08); }
+        }
+        @keyframes sistemaDriftB {
+          0%   { transform: translate(0,0) scale(1); }
+          100% { transform: translate(-3%, 4%) scale(1.06); }
+        }
       `}</style>
 
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      {/* CAMBIO: detalles sutiles en el fondo */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Grilla dorada muy tenue */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: `
+            linear-gradient(rgba(201,162,39,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(201,162,39,0.025) 1px, transparent 1px)
+          `,
+          backgroundSize: "72px 72px",
+        }} />
+        {/* Glow dorado arriba derecha */}
+        <div style={{
+          position: "absolute", width: "40vw", height: "40vw",
+          maxWidth: 480, maxHeight: 480, borderRadius: "50%",
+          top: "-15%", right: "-5%",
+          background: "radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 65%)",
+          filter: "blur(80px)",
+          animation: "sistemaDriftA 25s ease-in-out infinite alternate",
+        }} />
+        {/* Glow teal abajo izquierda */}
+        <div style={{
+          position: "absolute", width: "35vw", height: "35vw",
+          maxWidth: 420, maxHeight: 420, borderRadius: "50%",
+          bottom: "0%", left: "-5%",
+          background: "radial-gradient(circle, rgba(26,122,122,0.05) 0%, transparent 65%)",
+          filter: "blur(90px)",
+          animation: "sistemaDriftB 32s ease-in-out infinite alternate",
+        }} />
+      </div>
+
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
 
         {/* Header */}
         <ScrollReveal>
@@ -256,7 +290,6 @@ export function TabsCapabilities() {
               El sistema
             </p>
             <h2 className="text-white">Todo en un sistema integrado</h2>
-            {/* era oklch(0.48 0 0) ≈ #737373 → 4.4:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
             <p className="mx-auto max-w-md text-sm md:text-base" style={{ color: "#a0a0a0" }}>
               Cada pieza conectada con un propósito claro. No implementaciones aisladas — soluciones para cada etapa.
             </p>
@@ -276,7 +309,6 @@ export function TabsCapabilities() {
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all flex-shrink-0"
                   style={{
                     background: isActive ? "#c9a227" : "oklch(1 0 0 / 0.04)",
-                    // era oklch(0.5 0 0) ≈ #777 → 4.0:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅
                     color: isActive ? "#0a0a0a" : "#a0a0a0",
                     border: isActive ? "1px solid transparent" : "1px solid oklch(1 0 0 / 0.07)",
                   }}
@@ -337,7 +369,6 @@ export function TabsCapabilities() {
               </div>
 
               {/* Descripción */}
-              {/* era oklch(0.58 0 0) ≈ #888 → 3.2:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
               <p className="text-sm md:text-base leading-relaxed" style={{ color: "#a0a0a0" }}>
                 {current.description}
               </p>
@@ -350,7 +381,6 @@ export function TabsCapabilities() {
                 <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#c9a227" }}>
                   Resultado esperado
                 </p>
-                {/* oklch(0.72 0 0) ≈ #a8a8a8 → 4.8:1 ✅ — sin cambio */}
                 <p className="text-sm leading-relaxed" style={{ color: "#a8a8a8" }}>
                   {current.resultado}
                 </p>
@@ -363,7 +393,6 @@ export function TabsCapabilities() {
                 {current.bullets.map((b) => (
                   <li key={b} className="flex gap-3 items-start">
                     <span className="mt-[7px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#c9a227" }} />
-                    {/* era oklch(0.68 0 0) ≈ #9e9e9e → 4.0:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅ */}
                     <span className="text-sm" style={{ color: "#a0a0a0" }}>{b}</span>
                   </li>
                 ))}
@@ -377,7 +406,6 @@ export function TabsCapabilities() {
                     className="text-xs font-medium px-3 py-1 rounded-full"
                     style={{
                       border: "1px solid oklch(1 0 0 / 0.08)",
-                      // era oklch(0.45 0 0) ≈ #6b6b → 3.7:1 ❌ | corregido #a0a0a0 → 5.9:1 ✅
                       color: "#a0a0a0",
                       background: "oklch(1 0 0 / 0.02)",
                     }}
@@ -387,7 +415,7 @@ export function TabsCapabilities() {
                 ))}
               </div>
 
-              {/* CTA */}
+              {/* CTA — sin cambios, igual que el original */}
               <div className="pt-2">
                 <CtaPrimary />
               </div>
