@@ -4,12 +4,10 @@ import Cal, { getCalApi } from "@calcom/embed-react"
 import { useEffect } from "react"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { WhatsAppButton } from "@/components/ui/cta-buttons"
-import { CheckCircle2, Clock, Users, Zap } from "lucide-react"
+import { CheckCircle2, Clock, Zap } from "lucide-react"
 
-// Using CROMMA's existing color palette
 const GOLD = "#c9a227"
 const EMERALD = "#2eaf5a"
-const TEAL = "#1a6b6b"
 
 const WHATSAPP_URL = "https://wa.me/5491132031117?text=Hola%2C%20quiero%20hacer%20una%20consulta."
 
@@ -17,7 +15,6 @@ const benefits = [
   { icon: Clock, text: "Sesion de 30-45 minutos" },
   { icon: CheckCircle2, text: "Analisis de tu situacion actual" },
   { icon: Zap, text: "Plan de accion concreto" },
-  { icon: Users, text: "Sin compromiso" },
 ]
 
 export function LlamadoAccion() {
@@ -30,10 +27,9 @@ export function LlamadoAccion() {
 
   return (
     <section id="agenda" className="section-light relative overflow-hidden">
-      
-      {/* Subtle background accent */}
-      <div 
-        aria-hidden 
+
+      <div
+        aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background: "radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.04) 0%, transparent 50%)",
@@ -57,14 +53,13 @@ export function LlamadoAccion() {
             </div>
           </ScrollReveal>
 
-          {/* Benefits */}
           <ScrollReveal delay={60}>
             <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-12 md:mb-14">
               {benefits.map((benefit) => {
                 const Icon = benefit.icon
                 return (
                   <div key={benefit.text} className="flex items-center gap-2">
-                    <div 
+                    <div
                       className="flex h-8 w-8 items-center justify-center rounded-lg"
                       style={{ background: `${EMERALD}12`, border: `1px solid ${EMERALD}25` }}
                     >
@@ -77,27 +72,17 @@ export function LlamadoAccion() {
             </div>
           </ScrollReveal>
 
-          {/* Calendar */}
           <ScrollReveal delay={100}>
-            <div 
-              className="rounded-2xl overflow-hidden" 
-              style={{ 
-                height: "620px",
-                border: "1px solid rgba(0,0,0,0.06)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
-                background: "#ffffff",
-              }}
-            >
+            <div className="rounded-2xl overflow-hidden" style={{ height: "620px" }}>
               <Cal
                 namespace="consultoria"
                 calLink="cromma/consultoria"
-                config={{ layout: "month_view", "useSlotsViewOnSmallScreen": "true" }}
+                config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
                 style={{ width: "100%", height: "100%", overflow: "scroll" }}
               />
             </div>
           </ScrollReveal>
 
-          {/* Alternative contact */}
           <ScrollReveal delay={140}>
             <div className="text-center mt-8 space-y-3">
               <p className="text-sm" style={{ color: "#888888" }}>
