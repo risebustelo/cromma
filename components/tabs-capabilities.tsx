@@ -427,7 +427,7 @@ export function TabsCapabilities() {
 
               {/* CTA */}
               <div className="pt-4">
-                <CtaPrimary className="h-14 px-10 text-base" />
+                <CtaPrimary />
               </div>
 
             </div>

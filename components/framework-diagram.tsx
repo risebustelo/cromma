@@ -262,7 +262,7 @@ export function FrameworkDiagram() {
 
             {/* CTA */}
             <div className="text-center">
-              <CtaPrimary className="h-14 px-10 text-base" />
+              <CtaPrimary />
             </div>
           </div>
         </ScrollReveal>

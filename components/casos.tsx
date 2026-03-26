@@ -249,7 +249,7 @@ export function Casos() {
 
         <ScrollReveal delay={100}>
           <div className="text-center mt-16">
-            <CtaPrimary label="Agenda una sesion" className="h-14 px-10 text-base" />
+            <CtaPrimary label="Agenda una sesion" />
           </div>
         </ScrollReveal>
 
