@@ -139,10 +139,10 @@ export function Heroe() {
           {/* Main Column - Text Content */}
           <div className="flex-1 min-w-0 text-center lg:text-left">
 
-            <p 
-              className="text-xs font-semibold tracking-[0.22em] uppercase mb-10 hero-fade-up" 
-              style={{ 
-                color: "#888888", 
+            <p
+              className="text-xs font-semibold tracking-[0.22em] uppercase mb-10 hero-fade-up"
+              style={{
+                color: "#888888",
                 opacity: mounted ? 1 : 0,
                 animationDelay: "0.1s",
               }}
@@ -150,10 +150,10 @@ export function Heroe() {
               Consultores · Coaches · Servicios Profesionales · Infoproductores
             </p>
 
-            <h1 
-              className="text-white mb-8 hero-fade-up" 
-              style={{ 
-                fontSize: "clamp(40px,7vw,76px)", 
+            <h1
+              className="text-white mb-8 hero-fade-up"
+              style={{
+                fontSize: "clamp(40px,7vw,76px)",
                 lineHeight: 1.05,
                 animationDelay: "0.2s",
               }}
@@ -169,9 +169,9 @@ export function Heroe() {
               <span className="block text-white">en clientes predecibles.</span>
             </h1>
 
-            <p 
-              className="text-base md:text-lg lg:text-xl leading-relaxed mb-12 text-center lg:text-left mx-auto lg:mx-0 max-w-lg hero-fade-up" 
-              style={{ 
+            <p
+              className="text-base md:text-lg lg:text-xl leading-relaxed mb-12 text-center lg:text-left mx-auto lg:mx-0 max-w-lg hero-fade-up"
+              style={{
                 color: "#888888",
                 animationDelay: "0.3s",
               }}
@@ -180,8 +180,8 @@ export function Heroe() {
               <span style={{ color: "#666666" }}>Eso es exactamente lo que construimos.</span>
             </p>
 
-            <div 
-              className="flex flex-col items-center lg:items-start gap-4 hero-fade-up" 
+            <div
+              className="flex flex-col items-center lg:items-start gap-4 hero-fade-up"
               style={{ animationDelay: "0.4s" }}
             >
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -189,14 +189,14 @@ export function Heroe() {
                 <CtaSecondary className="h-14 px-10 text-base" />
               </div>
               <p className="text-xs tracking-wide mt-2" style={{ color: "#666666" }}>
-                Aplicacion gratuita · Cupos limitados
+                Aplicación gratuita · Cupos limitados
               </p>
             </div>
           </div>
 
           {/* Dashboard Widget - Desktop Only */}
-          <div 
-            className="hidden lg:block w-full max-w-md xl:max-w-lg flex-shrink-0 hero-fade-right" 
+          <div
+            className="hidden lg:block w-full max-w-md xl:max-w-lg flex-shrink-0 hero-fade-right"
             style={{ animationDelay: "0.5s" }}
           >
             <AnalyticsDashboard compact />
@@ -206,8 +206,8 @@ export function Heroe() {
       </div>
 
       {/* Bottom gradient fade */}
-      <div 
-        aria-hidden 
+      <div
+        aria-hidden
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{
           background: "linear-gradient(to top, #0a0a0a, transparent)",
