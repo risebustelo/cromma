@@ -54,7 +54,7 @@ const problems = [
   },
   {
     icon: Clock,
-    title: "Tu tiempo es el limite",
+    title: "Tu tiempo es el límite",
     description: "Cambias horas por dinero. El techo de tu negocio es tu agenda disponible.",
     stat: "40h",
     statLabel: "promedio semanal en operación",
