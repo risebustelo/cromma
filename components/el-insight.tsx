@@ -261,7 +261,7 @@ export function ElInsight() {
               }} />
             </p>
             <h2 className="text-white text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
-              Lo reconoces porque lo viviste
+              Lo reconocés porque lo viviste
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: "#888888" }}>
               No es falta de talento ni de esfuerzo. Es que nunca tuviste un sistema disenado para traer clientes de forma predecible.
