@@ -185,8 +185,8 @@ export function Heroe() {
               style={{ animationDelay: "0.4s" }}
             >
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <CtaPrimary />
-                <CtaSecondary />
+                <CtaPrimary className="h-14 px-10 text-base" />
+                <CtaSecondary className="h-14 px-10 text-base" />
               </div>
               <p className="text-xs tracking-wide mt-2" style={{ color: "#666666" }}>
                 Aplicacion gratuita · Cupos limitados
