@@ -22,9 +22,9 @@ export function Footer() {
 
   return (
     <footer className="section-dark relative overflow-hidden">
-      
+
       {/* Top border accent */}
-      <div 
+      <div
         className="absolute top-0 inset-x-0 h-px"
         style={{ background: `linear-gradient(to right, transparent, ${GOLD}30, transparent)` }}
       />
@@ -56,17 +56,17 @@ export function Footer() {
 
           {/* Links and Copyright */}
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="text-sm transition-colors duration-200"
               style={{ color: "#888888" }}
               onMouseEnter={(e) => e.currentTarget.style.color = "#ffffff"}
               onMouseLeave={(e) => e.currentTarget.style.color = "#888888"}
             >
-              Politica de privacidad
+              Política de privacidad
             </a>
             <span className="text-sm" style={{ color: "#666666" }}>
-              {year} Cromma. Todos los derechos reservados.
+              {year} Cromma™. Todos los derechos reservados.
             </span>
           </div>
 

@@ -47,22 +47,22 @@ const problems = [
   {
     icon: TrendingDown,
     title: "Ingresos impredecibles",
-    description: "Un mes facturas bien, el siguiente vuelves a cero. Sin sistema, cada mes es empezar de nuevo.",
+    description: "Un mes facturás bien, el siguiente volvés a cero. Sin sistema, cada mes es empezar de nuevo.",
     stat: "73%",
     statLabel: "de consultores sin flujo constante",
     variant: "coral" as const,
   },
   {
     icon: Clock,
-    title: "Tu tiempo es el limite",
+    title: "Tu tiempo es el límite",
     description: "Cambias horas por dinero. El techo de tu negocio es tu agenda disponible.",
     stat: "40h",
-    statLabel: "promedio semanal en operacion",
+    statLabel: "promedio semanal en operación",
     variant: "gold" as const,
   },
   {
     icon: Users,
-    title: "Dependes del boca a boca",
+    title: "Dependés del boca a boca",
     description: "Cuando para la red de referidos, para el ingreso. No hay flujo propio.",
     stat: "68%",
     statLabel: "dependen solo de referidos",
@@ -70,16 +70,16 @@ const problems = [
   },
   {
     icon: AlertTriangle,
-    title: "Contenido sin conversion",
-    description: "Publicas, tienes alcance, pero no se traduce en consultas ni ventas.",
+    title: "Contenido sin conversión",
+    description: "Publicás, tenés alcance, pero no se traduce en consultas ni ventas.",
     stat: "2.3%",
-    statLabel: "tasa de conversion promedio",
+    statLabel: "tasa de conversión promedio",
     variant: "coral" as const,
   },
   {
     icon: Target,
     title: "Oferta confusa",
-    description: "No tienes claro que vendes, a quien, ni por que deberian elegirte.",
+    description: "No tenés claro cuál es tu oferta específica, para quién es, ni por que debería comprarte.",
     stat: "85%",
     statLabel: "sin propuesta diferenciada",
     variant: "emerald" as const,
@@ -87,9 +87,9 @@ const problems = [
   {
     icon: Zap,
     title: "Todo manual",
-    description: "Seguimiento, respuestas, agendamiento. Todo depende de que estes presente.",
+    description: "Seguimiento, respuestas, agendamiento. Todo depende de que estés presente.",
     stat: "12h",
-    statLabel: "perdidas en tareas repetitivas",
+    statLabel: "pérdidas en tareas repetitivas",
     variant: "gold" as const,
   },
 ]
@@ -241,16 +241,16 @@ export function ElInsight() {
       </div>
 
       <div className="container mx-auto px-4 py-24 md:py-32 lg:py-40 relative z-10">
-        
+
         {/* Header */}
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-20 space-y-4">
-            <p style={{ 
-              fontFamily: "monospace", 
-              fontSize: 11, 
-              fontWeight: 700, 
-              letterSpacing: "0.25em", 
-              color: CORAL 
+            <p style={{
+              fontFamily: "monospace",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.25em",
+              color: CORAL
             }}>
               {eyebrow}
               <span style={{
@@ -261,7 +261,7 @@ export function ElInsight() {
               }} />
             </p>
             <h2 className="text-white text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
-              Lo reconoces porque lo viviste
+              Lo reconocés porque lo viviste
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: "#888888" }}>
               No es falta de talento ni de esfuerzo. Es que nunca tuviste un sistema disenado para traer clientes de forma predecible.
@@ -279,7 +279,7 @@ export function ElInsight() {
         {/* Bottom insight */}
         <ScrollReveal delay={400}>
           <div className="mt-16 md:mt-20 text-center">
-            <div 
+            <div
               className="inline-flex items-center gap-3 rounded-full px-6 py-3"
               style={{
                 background: "rgba(255,255,255,0.03)",
@@ -288,7 +288,7 @@ export function ElInsight() {
             >
               <span className="w-2 h-2 rounded-full" style={{ background: GOLD }} />
               <span className="text-sm" style={{ color: "#888888" }}>
-                La solucion no es trabajar mas. Es construir un <span className="text-white font-semibold">sistema que trabaje para vos</span>.
+                La solución no es trabajar mas. Es construir un <span className="text-white font-semibold">sistema que trabaje para vos</span>.
               </span>
             </div>
           </div>

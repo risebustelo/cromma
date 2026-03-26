@@ -10,66 +10,66 @@ const EMERALD = "#2eaf5a"
 const TEAL = "#1a6b6b"
 
 const steps = [
-  { 
-    icon: Megaphone, 
-    title: "Atraer", 
-    desc: "Contenido que atrae a quienes ya necesitan lo que ofreces.", 
-    step: 1, 
+  {
+    icon: Megaphone,
+    title: "Atraer",
+    desc: "Contenido que atrae a quienes ya necesitan lo que ofrecés.",
+    step: 1,
     color: EMERALD,
-    metrics: ["Visibilidad organica", "Leads calificados", "Autoridad"],
+    metrics: ["Visibilidad orgánica", "Leads calificados", "Autoridad"],
   },
-  { 
-    icon: Handshake, 
-    title: "Convertir", 
-    desc: "Transformamos interes en consultas calificadas y clientes.", 
-    step: 2, 
+  {
+    icon: Handshake,
+    title: "Convertir",
+    desc: "Transformamos interés en consultas calificadas y clientes.",
+    step: 2,
     color: TEAL,
-    metrics: ["Tasa de conversion", "Pipeline activo", "Tiempo de cierre"],
+    metrics: ["Tasa de conversión", "Pipeline activo", "Tiempo de cierre"],
   },
-  { 
-    icon: Package, 
-    title: "Entregar", 
-    desc: "Proceso claro para que cada cliente tenga una experiencia profesional.", 
-    step: 3, 
+  {
+    icon: Package,
+    title: "Entregar",
+    desc: "Proceso claro para que cada cliente tenga una experiencia profesional.",
+    step: 3,
     color: EMERALD,
-    metrics: ["Satisfaccion", "Retencion", "Eficiencia"],
+    metrics: ["Satisfacción", "Retención", "Eficiencia"],
   },
-  { 
-    icon: RefreshCw, 
-    title: "Expandir", 
-    desc: "Estrategias para crear clientes que vuelven y recomiendan.", 
-    step: 4, 
+  {
+    icon: RefreshCw,
+    title: "Expandir",
+    desc: "Estrategias para crear clientes que vuelven y recomiendan.",
+    step: 4,
     color: TEAL,
     metrics: ["LTV", "Referidos", "Upsells"],
   },
-  { 
-    icon: TrendingUp, 
-    title: "Escalar", 
-    desc: "Convertimos el proceso en un sistema que crece con el negocio.", 
-    step: 5, 
+  {
+    icon: TrendingUp,
+    title: "Escalar",
+    desc: "Convertimos el proceso en un sistema que crece con el negocio.",
+    step: 5,
     color: GOLD,
-    metrics: ["Automatizacion", "Crecimiento", "Margen"],
+    metrics: ["Automatización", "Crecimiento", "Margen"],
   },
 ]
 
 const proceso = [
-  { 
-    n: "01", 
-    label: "Clarificamos tu oferta", 
-    sub: "Definimos que vendes, a quien y por que deberian elegirte.",
+  {
+    n: "01",
+    label: "Clarificamos tu oferta",
+    sub: "Definimos que vendés, a quien y por que deberían elegirte.",
     bullets: ["Propuesta de valor diferenciada", "Precio alineado al mercado", "Mensaje claro y directo"],
   },
-  { 
-    n: "02", 
-    label: "Disenamos el sistema", 
+  {
+    n: "02",
+    label: "Diseñamos el sistema",
     sub: "Construimos la estructura que atrae, convierte y organiza las consultas.",
-    bullets: ["Funnel de conversion", "Proceso comercial", "Automatizaciones"],
+    bullets: ["Funnel de conversión", "Proceso comercial", "Automatizaciones"],
   },
-  { 
-    n: "03", 
-    label: "Implementamos y optimizamos", 
+  {
+    n: "03",
+    label: "Implementamos y optimizamos",
     sub: "Ponemos el sistema en marcha y lo mejoramos con datos reales.",
-    bullets: ["Lanzamiento rapido", "Metricas claras", "Iteracion continua"],
+    bullets: ["Lanzamiento rápido", "Métricas claras", "Iteracción continua"],
   },
 ]
 
@@ -86,15 +86,15 @@ export function FrameworkDiagram() {
             </p>
             <h2 className="text-[#0a0a0a] text-3xl md:text-4xl lg:text-5xl">Como funciona Cromma</h2>
             <p className="text-[#555555] mx-auto max-w-xl text-base md:text-lg">
-              La mayoria publica contenido sin un sistema detras.
-              Nosotros construimos el sistema que convierte esa atencion en consultas reales.
+              La mayoría publica contenido sin un sistema detrás.
+              Nosotros construimos el sistema que convierte esa atención en consultas reales.
             </p>
           </div>
         </ScrollReveal>
 
         {/* Bento Grid - Framework Steps */}
         <div className="max-w-6xl mx-auto mb-20 md:mb-28">
-          
+
           {/* Desktop: Horizontal Bento */}
           <div className="hidden lg:grid grid-cols-5 gap-4">
             {steps.map((node, i) => (
@@ -116,7 +116,7 @@ export function FrameworkDiagram() {
                   }}
                 >
                   {/* Step number */}
-                  <div 
+                  <div
                     className="absolute -top-3 -right-3 flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold"
                     style={{ background: node.color, color: "#0a0a0a" }}
                   >
@@ -187,7 +187,7 @@ export function FrameworkDiagram() {
                         <div className="w-px h-6 mt-2" style={{ background: `${node.color}30` }} />
                       )}
                     </div>
-                    
+
                     {/* Right: Content */}
                     <div className="flex-1 min-w-0 pt-1">
                       <h3 className="text-base font-bold text-[#0a0a0a] mb-1">{node.title}</h3>
