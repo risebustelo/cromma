@@ -1,9 +1,16 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { ScrollReveal } from "@/components/scroll-reveal"
+import { AlertTriangle, TrendingDown, Clock, Users, Zap, Target } from "lucide-react"
 
-// ─── Scramble hook ────────────────────────────────────────────────────────────
+// Using CROMMA's existing color palette
+const GOLD = "#c9a227"
+const EMERALD = "#2eaf5a"
+const TEAL = "#1a6b6b"
+const CORAL = "#f07baa"
 
+// Scramble effect hook
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%"
 
 function useScramble(target: string, trigger: boolean, delay = 0) {
@@ -35,294 +42,153 @@ function useScramble(target: string, trigger: boolean, delay = 0) {
   return display
 }
 
-// ─── Flip lines ───────────────────────────────────────────────────────────────
-
-const PAIRS: [string, string][] = [
-  ["Publicás.", "Pero no convierte."],
-  ["Vendés.", "Pero no escala."],
-  ["Trabajás.", "Todo depende de vos."],
+// Problem cards data
+const problems = [
+  {
+    icon: TrendingDown,
+    title: "Ingresos impredecibles",
+    description: "Un mes facturas bien, el siguiente vuelves a cero. Sin sistema, cada mes es empezar de nuevo.",
+    stat: "73%",
+    statLabel: "de consultores sin flujo constante",
+    variant: "coral" as const,
+  },
+  {
+    icon: Clock,
+    title: "Tu tiempo es el limite",
+    description: "Cambias horas por dinero. El techo de tu negocio es tu agenda disponible.",
+    stat: "40h",
+    statLabel: "promedio semanal en operacion",
+    variant: "gold" as const,
+  },
+  {
+    icon: Users,
+    title: "Dependes del boca a boca",
+    description: "Cuando para la red de referidos, para el ingreso. No hay flujo propio.",
+    stat: "68%",
+    statLabel: "dependen solo de referidos",
+    variant: "teal" as const,
+  },
+  {
+    icon: AlertTriangle,
+    title: "Contenido sin conversion",
+    description: "Publicas, tienes alcance, pero no se traduce en consultas ni ventas.",
+    stat: "2.3%",
+    statLabel: "tasa de conversion promedio",
+    variant: "coral" as const,
+  },
+  {
+    icon: Target,
+    title: "Oferta confusa",
+    description: "No tienes claro que vendes, a quien, ni por que deberian elegirte.",
+    stat: "85%",
+    statLabel: "sin propuesta diferenciada",
+    variant: "emerald" as const,
+  },
+  {
+    icon: Zap,
+    title: "Todo manual",
+    description: "Seguimiento, respuestas, agendamiento. Todo depende de que estes presente.",
+    stat: "12h",
+    statLabel: "perdidas en tareas repetitivas",
+    variant: "gold" as const,
+  },
 ]
 
-function FlipLine({ left, right, delay }: { left: string; right: string; delay: number }) {
-  const [phase, setPhase] = useState<"show-right" | "deleting" | "typing">("show-right")
-  const [text, setText] = useState(right)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  useEffect(() => {
-    const PAUSE = 2200, TYPE_MS = 38, DEL_MS = 22
-    const startCycle = () => {
-      setPhase("deleting")
-      let current = right
-      const del = setInterval(() => {
-        current = current.slice(0, -1)
-        setText(current)
-        if (current.length === 0) {
-          clearInterval(del)
-          setPhase("typing")
-          let built = ""
-          const type = setInterval(() => {
-            built += right[built.length]
-            setText(built)
-            if (built === right) {
-              clearInterval(type)
-              setPhase("show-right")
-              timerRef.current = setTimeout(startCycle, PAUSE)
-            }
-          }, TYPE_MS)
-        }
-      }, DEL_MS)
-    }
-    timerRef.current = setTimeout(startCycle, PAUSE + delay)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return (
-    <div className="flex items-baseline gap-2 flex-wrap">
-      <span style={{
-        fontFamily: "cromma, sans-serif",
-        fontSize: "clamp(1.1rem,2.6vw,1.65rem)",
-        fontWeight: 900,
-        // CAMBIO: blanco → negro para fondo claro
-        color: "#0a0a0a",
-        letterSpacing: "-0.02em", lineHeight: 1,
-      }}>
-        {left}
-      </span>
-      <span style={{
-        fontFamily: "cromma, sans-serif",
-        fontSize: "clamp(1.1rem,2.6vw,1.65rem)",
-        fontWeight: 600,
-        // CAMBIO: idle #797979 → #555555 (pasa WCAG sobre fondo claro)
-        color: phase === "typing" ? "#c9a227" : "#555555",
-        letterSpacing: "-0.02em", lineHeight: 1, minWidth: "1ch",
-      }}>
-        {text}
-        <span style={{
-          display: "inline-block", width: 2, height: "1em",
-          background: "#c9a227", marginLeft: 2, verticalAlign: "text-bottom",
-          opacity: phase === "show-right" ? 0 : 1,
-          animation: phase !== "show-right" ? "blink 0.5s step-end infinite" : "none",
-        }} />
-      </span>
-    </div>
-  )
-}
-
-// ─── Tipos ────────────────────────────────────────────────────────────────────
-
-// CAMBIO: reemplazamos "light" | "dark" por los 4 colores del logo
-type Variant = "gold" | "teal" | "coral" | "emerald"
-
-type CardData = {
-  label: string
-  pain: string
-  sub: string
-  tag: string
-  variant: Variant
-}
-
-// ─── Paleta — cards siempre blancas, detalle de color del logo ────────────────
-// Todos verificados WCAG AA sobre bg #ffffff
-const V: Record<Variant, {
-  dot: string; topBar: string
-  tagColor: string; tagBg: string; tagBorder: string
-  borderColor: string
-}> = {
+const variantStyles = {
+  coral: {
+    border: "rgba(240,123,170,0.20)",
+    borderHover: "rgba(240,123,170,0.35)",
+    glow: "rgba(240,123,170,0.08)",
+    iconBg: "rgba(240,123,170,0.10)",
+    iconBorder: "rgba(240,123,170,0.25)",
+    iconColor: CORAL,
+    statColor: CORAL,
+  },
   gold: {
-    dot: "#c9a227",
-    topBar: "#c9a227",
-    tagColor: "#7a6000",        // 4.8:1 ✅ sobre #fff
-    tagBg: "rgba(201,162,39,0.08)",
-    tagBorder: "rgba(201,162,39,0.22)",
-    borderColor: "rgba(201,162,39,0.28)",
+    border: "rgba(201,162,39,0.20)",
+    borderHover: "rgba(201,162,39,0.35)",
+    glow: "rgba(201,162,39,0.08)",
+    iconBg: "rgba(201,162,39,0.10)",
+    iconBorder: "rgba(201,162,39,0.25)",
+    iconColor: GOLD,
+    statColor: GOLD,
   },
   teal: {
-    dot: "#1a7a7a",
-    topBar: "#1a7a7a",
-    tagColor: "#0d4444",        // 8.2:1 ✅ sobre #fff
-    tagBg: "rgba(26,122,122,0.07)",
-    tagBorder: "rgba(26,122,122,0.20)",
-    borderColor: "rgba(26,122,122,0.22)",
-  },
-  coral: {
-    dot: "#d45a8a",
-    topBar: "#d45a8a",
-    tagColor: "#8a2050",        // 6.1:1 ✅ sobre #fff
-    tagBg: "rgba(212,90,138,0.07)",
-    tagBorder: "rgba(212,90,138,0.20)",
-    borderColor: "rgba(212,90,138,0.22)",
+    border: "rgba(26,107,107,0.25)",
+    borderHover: "rgba(26,107,107,0.40)",
+    glow: "rgba(26,107,107,0.08)",
+    iconBg: "rgba(26,107,107,0.12)",
+    iconBorder: "rgba(26,107,107,0.30)",
+    iconColor: "#4ab8b8",
+    statColor: "#4ab8b8",
   },
   emerald: {
-    dot: "#2a9e58",
-    topBar: "#2a9e58",
-    tagColor: "#155a2a",        // 7.4:1 ✅ sobre #fff
-    tagBg: "rgba(42,158,88,0.07)",
-    tagBorder: "rgba(42,158,88,0.20)",
-    borderColor: "rgba(42,158,88,0.22)",
+    border: "rgba(46,175,90,0.20)",
+    borderHover: "rgba(46,175,90,0.35)",
+    glow: "rgba(46,175,90,0.08)",
+    iconBg: "rgba(46,175,90,0.10)",
+    iconBorder: "rgba(46,175,90,0.25)",
+    iconColor: EMERALD,
+    statColor: EMERALD,
   },
 }
 
-// ─── SVG decorativo ───────────────────────────────────────────────────────────
+function ProblemCard({ problem, index }: { problem: typeof problems[0]; index: number }) {
+  const Icon = problem.icon
+  const style = variantStyles[problem.variant]
 
-function SocialBg() {
-  // CAMBIO: siempre fondo claro
-  const c = "rgba(0,0,0,0.04)"
   return (
-    <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 240 120" fill="none" preserveAspectRatio="xMidYMid slice">
-      <rect x="8" y="8" width="24" height="24" rx="6" stroke={c} strokeWidth="1.6" />
-      <circle cx="20" cy="20" r="5.5" stroke={c} strokeWidth="1.3" />
-      <circle cx="26.5" cy="12.5" r="1.3" fill={c} />
-      <rect x="42" y="8" width="24" height="24" rx="4" stroke={c} strokeWidth="1.6" />
-      <text x="47" y="26" fontSize="13" fontWeight="bold" fill={c} fontFamily="sans-serif">in</text>
-      <rect x="76" y="10" width="30" height="20" rx="5" stroke={c} strokeWidth="1.6" />
-      <polygon points="86,14 97,20 86,26" fill={c} />
-      <path d="M116 9 L130 27 M130 9 L116 27" stroke={c} strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M150 8 L150 22 C150 25.3 147.3 28 144 28 C140.7 28 138 25.3 138 22" stroke={c} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M150 12 C152 12 156 14 158 16" stroke={c} strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="30" cy="90" r="13" stroke={c} strokeWidth="1.6" />
-      <text x="25" y="96" fontSize="14" fontWeight="bold" fill={c} fontFamily="sans-serif">f</text>
-      <circle cx="80" cy="90" r="13" stroke={c} strokeWidth="1.6" />
-      <text x="74" y="96" fontSize="12" fill={c} fontFamily="sans-serif">@</text>
-      <circle cx="130" cy="90" r="13" stroke={c} strokeWidth="1.6" />
-      <path d="M122 87 Q130 82 138 87" stroke={c} strokeWidth="1.3" strokeLinecap="round" />
-      <path d="M124 92 Q130 88 136 92" stroke={c} strokeWidth="1.3" strokeLinecap="round" />
-      <path d="M126 97 Q130 94 134 97" stroke={c} strokeWidth="1.3" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-// ─── ROW 1 — CAMBIO: variants distribuidas en gold/teal/coral/emerald ─────────
-
-const ROW_1: CardData[] = [
-  { label: "COACH / MENTOR", pain: "Sin sistema, no hay clientes nuevos.", sub: "Cuando dejás de buscar, dejás de facturar.", tag: "SIN SISTEMA", variant: "gold" },
-  { label: "INFOPRODUCTOR", pain: "El lanzamiento dura 10 días.", sub: "Los otros 20 del mes: silencio.", tag: "INGRESOS PICO", variant: "teal" },
-  { label: "FITNESS", pain: "Seguidores sí. Membresía recurrente, no.", sub: "El alcance no se convierte solo.", tag: "CONVERSIÓN CERO", variant: "coral" },
-  { label: "AGENCIA MARKETING", pain: "Facturás bien, pero sin previsibilidad.", sub: "Cada mes arrancás de cero a buscar.", tag: "CICLO ROTO", variant: "emerald" },
-  { label: "CREADORA ONLYFANS", pain: "Ingresos inconsistentes mes a mes.", sub: "Sin sistema de retención, no hay base.", tag: "SIN RETENCIÓN", variant: "gold" },
-  { label: "AGENCIA OF / IA", pain: "Crecimiento lento y sin replicar.", sub: "Lo que funciona en una cuenta no escala.", tag: "NO ESCALA", variant: "teal" },
-  { label: "CONSULTOR", pain: "Tu tiempo es lo único que vendés.", sub: "Y tiene un límite físico.", tag: "TECHO DE HORA", variant: "coral" },
-  { label: "FREELANCER", pain: "Terminás un proyecto. Volvés a cero.", sub: "Cada mes es una búsqueda nueva.", tag: "CICLO ROTO", variant: "emerald" },
-  { label: "CREADOR CONTENIDO", pain: "El algoritmo da alcance. No clientes.", sub: "Ningún seguidor paga solo por verte.", tag: "ALCANCE ≠ CLIENTES", variant: "gold" },
-]
-
-// ─── ROW 2 — CAMBIO: variants distribuidas ────────────────────────────────────
-
-const ROW_2: CardData[] = [
-  { label: "ABOGADO / ESTUDIO", pain: "Los clientes llegan por referido.", sub: "Cuando para la red, para el ingreso.", tag: "SIN FLUJO", variant: "teal" },
-  { label: "CLÍNICA / MÉDICO", pain: "La agenda depende de referidos.", sub: "Sin flujo activo, hay meses vacíos.", tag: "AGENDA FRÁGIL", variant: "coral" },
-  { label: "LONGEVIDAD / SALUD", pain: "Especialidad de nicho. Difícil de comunicar.", sub: "El mercado no sabe que existís.", tag: "INVISIBILIDAD", variant: "emerald" },
-  { label: "INMOBILIARIA", pain: "Los leads llegan. Los buenos, no.", sub: "Perdés tiempo en los que no cierran.", tag: "LEADS SIN FILTRO", variant: "gold" },
-  { label: "AIRBNB / RENTA", pain: "Crecés en operación, no en margen.", sub: "Más propiedades no es más ganancia.", tag: "MARGEN PLANO", variant: "teal" },
-  { label: "TECH / SOFTWARE", pain: "El producto funciona. El GTM, no.", sub: "Sin distribución, el mejor no gana.", tag: "GTM ROTO", variant: "coral" },
-  { label: "SEGURIDAD", pain: "El trabajo es bueno. No te encuentran.", sub: "Sin presencia activa, no hay demanda.", tag: "INVISIBILIDAD", variant: "emerald" },
-  { label: "AGENCIA SERVICIOS", pain: "Referidos o nada. Sin sistema propio.", sub: "El día que paren, parás vos.", tag: "DEPENDENCIA TOTAL", variant: "gold" },
-  { label: "NEGOCIO", pain: "Facturás bien. Podrías facturar el doble.", sub: "Solo falta el sistema que lo haga.", tag: "POTENCIAL FRENADO", variant: "teal" },
-]
-
-const TRACK_1 = [...ROW_1, ...ROW_1, ...ROW_1]
-const TRACK_2 = [...ROW_2, ...ROW_2, ...ROW_2]
-
-const CARD_W = 256
-const UNIQUE = 9
-
-// ─── Card ─────────────────────────────────────────────────────────────────────
-
-function Card({ label, pain, sub, tag, variant }: CardData) {
-  const v = V[variant]
-  return (
-    <div
-      className="relative flex-shrink-0 rounded-2xl overflow-hidden"
-      style={{
-        width: 240, height: 120,
-        // CAMBIO: siempre blanco
-        background: "#ffffff",
-        border: `1px solid ${v.borderColor}`,
-        margin: "0 8px",
-        boxShadow: "0 1px 6px rgba(0,0,0,0.06)",
-      }}
-    >
-      <SocialBg />
-
-      {/* CAMBIO: línea de color en top — detalle de logo */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: v.topBar, opacity: 0.75 }} />
-
-      <div className="relative z-10 h-full flex flex-col justify-between p-4 pt-5">
-
-        {/* Label + Tag */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <span className="flex-shrink-0 rounded-full" style={{ width: 5, height: 5, background: v.dot }} />
-            <span style={{
-              fontFamily: "cromma, sans-serif", fontSize: 8, fontWeight: 700,
-              letterSpacing: "0.16em", textTransform: "uppercase" as const,
-              // CAMBIO: label siempre oscuro sobre blanco
-              color: "#555555", whiteSpace: "nowrap" as const,
-            }}>
-              {label}
-            </span>
-          </div>
-          <span style={{
-            fontFamily: "cromma, sans-serif", fontSize: 7, fontWeight: 700,
-            letterSpacing: "0.12em", textTransform: "uppercase" as const,
-            color: v.tagColor, background: v.tagBg,
-            border: `1px solid ${v.tagBorder}`, borderRadius: 99,
-            padding: "2px 6px", whiteSpace: "nowrap" as const, flexShrink: 0,
-          }}>
-            {tag}
-          </span>
-        </div>
-
-        {/* Pain — CAMBIO: negro sobre blanco */}
-        <p style={{
-          fontFamily: "cromma, sans-serif", fontSize: 13, fontWeight: 700,
-          lineHeight: 1.35, letterSpacing: "-0.01em",
-          color: "#0a0a0a", margin: 0,
-        }}>
-          {pain}
-        </p>
-
-        {/* Sub — CAMBIO: gris medio sobre blanco */}
-        <p style={{
-          fontFamily: "cromma, sans-serif", fontSize: 11, fontWeight: 500,
-          lineHeight: 1.35, color: "#666666", margin: 0,
-        }}>
-          {sub}
-        </p>
-
-      </div>
-    </div>
-  )
-}
-
-// ─── Track ────────────────────────────────────────────────────────────────────
-
-function Track({ items, duration, reverse = false }: {
-  items: CardData[]; duration: number; reverse?: boolean
-}) {
-  return (
-    <div className="relative overflow-hidden" style={{ height: 140 }}>
-      {/* CAMBIO: gradientes laterales al color del fondo claro */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #f5f5f3, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #f5f5f3, transparent)" }} />
+    <ScrollReveal delay={index * 80}>
       <div
-        className="flex absolute top-0 left-0 items-center"
+        className="group relative h-full rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-y-[-4px]"
         style={{
-          height: 140,
-          animation: `insight-scroll ${duration}s linear infinite ${reverse ? "reverse" : "normal"}`,
-          willChange: "transform",
+          background: "#0a0a0a",
+          border: `1px solid ${style.border}`,
+          boxShadow: "0 2px 16px rgba(0,0,0,0.3)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = style.borderHover
+          e.currentTarget.style.boxShadow = `0 8px 32px ${style.glow}, 0 2px 16px rgba(0,0,0,0.4)`
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = style.border
+          e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.3)"
         }}
       >
-        {items.map((item, i) => <Card key={i} {...item} />)}
+        {/* Icon */}
+        <div
+          className="flex h-12 w-12 items-center justify-center rounded-xl mb-5"
+          style={{
+            background: style.iconBg,
+            border: `1px solid ${style.iconBorder}`,
+          }}
+        >
+          <Icon className="h-6 w-6" style={{ color: style.iconColor }} />
+        </div>
+
+        {/* Title */}
+        <h3 className="text-lg font-bold text-white mb-3">{problem.title}</h3>
+
+        {/* Description */}
+        <p className="text-sm leading-relaxed mb-6" style={{ color: "#888888" }}>
+          {problem.description}
+        </p>
+
+        {/* Stat */}
+        <div className="pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-bold" style={{ color: style.statColor }}>
+              {problem.stat}
+            </span>
+            <span className="text-xs" style={{ color: "#666666" }}>
+              {problem.statLabel}
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </ScrollReveal>
   )
 }
-
-// ─── Sección ──────────────────────────────────────────────────────────────────
 
 export function ElInsight() {
   const [visible, setVisible] = useState(false)
@@ -341,81 +207,96 @@ export function ElInsight() {
   }, [])
 
   return (
-    // CAMBIO: section-dark → section-light
-    <section ref={ref} id="insight" className="section-light relative overflow-hidden py-10 md:py-16">
+    <section ref={ref} id="insight" className="section-dark-coral relative overflow-hidden">
 
       <style>{`
-        @keyframes insight-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-${CARD_W * UNIQUE}px); }
+        @keyframes insightGlowA {
+          0%   { transform: translate(0,0) scale(1); }
+          100% { transform: translate(3%, -4%) scale(1.08); }
+        }
+        @keyframes insightGlowB {
+          0%   { transform: translate(0,0) scale(1); }
+          100% { transform: translate(-4%, 5%) scale(1.06); }
         }
       `}</style>
 
-      <div className="absolute top-0 inset-x-0 h-px"
-        style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.25), transparent)" }} />
+      {/* Background glows */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div style={{
+          position: "absolute", width: "50vw", height: "50vw",
+          maxWidth: 600, maxHeight: 600, borderRadius: "50%",
+          top: "-20%", left: "-10%",
+          background: "radial-gradient(circle, rgba(240,123,170,0.06) 0%, transparent 65%)",
+          filter: "blur(80px)",
+          animation: "insightGlowA 25s ease-in-out infinite alternate",
+        }} />
+        <div style={{
+          position: "absolute", width: "40vw", height: "40vw",
+          maxWidth: 500, maxHeight: 500, borderRadius: "50%",
+          bottom: "-10%", right: "-5%",
+          background: "radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 65%)",
+          filter: "blur(80px)",
+          animation: "insightGlowB 30s ease-in-out infinite alternate",
+        }} />
+      </div>
 
-      {/* Header */}
-      <div className="container mx-auto px-4 mb-10">
-        <div className="mx-auto max-w-4xl space-y-4">
-          <p style={{ fontFamily: "monospace", fontSize: 10, fontWeight: 700, letterSpacing: "0.25em", color: "#c9a227" }}>
-            {eyebrow}
-            <span style={{
-              display: "inline-block", width: 2, height: "0.8em",
-              background: "#c9a227", marginLeft: 3, verticalAlign: "middle",
-              animation: visible ? "blink 0.7s step-end infinite" : "none",
-              opacity: visible ? 1 : 0,
-            }} />
-          </p>
-          <div className="flex flex-col gap-1.5">
-            {PAIRS.map(([left, right], i) => (
-              <FlipLine key={i} left={left} right={right} delay={i * 800} />
-            ))}
+      <div className="container mx-auto px-4 py-24 md:py-32 lg:py-40 relative z-10">
+        
+        {/* Header */}
+        <ScrollReveal>
+          <div className="text-center mb-16 md:mb-20 space-y-4">
+            <p style={{ 
+              fontFamily: "monospace", 
+              fontSize: 11, 
+              fontWeight: 700, 
+              letterSpacing: "0.25em", 
+              color: CORAL 
+            }}>
+              {eyebrow}
+              <span style={{
+                display: "inline-block", width: 2, height: "0.8em",
+                background: CORAL, marginLeft: 4, verticalAlign: "middle",
+                animation: visible ? "blink 0.7s step-end infinite" : "none",
+                opacity: visible ? 1 : 0,
+              }} />
+            </p>
+            <h2 className="text-white text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
+              Lo reconoces porque lo viviste
+            </h2>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: "#888888" }}>
+              No es falta de talento ni de esfuerzo. Es que nunca tuviste un sistema disenado para traer clientes de forma predecible.
+            </p>
           </div>
+        </ScrollReveal>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
+          {problems.map((problem, i) => (
+            <ProblemCard key={problem.title} problem={problem} index={i} />
+          ))}
         </div>
+
+        {/* Bottom insight */}
+        <ScrollReveal delay={400}>
+          <div className="mt-16 md:mt-20 text-center">
+            <div 
+              className="inline-flex items-center gap-3 rounded-full px-6 py-3"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <span className="w-2 h-2 rounded-full" style={{ background: GOLD }} />
+              <span className="text-sm" style={{ color: "#888888" }}>
+                La solucion no es trabajar mas. Es construir un <span className="text-white font-semibold">sistema que trabaje para vos</span>.
+              </span>
+            </div>
+          </div>
+        </ScrollReveal>
+
       </div>
 
-      {/* Micro-label fila 1 — CAMBIO: #888888 sobre section-light */}
-      <div className="container mx-auto px-4 mb-3">
-        <div className="mx-auto max-w-4xl">
-          <span style={{
-            fontFamily: "monospace", fontSize: 9, fontWeight: 700,
-            letterSpacing: "0.22em", textTransform: "uppercase" as const,
-            color: "#888888",
-          }}>
-            CREADORES · COACHES · AGENCIAS
-          </span>
-        </div>
-      </div>
-
-      <Track items={TRACK_1} duration={40} />
-
-      {/* Micro-label fila 2 */}
-      <div className="container mx-auto px-4 mt-7 mb-3">
-        <div className="mx-auto max-w-4xl">
-          <span style={{
-            fontFamily: "monospace", fontSize: 9, fontWeight: 700,
-            letterSpacing: "0.22em", textTransform: "uppercase" as const,
-            color: "#888888",
-          }}>
-            SERVICIOS · EMPRESAS · NEGOCIOS
-          </span>
-        </div>
-      </div>
-
-      <Track items={TRACK_2} duration={48} reverse />
-
-      {/* Cierre — CAMBIO: #555555 sobre section-light */}
-      <div className="container mx-auto px-4 mt-10">
-        <div className="mx-auto max-w-4xl space-y-1">
-          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, fontWeight: 600, color: "#555555" }}>
-            No es falta de talento, ni de esfuerzo.
-          </p>
-          <p style={{ fontFamily: "cromma, sans-serif", fontSize: 13, color: "#555555" }}>
-            Es que nunca tuviste un sistema diseñado para traer clientes.
-          </p>
-        </div>
-      </div>
-
+      {/* Bottom border */}
       <div className="absolute bottom-0 inset-x-0 h-px"
         style={{ background: "linear-gradient(to right, transparent, rgba(201,162,39,0.15), transparent)" }} />
     </section>
